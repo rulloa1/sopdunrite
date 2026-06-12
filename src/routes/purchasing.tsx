@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
-import { PageHeader, DataCard } from "@/components/PageHeader";
+import { PageHeader } from "@/components/PageHeader";
 import { DocActions } from "@/components/DocActions";
+import { Table, Th, Td, Tr } from "@/components/Table";
 import { PURCHASING, currency } from "@/lib/project-data";
 
 export const Route = createFileRoute("/purchasing")({
@@ -21,6 +22,7 @@ function Purchasing() {
   return (
     <Layout>
       <PageHeader
+        number={2}
         title="Purchasing Log"
         description="Original budget vs. contracted amounts by cost code."
         actions={<DocActions label="Purchasing Log" />}
@@ -35,36 +37,33 @@ function Purchasing() {
         />
       </div>
 
-      <DataCard>
-        <table className="w-full text-sm">
-          <thead className="border-b bg-muted/50 text-left text-xs uppercase tracking-wide text-muted-foreground">
-            <tr>
-              <Th>Cost Code</Th>
-              <Th>Description</Th>
-              <Th right>Original Budget</Th>
-              <Th>Subcontractor</Th>
-              <Th right>Contract Amount</Th>
-              <Th>PO #</Th>
-              <Th right>Variance</Th>
-            </tr>
-          </thead>
-          <tbody>
-            {PURCHASING.map((r) => (
-              <tr key={r.code} className="border-b last:border-0 hover:bg-muted/40">
-                <Td className="font-mono text-xs font-medium">{r.code}</Td>
-                <Td>{r.desc}</Td>
-                <Td right className="tabular-nums">{currency(r.originalBudget)}</Td>
-                <Td className="text-muted-foreground">{r.subcontractor}</Td>
-                <Td right className="tabular-nums">{currency(r.contractAmount)}</Td>
-                <Td className="font-mono text-xs text-muted-foreground">{r.poNumber}</Td>
-                <Td right className={`tabular-nums font-medium ${r.variance >= 0 ? "text-success" : "text-destructive"}`}>
-                  {currency(r.variance)}
-                </Td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </DataCard>
+      <Table
+        head={
+          <tr>
+            <Th>Cost Code</Th>
+            <Th>Description</Th>
+            <Th right>Original Budget</Th>
+            <Th>Subcontractor</Th>
+            <Th right>Contract Amount</Th>
+            <Th>PO #</Th>
+            <Th right>Variance</Th>
+          </tr>
+        }
+      >
+        {PURCHASING.map((r) => (
+          <Tr key={r.code}>
+            <Td className="font-mono text-xs font-medium">{r.code}</Td>
+            <Td>{r.desc}</Td>
+            <Td right className="tabular-nums">{currency(r.originalBudget)}</Td>
+            <Td className="text-muted-foreground">{r.subcontractor}</Td>
+            <Td right className="tabular-nums">{currency(r.contractAmount)}</Td>
+            <Td className="font-mono text-xs text-muted-foreground">{r.poNumber}</Td>
+            <Td right className={`tabular-nums font-medium ${r.variance >= 0 ? "text-success" : "text-destructive"}`}>
+              {currency(r.variance)}
+            </Td>
+          </Tr>
+        ))}
+      </Table>
     </Layout>
   );
 }
@@ -82,19 +81,4 @@ function Summary({ label, value, tone }: { label: string; value: string; tone?: 
       </p>
     </div>
   );
-}
-
-function Th({ children, right }: { children: React.ReactNode; right?: boolean }) {
-  return <th className={`px-4 py-3 font-medium ${right ? "text-right" : ""}`}>{children}</th>;
-}
-function Td({
-  children,
-  right,
-  className = "",
-}: {
-  children: React.ReactNode;
-  right?: boolean;
-  className?: string;
-}) {
-  return <td className={`px-4 py-3 ${right ? "text-right" : ""} ${className}`}>{children}</td>;
 }
