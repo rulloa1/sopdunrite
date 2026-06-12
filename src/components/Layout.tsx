@@ -9,12 +9,18 @@ import {
   FileCheck2,
   CalendarClock,
   PackageSearch,
+  FolderKanban,
+  Users,
+  LogOut,
+  LogIn,
 } from "lucide-react";
 import logo from "@/assets/dunrite-logo.png.asset.json";
 import { COMPANY, PROJECT } from "@/lib/project-data";
+import { useAuth, isAdmin, ROLE_LABELS } from "@/lib/auth";
 
 const NAV = [
   { to: "/", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/projects", label: "Projects", icon: FolderKanban },
   { to: "/purchasing", label: "Purchasing Log", icon: ShoppingCart },
   { to: "/bids", label: "Bid Log", icon: Gavel },
   { to: "/purchase-orders", label: "PO Log", icon: FileText },
@@ -23,6 +29,7 @@ const NAV = [
   { to: "/schedule", label: "Schedule Delays", icon: CalendarClock },
   { to: "/procurement", label: "Procurement", icon: PackageSearch },
 ] as const;
+
 
 export function Layout({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
