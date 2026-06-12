@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SubmittalsRouteImport } from './routes/submittals'
 import { Route as RfisRouteImport } from './routes/rfis'
 import { Route as PurchasingRouteImport } from './routes/purchasing'
 import { Route as PurchaseOrdersRouteImport } from './routes/purchase-orders'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SubmittalsRoute = SubmittalsRouteImport.update({
+  id: '/submittals',
+  path: '/submittals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RfisRoute = RfisRouteImport.update({
   id: '/rfis',
   path: '/rfis',
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
+  '/submittals': typeof SubmittalsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
+  '/submittals': typeof SubmittalsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,33 @@ export interface FileRoutesById {
   '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
+  '/submittals': typeof SubmittalsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/bids' | '/purchase-orders' | '/purchasing' | '/rfis'
+  fullPaths:
+    | '/'
+    | '/bids'
+    | '/purchase-orders'
+    | '/purchasing'
+    | '/rfis'
+    | '/submittals'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bids' | '/purchase-orders' | '/purchasing' | '/rfis'
-  id: '__root__' | '/' | '/bids' | '/purchase-orders' | '/purchasing' | '/rfis'
+  to:
+    | '/'
+    | '/bids'
+    | '/purchase-orders'
+    | '/purchasing'
+    | '/rfis'
+    | '/submittals'
+  id:
+    | '__root__'
+    | '/'
+    | '/bids'
+    | '/purchase-orders'
+    | '/purchasing'
+    | '/rfis'
+    | '/submittals'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,10 +105,18 @@ export interface RootRouteChildren {
   PurchaseOrdersRoute: typeof PurchaseOrdersRoute
   PurchasingRoute: typeof PurchasingRoute
   RfisRoute: typeof RfisRoute
+  SubmittalsRoute: typeof SubmittalsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/submittals': {
+      id: '/submittals'
+      path: '/submittals'
+      fullPath: '/submittals'
+      preLoaderRoute: typeof SubmittalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/rfis': {
       id: '/rfis'
       path: '/rfis'
@@ -125,6 +161,7 @@ const rootRouteChildren: RootRouteChildren = {
   PurchaseOrdersRoute: PurchaseOrdersRoute,
   PurchasingRoute: PurchasingRoute,
   RfisRoute: RfisRoute,
+  SubmittalsRoute: SubmittalsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
