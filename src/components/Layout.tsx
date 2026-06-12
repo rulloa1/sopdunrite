@@ -80,7 +80,7 @@ export function Layout({ children }: { children: ReactNode }) {
           </span>
         </header>
 
-        <main className="flex-1 px-5 py-6 lg:px-8 lg:py-8">{children}</main>
+        <main className="flex-1 px-5 py-6 pb-24 lg:px-8 lg:py-8 lg:pb-8">{children}</main>
       </div>
 
       {/* mobile bottom nav */}
