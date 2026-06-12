@@ -1,4 +1,5 @@
-import { FileText, FileSpreadsheet, Mail, ChevronDown } from "lucide-react";
+import { FileText, FileSpreadsheet, Mail, ChevronDown, FileDown } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -9,12 +10,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { EXECUTIVES, PROJECT } from "@/lib/project-data";
+import { downloadWorkbookPdf } from "@/lib/workbook-pdf";
 
 // Office for the web — opens a fresh document the user can edit and save.
 const WORD_ONLINE = "https://www.office.com/launch/word?auth=2";
 const EXCEL_ONLINE = "https://www.office.com/launch/excel?auth=2";
 
 export function DocActions({ label }: { label: string }) {
+  const [busy, setBusy] = useState(false);
   const recipients = EXECUTIVES.map((e) => e.email).join(",");
   const subject = encodeURIComponent(`${PROJECT.name} — ${label}`);
   const body = encodeURIComponent(
@@ -23,6 +26,14 @@ export function DocActions({ label }: { label: string }) {
   const mailto = `mailto:${recipients}?subject=${subject}&body=${body}`;
 
   const open = (url: string) => window.open(url, "_blank", "noopener,noreferrer");
+  const exportPdf = async () => {
+    setBusy(true);
+    try {
+      await downloadWorkbookPdf();
+    } finally {
+      setBusy(false);
+    }
+  };
 
   return (
     <DropdownMenu>
@@ -32,7 +43,13 @@ export function DocActions({ label }: { label: string }) {
           <ChevronDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-56">
+      <DropdownMenuContent align="end" className="w-60">
+        <DropdownMenuLabel>Workbook</DropdownMenuLabel>
+        <DropdownMenuItem disabled={busy} onSelect={(e) => { e.preventDefault(); exportPdf(); }}>
+          <FileDown className="mr-2 h-4 w-4 text-primary" />
+          {busy ? "Generating PDF…" : "Download Workbook PDF"}
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuLabel>Open in Microsoft Office</DropdownMenuLabel>
         <DropdownMenuItem onSelect={() => open(WORD_ONLINE)}>
           <FileText className="mr-2 h-4 w-4 text-primary" />
