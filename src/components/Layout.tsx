@@ -33,6 +33,7 @@ const NAV = [
 
 export function Layout({ children }: { children: ReactNode }) {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const { user, role, signOut } = useAuth();
 
   return (
     <div className="flex min-h-screen bg-background">
@@ -63,13 +64,48 @@ export function Layout({ children }: { children: ReactNode }) {
               </Link>
             );
           })}
+          {isAdmin(role) && (
+            <Link
+              to="/team"
+              className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+                pathname.startsWith("/team")
+                  ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm"
+                  : "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              }`}
+            >
+              <Users className="h-4.5 w-4.5 shrink-0" />
+              Team &amp; Roles
+            </Link>
+          )}
         </nav>
 
-        <div className="border-t border-sidebar-border px-6 py-4">
-          <p className="text-xs font-medium text-sidebar-accent-foreground">{PROJECT.name}</p>
-          <p className="text-xs text-sidebar-foreground/60">{PROJECT.lot}</p>
+        <div className="border-t border-sidebar-border px-4 py-4">
+          {user ? (
+            <div className="space-y-2">
+              <div className="px-2">
+                <p className="truncate text-xs font-medium text-sidebar-accent-foreground">{user.email}</p>
+                {role && (
+                  <p className="text-[11px] text-sidebar-foreground/60">{ROLE_LABELS[role]}</p>
+                )}
+              </div>
+              <button
+                onClick={() => signOut()}
+                className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm font-medium text-sidebar-foreground/80 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+              >
+                <LogOut className="h-4 w-4" /> Sign out
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/auth"
+              className="flex w-full items-center gap-2 rounded-lg px-2 py-2 text-sm font-medium text-sidebar-foreground/80 transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+            >
+              <LogIn className="h-4 w-4" /> Sign in
+            </Link>
+          )}
         </div>
       </aside>
+
 
       <div className="flex w-full flex-col lg:pl-64">
         <header className="sticky top-0 z-20 flex items-center gap-3 border-b bg-card/80 px-5 py-3 backdrop-blur lg:px-8">
