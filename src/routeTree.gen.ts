@@ -9,8 +9,56 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SubmittalsRouteImport } from './routes/submittals'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ScheduleRouteImport } from './routes/schedule'
+import { Route as RfisRouteImport } from './routes/rfis'
+import { Route as PurchasingRouteImport } from './routes/purchasing'
+import { Route as PurchaseOrdersRouteImport } from './routes/purchase-orders'
+import { Route as ProcurementRouteImport } from './routes/procurement'
+import { Route as BidsRouteImport } from './routes/bids'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SubmittalsRoute = SubmittalsRouteImport.update({
+  id: '/submittals',
+  path: '/submittals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScheduleRoute = ScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RfisRoute = RfisRouteImport.update({
+  id: '/rfis',
+  path: '/rfis',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PurchasingRoute = PurchasingRouteImport.update({
+  id: '/purchasing',
+  path: '/purchasing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PurchaseOrdersRoute = PurchaseOrdersRouteImport.update({
+  id: '/purchase-orders',
+  path: '/purchase-orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProcurementRoute = ProcurementRouteImport.update({
+  id: '/procurement',
+  path: '/procurement',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BidsRoute = BidsRouteImport.update({
+  id: '/bids',
+  path: '/bids',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +67,144 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bids': typeof BidsRoute
+  '/procurement': typeof ProcurementRoute
+  '/purchase-orders': typeof PurchaseOrdersRoute
+  '/purchasing': typeof PurchasingRoute
+  '/rfis': typeof RfisRoute
+  '/schedule': typeof ScheduleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/submittals': typeof SubmittalsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bids': typeof BidsRoute
+  '/procurement': typeof ProcurementRoute
+  '/purchase-orders': typeof PurchaseOrdersRoute
+  '/purchasing': typeof PurchasingRoute
+  '/rfis': typeof RfisRoute
+  '/schedule': typeof ScheduleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/submittals': typeof SubmittalsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bids': typeof BidsRoute
+  '/procurement': typeof ProcurementRoute
+  '/purchase-orders': typeof PurchaseOrdersRoute
+  '/purchasing': typeof PurchasingRoute
+  '/rfis': typeof RfisRoute
+  '/schedule': typeof ScheduleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/submittals': typeof SubmittalsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/bids'
+    | '/procurement'
+    | '/purchase-orders'
+    | '/purchasing'
+    | '/rfis'
+    | '/schedule'
+    | '/sitemap.xml'
+    | '/submittals'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/bids'
+    | '/procurement'
+    | '/purchase-orders'
+    | '/purchasing'
+    | '/rfis'
+    | '/schedule'
+    | '/sitemap.xml'
+    | '/submittals'
+  id:
+    | '__root__'
+    | '/'
+    | '/bids'
+    | '/procurement'
+    | '/purchase-orders'
+    | '/purchasing'
+    | '/rfis'
+    | '/schedule'
+    | '/sitemap.xml'
+    | '/submittals'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BidsRoute: typeof BidsRoute
+  ProcurementRoute: typeof ProcurementRoute
+  PurchaseOrdersRoute: typeof PurchaseOrdersRoute
+  PurchasingRoute: typeof PurchasingRoute
+  RfisRoute: typeof RfisRoute
+  ScheduleRoute: typeof ScheduleRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SubmittalsRoute: typeof SubmittalsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/submittals': {
+      id: '/submittals'
+      path: '/submittals'
+      fullPath: '/submittals'
+      preLoaderRoute: typeof SubmittalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schedule': {
+      id: '/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof ScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rfis': {
+      id: '/rfis'
+      path: '/rfis'
+      fullPath: '/rfis'
+      preLoaderRoute: typeof RfisRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/purchasing': {
+      id: '/purchasing'
+      path: '/purchasing'
+      fullPath: '/purchasing'
+      preLoaderRoute: typeof PurchasingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/purchase-orders': {
+      id: '/purchase-orders'
+      path: '/purchase-orders'
+      fullPath: '/purchase-orders'
+      preLoaderRoute: typeof PurchaseOrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/procurement': {
+      id: '/procurement'
+      path: '/procurement'
+      fullPath: '/procurement'
+      preLoaderRoute: typeof ProcurementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bids': {
+      id: '/bids'
+      path: '/bids'
+      fullPath: '/bids'
+      preLoaderRoute: typeof BidsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +217,15 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BidsRoute: BidsRoute,
+  ProcurementRoute: ProcurementRoute,
+  PurchaseOrdersRoute: PurchaseOrdersRoute,
+  PurchasingRoute: PurchasingRoute,
+  RfisRoute: RfisRoute,
+  ScheduleRoute: ScheduleRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SubmittalsRoute: SubmittalsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
