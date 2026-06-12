@@ -21,6 +21,7 @@ function SubmittalLog() {
       <PageHeader
         title="Submittal Log"
         description={`Shop drawings, samples & product data · ${open} open of ${SUBMITTALS.length}.`}
+        actions={<DocActions label="Submittal Log" />}
       />
       <Table
         head={
