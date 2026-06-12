@@ -10,12 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PurchasingRouteImport } from './routes/purchasing'
+import { Route as PurchaseOrdersRouteImport } from './routes/purchase-orders'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as IndexRouteImport } from './routes/index'
 
 const PurchasingRoute = PurchasingRouteImport.update({
   id: '/purchasing',
   path: '/purchasing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PurchaseOrdersRoute = PurchaseOrdersRouteImport.update({
+  id: '/purchase-orders',
+  path: '/purchase-orders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BidsRoute = BidsRouteImport.update({
@@ -32,30 +38,34 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/bids': typeof BidsRoute
+  '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bids': typeof BidsRoute
+  '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/bids': typeof BidsRoute
+  '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/bids' | '/purchasing'
+  fullPaths: '/' | '/bids' | '/purchase-orders' | '/purchasing'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/bids' | '/purchasing'
-  id: '__root__' | '/' | '/bids' | '/purchasing'
+  to: '/' | '/bids' | '/purchase-orders' | '/purchasing'
+  id: '__root__' | '/' | '/bids' | '/purchase-orders' | '/purchasing'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BidsRoute: typeof BidsRoute
+  PurchaseOrdersRoute: typeof PurchaseOrdersRoute
   PurchasingRoute: typeof PurchasingRoute
 }
 
@@ -66,6 +76,13 @@ declare module '@tanstack/react-router' {
       path: '/purchasing'
       fullPath: '/purchasing'
       preLoaderRoute: typeof PurchasingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/purchase-orders': {
+      id: '/purchase-orders'
+      path: '/purchase-orders'
+      fullPath: '/purchase-orders'
+      preLoaderRoute: typeof PurchaseOrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bids': {
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BidsRoute: BidsRoute,
+  PurchaseOrdersRoute: PurchaseOrdersRoute,
   PurchasingRoute: PurchasingRoute,
 }
 export const routeTree = rootRouteImport
