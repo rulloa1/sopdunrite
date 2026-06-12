@@ -15,6 +15,7 @@ import {
   LogIn,
 } from "lucide-react";
 import logo from "@/assets/dunrite-logo.png.asset.json";
+import { WorkbookBanner } from "@/components/WorkbookBanner";
 import { COMPANY, PROJECT } from "@/lib/project-data";
 import { useAuth, isAdmin, ROLE_LABELS } from "@/lib/auth";
 
