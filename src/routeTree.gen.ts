@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SubmittalsRouteImport } from './routes/submittals'
+import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as RfisRouteImport } from './routes/rfis'
 import { Route as PurchasingRouteImport } from './routes/purchasing'
 import { Route as PurchaseOrdersRouteImport } from './routes/purchase-orders'
@@ -19,6 +20,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const SubmittalsRoute = SubmittalsRouteImport.update({
   id: '/submittals',
   path: '/submittals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ScheduleRoute = ScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RfisRoute = RfisRouteImport.update({
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
+  '/schedule': typeof ScheduleRoute
   '/submittals': typeof SubmittalsRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
+  '/schedule': typeof ScheduleRoute
   '/submittals': typeof SubmittalsRoute
 }
 export interface FileRoutesById {
@@ -70,6 +78,7 @@ export interface FileRoutesById {
   '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
+  '/schedule': typeof ScheduleRoute
   '/submittals': typeof SubmittalsRoute
 }
 export interface FileRouteTypes {
@@ -80,6 +89,7 @@ export interface FileRouteTypes {
     | '/purchase-orders'
     | '/purchasing'
     | '/rfis'
+    | '/schedule'
     | '/submittals'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -88,6 +98,7 @@ export interface FileRouteTypes {
     | '/purchase-orders'
     | '/purchasing'
     | '/rfis'
+    | '/schedule'
     | '/submittals'
   id:
     | '__root__'
@@ -96,6 +107,7 @@ export interface FileRouteTypes {
     | '/purchase-orders'
     | '/purchasing'
     | '/rfis'
+    | '/schedule'
     | '/submittals'
   fileRoutesById: FileRoutesById
 }
@@ -105,6 +117,7 @@ export interface RootRouteChildren {
   PurchaseOrdersRoute: typeof PurchaseOrdersRoute
   PurchasingRoute: typeof PurchasingRoute
   RfisRoute: typeof RfisRoute
+  ScheduleRoute: typeof ScheduleRoute
   SubmittalsRoute: typeof SubmittalsRoute
 }
 
@@ -115,6 +128,13 @@ declare module '@tanstack/react-router' {
       path: '/submittals'
       fullPath: '/submittals'
       preLoaderRoute: typeof SubmittalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/schedule': {
+      id: '/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof ScheduleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/rfis': {
@@ -161,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   PurchaseOrdersRoute: PurchaseOrdersRoute,
   PurchasingRoute: PurchasingRoute,
   RfisRoute: RfisRoute,
+  ScheduleRoute: ScheduleRoute,
   SubmittalsRoute: SubmittalsRoute,
 }
 export const routeTree = rootRouteImport
