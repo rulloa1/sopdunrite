@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { StatusBadge } from "@/components/PageHeader";
+import { DocActions } from "@/components/DocActions";
 import {
   BUDGET,
   MILESTONES,
