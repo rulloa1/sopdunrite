@@ -15,6 +15,7 @@ import {
   LogIn,
 } from "lucide-react";
 import logo from "@/assets/dunrite-logo.png.asset.json";
+import { WorkbookBanner } from "@/components/WorkbookBanner";
 import { COMPANY, PROJECT } from "@/lib/project-data";
 import { useAuth, isAdmin, ROLE_LABELS } from "@/lib/auth";
 
@@ -123,7 +124,10 @@ export function Layout({ children }: { children: ReactNode }) {
           </span>
         </header>
 
-        <main className="flex-1 px-5 py-6 pb-24 lg:px-8 lg:py-8 lg:pb-8">{children}</main>
+        <main className="flex-1 px-5 py-6 pb-24 lg:px-8 lg:py-8 lg:pb-8">
+          <WorkbookBanner />
+          {children}
+        </main>
       </div>
 
       {/* mobile bottom nav */}

@@ -20,6 +20,7 @@ function ScheduleDelays() {
   return (
     <Layout>
       <PageHeader
+        number={7}
         title="Schedule Delays"
         description="Documented events impacting the construction schedule."
         actions={

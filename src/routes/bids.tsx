@@ -18,7 +18,7 @@ export const Route = createFileRoute("/bids")({
 function Bids() {
   return (
     <Layout>
-      <PageHeader title="Bid Log" description="Competitive bids by cost code with awarded subcontractor and budget variance." actions={<DocActions label="Bid Log" />} />
+      <PageHeader number={3} title="Bid Log" description="Competitive bids by cost code with awarded subcontractor and budget variance." actions={<DocActions label="Bid Log" />} />
       <Table
         head={
           <tr>

@@ -32,6 +32,7 @@ function Procurement() {
   return (
     <Layout>
       <PageHeader
+        number={8}
         title="Procurement Buyout Log"
         description="Long-lead items, commitment status and expected delivery."
         actions={<DocActions label="Procurement Buyout Log" />}
