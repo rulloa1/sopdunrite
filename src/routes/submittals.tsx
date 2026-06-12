@@ -20,6 +20,7 @@ function SubmittalLog() {
   return (
     <Layout>
       <PageHeader
+        number={6}
         title="Submittal Log"
         description={`Shop drawings, samples & product data · ${open} open of ${SUBMITTALS.length}.`}
         actions={<DocActions label="Submittal Log" />}

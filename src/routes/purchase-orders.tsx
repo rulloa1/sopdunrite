@@ -20,6 +20,7 @@ function POLog() {
   return (
     <Layout>
       <PageHeader
+        number={4}
         title="Purchase Order Log"
         description="Issued purchase orders by vendor and cost code."
         actions={

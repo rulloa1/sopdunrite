@@ -20,6 +20,7 @@ function RFILog() {
   return (
     <Layout>
       <PageHeader
+        number={5}
         title="RFI Log"
         description={`Requests for information · ${open} open of ${RFIS.length}.`}
         actions={<DocActions label="RFI Log" />}
