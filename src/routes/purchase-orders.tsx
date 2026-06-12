@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader";
+import { DocActions } from "@/components/DocActions";
 import { Table, Th, Td, Tr } from "@/components/Table";
 import { PURCHASE_ORDERS, currency } from "@/lib/project-data";
 
@@ -22,9 +23,12 @@ function POLog() {
         title="Purchase Order Log"
         description="Issued purchase orders by vendor and cost code."
         actions={
-          <div className="rounded-xl border bg-card px-4 py-2 shadow-sm">
-            <span className="text-xs uppercase tracking-wide text-muted-foreground">Total Issued </span>
-            <span className="font-display text-lg font-bold tabular-nums">{currency(total)}</span>
+          <div className="flex items-center gap-3">
+            <div className="rounded-xl border bg-card px-4 py-2 shadow-sm">
+              <span className="text-xs uppercase tracking-wide text-muted-foreground">Total Issued </span>
+              <span className="font-display text-lg font-bold tabular-nums">{currency(total)}</span>
+            </div>
+            <DocActions label="Purchase Order Log" />
           </div>
         }
       />
