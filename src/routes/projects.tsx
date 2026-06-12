@@ -10,7 +10,7 @@ import {
   canDeleteProjects,
   canEditProject,
 } from "@/lib/auth";
-import { STATUSES, STATUS_BY_VALUE, type ProjectRow, type ProjectStatus } from "@/lib/projects";
+import { STATUSES, type ProjectRow, type ProjectStatus } from "@/lib/projects";
 import { currency } from "@/lib/project-data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
