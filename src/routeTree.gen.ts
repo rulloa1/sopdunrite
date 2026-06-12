@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SubmittalsRouteImport } from './routes/submittals'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as RfisRouteImport } from './routes/rfis'
 import { Route as PurchasingRouteImport } from './routes/purchasing'
@@ -21,6 +22,11 @@ import { Route as IndexRouteImport } from './routes/index'
 const SubmittalsRoute = SubmittalsRouteImport.update({
   id: '/submittals',
   path: '/submittals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ScheduleRoute = ScheduleRouteImport.update({
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
   '/schedule': typeof ScheduleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submittals': typeof SubmittalsRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
   '/schedule': typeof ScheduleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submittals': typeof SubmittalsRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
   '/schedule': typeof ScheduleRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submittals': typeof SubmittalsRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/purchasing'
     | '/rfis'
     | '/schedule'
+    | '/sitemap.xml'
     | '/submittals'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/purchasing'
     | '/rfis'
     | '/schedule'
+    | '/sitemap.xml'
     | '/submittals'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/purchasing'
     | '/rfis'
     | '/schedule'
+    | '/sitemap.xml'
     | '/submittals'
   fileRoutesById: FileRoutesById
 }
@@ -131,6 +143,7 @@ export interface RootRouteChildren {
   PurchasingRoute: typeof PurchasingRoute
   RfisRoute: typeof RfisRoute
   ScheduleRoute: typeof ScheduleRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SubmittalsRoute: typeof SubmittalsRoute
 }
 
@@ -141,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/submittals'
       fullPath: '/submittals'
       preLoaderRoute: typeof SubmittalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/schedule': {
@@ -203,8 +223,19 @@ const rootRouteChildren: RootRouteChildren = {
   PurchasingRoute: PurchasingRoute,
   RfisRoute: RfisRoute,
   ScheduleRoute: ScheduleRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   SubmittalsRoute: SubmittalsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
