@@ -46,6 +46,11 @@ async function loadLogo(): Promise<string | null> {
 }
 
 export async function downloadWorkbookPdf() {
+  const doc = await buildWorkbookDoc();
+  doc.save(`Dun-Rite-Workbook-${PROJECT.name.replace(/[^a-z0-9]+/gi, "-")}.pdf`);
+}
+
+export async function buildWorkbookDoc() {
   const [{ jsPDF }, autoTableMod] = await Promise.all([
     import("jspdf"),
     import("jspdf-autotable"),
