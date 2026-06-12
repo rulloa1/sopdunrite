@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { StatusBadge } from "@/components/PageHeader";
+import { DocActions } from "@/components/DocActions";
 import {
   BUDGET,
   MILESTONES,
@@ -57,12 +58,15 @@ function Dashboard() {
 
   return (
     <Layout>
-      <div className="mb-6">
-        <h2 className="font-display text-2xl font-bold">Executive Summary</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
-          {PROJECT.scheduleMonths}-month schedule · Started {PROJECT.startDate} · Target completion{" "}
-          {PROJECT.currentCompletion}
-        </p>
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h2 className="font-display text-2xl font-bold">Executive Summary</h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {PROJECT.scheduleMonths}-month schedule · Started {PROJECT.startDate} · Target completion{" "}
+            {PROJECT.currentCompletion}
+          </p>
+        </div>
+        <DocActions label="Executive Summary" />
       </div>
 
       {/* Budget cards */}

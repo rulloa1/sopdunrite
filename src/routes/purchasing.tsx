@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 import { PageHeader, DataCard } from "@/components/PageHeader";
+import { DocActions } from "@/components/DocActions";
 import { PURCHASING, currency } from "@/lib/project-data";
 
 export const Route = createFileRoute("/purchasing")({
@@ -22,6 +23,7 @@ function Purchasing() {
       <PageHeader
         title="Purchasing Log"
         description="Original budget vs. contracted amounts by cost code."
+        actions={<DocActions label="Purchasing Log" />}
       />
       <div className="mb-4 grid gap-4 sm:grid-cols-3">
         <Summary label="Original Budget" value={currency(totalBudget)} />

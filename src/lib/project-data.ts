@@ -3,6 +3,21 @@ export const COMPANY = {
   tagline: "Project Management & Standard Operating Procedures",
 };
 
+export interface Executive {
+  name: string;
+  title: string;
+  email: string;
+}
+
+// Placeholder executives — update names and emails with the real recipients.
+export const EXECUTIVES: Executive[] = [
+  { name: "Executive One", title: "President", email: "exec1@dunriteconstruction.com" },
+  { name: "Executive Two", title: "Vice President", email: "exec2@dunriteconstruction.com" },
+  { name: "Executive Three", title: "Chief Financial Officer", email: "exec3@dunriteconstruction.com" },
+  { name: "Executive Four", title: "Director of Operations", email: "exec4@dunriteconstruction.com" },
+  { name: "Executive Five", title: "Project Executive", email: "exec5@dunriteconstruction.com" },
+];
+
 export const PROJECT = {
   name: "Baker's Bay Golf & Ocean Club",
   lot: "Lot #142",

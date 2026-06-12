@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 import { PageHeader, StatusBadge } from "@/components/PageHeader";
+import { DocActions } from "@/components/DocActions";
 import { Table, Th, Td, Tr } from "@/components/Table";
 import { RFIS, currency } from "@/lib/project-data";
 
@@ -21,6 +22,7 @@ function RFILog() {
       <PageHeader
         title="RFI Log"
         description={`Requests for information · ${open} open of ${RFIS.length}.`}
+        actions={<DocActions label="RFI Log" />}
       />
       <Table
         head={
