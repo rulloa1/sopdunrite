@@ -9,17 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TeamRouteImport } from './routes/team'
 import { Route as SubmittalsRouteImport } from './routes/submittals'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as RfisRouteImport } from './routes/rfis'
 import { Route as PurchasingRouteImport } from './routes/purchasing'
 import { Route as PurchaseOrdersRouteImport } from './routes/purchase-orders'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProcurementRouteImport } from './routes/procurement'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TeamRoute = TeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SubmittalsRoute = SubmittalsRouteImport.update({
   id: '/submittals',
   path: '/submittals',
@@ -50,6 +57,11 @@ const PurchaseOrdersRoute = PurchaseOrdersRouteImport.update({
   path: '/purchase-orders',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProcurementRoute = ProcurementRouteImport.update({
   id: '/procurement',
   path: '/procurement',
@@ -76,24 +88,28 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
   '/procurement': typeof ProcurementRoute
+  '/projects': typeof ProjectsRoute
   '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
   '/schedule': typeof ScheduleRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submittals': typeof SubmittalsRoute
+  '/team': typeof TeamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
   '/procurement': typeof ProcurementRoute
+  '/projects': typeof ProjectsRoute
   '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
   '/schedule': typeof ScheduleRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submittals': typeof SubmittalsRoute
+  '/team': typeof TeamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -101,12 +117,14 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
   '/procurement': typeof ProcurementRoute
+  '/projects': typeof ProjectsRoute
   '/purchase-orders': typeof PurchaseOrdersRoute
   '/purchasing': typeof PurchasingRoute
   '/rfis': typeof RfisRoute
   '/schedule': typeof ScheduleRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/submittals': typeof SubmittalsRoute
+  '/team': typeof TeamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -115,36 +133,42 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bids'
     | '/procurement'
+    | '/projects'
     | '/purchase-orders'
     | '/purchasing'
     | '/rfis'
     | '/schedule'
     | '/sitemap.xml'
     | '/submittals'
+    | '/team'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/bids'
     | '/procurement'
+    | '/projects'
     | '/purchase-orders'
     | '/purchasing'
     | '/rfis'
     | '/schedule'
     | '/sitemap.xml'
     | '/submittals'
+    | '/team'
   id:
     | '__root__'
     | '/'
     | '/auth'
     | '/bids'
     | '/procurement'
+    | '/projects'
     | '/purchase-orders'
     | '/purchasing'
     | '/rfis'
     | '/schedule'
     | '/sitemap.xml'
     | '/submittals'
+    | '/team'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -152,16 +176,25 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BidsRoute: typeof BidsRoute
   ProcurementRoute: typeof ProcurementRoute
+  ProjectsRoute: typeof ProjectsRoute
   PurchaseOrdersRoute: typeof PurchaseOrdersRoute
   PurchasingRoute: typeof PurchasingRoute
   RfisRoute: typeof RfisRoute
   ScheduleRoute: typeof ScheduleRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   SubmittalsRoute: typeof SubmittalsRoute
+  TeamRoute: typeof TeamRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/team': {
+      id: '/team'
+      path: '/team'
+      fullPath: '/team'
+      preLoaderRoute: typeof TeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/submittals': {
       id: '/submittals'
       path: '/submittals'
@@ -204,6 +237,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PurchaseOrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/procurement': {
       id: '/procurement'
       path: '/procurement'
@@ -240,23 +280,15 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BidsRoute: BidsRoute,
   ProcurementRoute: ProcurementRoute,
+  ProjectsRoute: ProjectsRoute,
   PurchaseOrdersRoute: PurchaseOrdersRoute,
   PurchasingRoute: PurchasingRoute,
   RfisRoute: RfisRoute,
   ScheduleRoute: ScheduleRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   SubmittalsRoute: SubmittalsRoute,
+  TeamRoute: TeamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

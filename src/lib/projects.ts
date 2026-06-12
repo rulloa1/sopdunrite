@@ -1,51 +1,52 @@
-export type ProjectStatus =
-  | "bid_pre_contract"
-  | "bid_under_contract"
-  | "active"
-  | "complete";
+import type { Database } from "@/integrations/supabase/types";
 
-export interface Project {
-  id: string;
-  name: string;
-  client: string | null;
-  location: string | null;
-  value: number;
-  status: ProjectStatus;
-  assigned_to: string | null;
-  bid_due_date: string | null;
-  start_date: string | null;
-  notes: string | null;
-  created_by: string | null;
-  created_at: string;
-  updated_at: string;
+export type ProjectStatus = Database["public"]["Enums"]["project_status"];
+export type ProjectRow = Database["public"]["Tables"]["projects"]["Row"];
+
+export interface StatusMeta {
+  value: ProjectStatus;
+  label: string;
+  short: string;
+  // tailwind classes for the column header accent + badge
+  badge: string;
+  dot: string;
 }
 
-// Display order for the dashboard groupings.
-export const STATUS_ORDER: ProjectStatus[] = [
-  "bid_pre_contract",
-  "bid_under_contract",
-  "active",
-  "complete",
+export const STATUSES: StatusMeta[] = [
+  {
+    value: "bid_pre_contract",
+    label: "Bid – Pre-Contract",
+    short: "Pre-Contract",
+    badge: "bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-200",
+    dot: "bg-amber-500",
+  },
+  {
+    value: "bid_under_contract",
+    label: "Bid / Under Contract",
+    short: "Under Contract",
+    badge: "bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-200",
+    dot: "bg-blue-500",
+  },
+  {
+    value: "active",
+    label: "Active / In Progress",
+    short: "Active",
+    badge: "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/40 dark:text-emerald-200",
+    dot: "bg-emerald-500",
+  },
+  {
+    value: "complete",
+    label: "Complete",
+    short: "Complete",
+    badge: "bg-muted text-muted-foreground",
+    dot: "bg-muted-foreground",
+  },
 ];
 
-export const STATUS_LABELS: Record<ProjectStatus, string> = {
-  bid_pre_contract: "Bid – Pre-Contract",
-  bid_under_contract: "Bid / Under Contract",
-  active: "Active / In Progress",
-  complete: "Complete",
-};
-
-// Tailwind tone classes per status (semantic tokens only).
-export const STATUS_TONE: Record<ProjectStatus, string> = {
-  bid_pre_contract: "bg-warning/20 text-warning-foreground",
-  bid_under_contract: "bg-primary/15 text-primary",
-  active: "bg-secondary text-secondary-foreground",
-  complete: "bg-success/15 text-success",
-};
-
-export const projectCurrency = (n: number) =>
-  new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 0,
-  }).format(n || 0);
+export const STATUS_BY_VALUE: Record<ProjectStatus, StatusMeta> = STATUSES.reduce(
+  (acc, s) => {
+    acc[s.value] = s;
+    return acc;
+  },
+  {} as Record<ProjectStatus, StatusMeta>,
+);
