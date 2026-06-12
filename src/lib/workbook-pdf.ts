@@ -314,7 +314,7 @@ export async function buildWorkbookDoc() {
     doc.text(`Page ${i} of ${total}`, pageW - margin, pageH - 20, { align: "right" });
   }
 
-  doc.save(`Dun-Rite-Workbook-${PROJECT.name.replace(/[^a-z0-9]+/gi, "-")}.pdf`);
+  return doc;
 }
 
 const SECTIONS = [
