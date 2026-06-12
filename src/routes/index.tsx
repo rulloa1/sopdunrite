@@ -60,13 +60,20 @@ function Dashboard() {
     <Layout>
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h2 className="font-display text-2xl font-bold">Executive Summary</h2>
+          <h2 className="font-display text-2xl font-bold">
+            <span className="text-primary">1. </span>Executive Summary
+          </h2>
           <p className="mt-1 text-sm text-muted-foreground">
             {PROJECT.scheduleMonths}-month schedule · Started {PROJECT.startDate} · Target completion{" "}
             {PROJECT.currentCompletion}
           </p>
         </div>
-        <DocActions label="Executive Summary" />
+        <div className="flex items-center gap-3">
+          <Button onClick={() => downloadWorkbookPdf()} className="gap-2">
+            <FileDown className="h-4 w-4" /> Download Workbook
+          </Button>
+          <DocActions label="Executive Summary" />
+        </div>
       </div>
 
       {/* Budget cards */}
