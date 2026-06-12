@@ -51,14 +51,21 @@ export async function downloadWorkbookPdf() {
 }
 
 export async function buildWorkbookDoc() {
-  const [{ jsPDF }, autoTableMod] = await Promise.all([
+  const [{ jsPDF }, autoTableMod, fonts] = await Promise.all([
     import("jspdf"),
     import("jspdf-autotable"),
+    import("@/lib/workbook-fonts"),
   ]);
   const autoTable = autoTableMod.default;
   const logoData = await loadLogo();
 
   const doc = new jsPDF({ unit: "pt", format: "letter" });
+  // Embed Liberation Sans (Helvetica-compatible) so glyphs render correctly in every viewer.
+  doc.addFileToVFS("LiberationSans-Regular.ttf", fonts.LIBERATION_SANS_REGULAR);
+  doc.addFont("LiberationSans-Regular.ttf", "helvetica", "normal");
+  doc.addFileToVFS("LiberationSans-Bold.ttf", fonts.LIBERATION_SANS_BOLD);
+  doc.addFont("LiberationSans-Bold.ttf", "helvetica", "bold");
+  doc.setFont("helvetica", "normal");
   const pageW = doc.internal.pageSize.getWidth();
   const pageH = doc.internal.pageSize.getHeight();
   const margin = 40;
