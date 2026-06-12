@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Check, X } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { PageHeader, StatusBadge } from "@/components/PageHeader";
+import { DocActions } from "@/components/DocActions";
 import { Table, Th, Td, Tr } from "@/components/Table";
 import { PROCUREMENT } from "@/lib/project-data";
 
@@ -33,6 +34,7 @@ function Procurement() {
       <PageHeader
         title="Procurement Buyout Log"
         description="Long-lead items, commitment status and expected delivery."
+        actions={<DocActions label="Procurement Buyout Log" />}
       />
       <Table
         head={

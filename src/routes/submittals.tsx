@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 import { PageHeader, StatusBadge } from "@/components/PageHeader";
+import { DocActions } from "@/components/DocActions";
 import { Table, Th, Td, Tr } from "@/components/Table";
 import { SUBMITTALS } from "@/lib/project-data";
 

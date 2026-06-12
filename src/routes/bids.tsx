@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader";
+import { DocActions } from "@/components/DocActions";
 import { Table, Th, Td, Tr } from "@/components/Table";
 import { BIDS, currency } from "@/lib/project-data";
 
@@ -17,7 +18,7 @@ export const Route = createFileRoute("/bids")({
 function Bids() {
   return (
     <Layout>
-      <PageHeader title="Bid Log" description="Competitive bids by cost code with awarded subcontractor and budget variance." />
+      <PageHeader title="Bid Log" description="Competitive bids by cost code with awarded subcontractor and budget variance." actions={<DocActions label="Bid Log" />} />
       <Table
         head={
           <tr>
