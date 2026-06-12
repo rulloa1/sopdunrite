@@ -8,7 +8,10 @@ import {
   CheckCircle2,
   Clock,
   CalendarClock,
+  FileDown,
 } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { downloadWorkbookPdf } from "@/lib/workbook-pdf";
 import { Layout } from "@/components/Layout";
 import { StatusBadge } from "@/components/PageHeader";
 import { DocActions } from "@/components/DocActions";
