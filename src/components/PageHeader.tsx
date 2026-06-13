@@ -4,9 +4,12 @@ import { ChevronRight, AlertTriangle } from "lucide-react";
 
 export function Breadcrumb({ section }: { section: string }) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-3 flex flex-wrap items-center gap-1 text-xs text-muted-foreground no-print">
+    <nav
+      aria-label="Breadcrumb"
+      className="mb-3 flex flex-wrap items-center gap-1 text-xs text-muted-foreground no-print"
+    >
       <Link to="/" className="transition-colors hover:text-foreground">
-        12412 Curley St, San Antonio, FL 33576
+        450 Innovation Drive, Austin, TX 78701
       </Link>
       <ChevronRight className="h-3 w-3 shrink-0" />
       <span>Project Management Workbook</span>
