@@ -58,7 +58,11 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [extractingIds, setExtractingIds] = useState<string[]>([]);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const runExtract = useServerFn(extractDocumentText);
+
 
   const load = useCallback(async () => {
     setLoading(true);
