@@ -42,6 +42,7 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -53,62 +54,62 @@
 }
 
 /* ---------------------------------------------------------------------------
-   DunRite brand — dark navy + amber. Dark is the default and ONLY theme.
---------------------------------------------------------------------------- */
+   BuildFlow Pro brand – slate charcoal + indigo. Dark is the default and ONLY theme.
+      --------------------------------------------------------------------------- */
 :root,
 .dark {
   --radius: 0.75rem;
 
-  --background: #10162e;
-  --foreground: #f2f4fb;
+  --background: #0f172a;
+  --foreground: #f1f5f9;
 
-  --card: #1c2448;
-  --card-foreground: #f2f4fb;
+  --card: #1e293b;
+  --card-foreground: #f1f5f9;
 
-  --popover: #1c2448;
-  --popover-foreground: #f2f4fb;
+  --popover: #1e293b;
+  --popover-foreground: #f1f5f9;
 
-  --primary: #f89925; /* amber */
-  --primary-foreground: #10162e; /* dark navy text on amber (AA) */
+  --primary: #6366f1; /* indigo */
+  --primary-foreground: #ffffff; /* white text on indigo */
 
-  --secondary: #ce6823; /* burnt orange */
-  --secondary-foreground: #f2f4fb;
+  --secondary: #4f46e5; /* deeper indigo */
+  --secondary-foreground: #f1f5f9;
 
-  --muted: #1c2448;
-  --muted-foreground: #9aa3c0;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
 
-  --accent: #2a3358;
-  --accent-foreground: #f2f4fb;
+  --accent: #312e81; /* dark indigo accent */
+  --accent-foreground: #c7d2fe;
 
-  --destructive: #e64343;
+  --destructive: #ef4444;
   --destructive-foreground: #ffffff;
 
-  --success: #27a86d;
+  --success: #10b981;
   --success-foreground: #ffffff;
 
-  --warning: #f89925;
-  --warning-foreground: #10162e;
+  --warning: #f59e0b;
+  --warning-foreground: #0f172a;
 
-  --border: #2a3358;
-  --input: #2a3358;
-  --ring: #f89925;
+  --border: #334155;
+  --input: #1e293b;
+  --ring: #6366f1;
 
-  --chart-1: #f89925;
-  --chart-2: #ce6823;
-  --chart-3: #27a86d;
-  --chart-4: #9aa3c0;
-  --chart-5: #e64343;
+  --chart-1: #6366f1;
+  --chart-2: #8b5cf6;
+  --chart-3: #06b6d4;
+  --chart-4: #10b981;
+  --chart-5: #f59e0b;
 
-  --sidebar: #0b1022;
-  --sidebar-foreground: #f2f4fb;
-  --sidebar-primary: #f89925;
-  --sidebar-primary-foreground: #10162e;
-  --sidebar-accent: #1c2448;
-  --sidebar-accent-foreground: #f2f4fb;
-  --sidebar-border: #2a3358;
-  --sidebar-ring: #f89925;
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f1f5f9;
+  --sidebar-primary: #6366f1; /* indigo */
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #334155;
+  --sidebar-accent-foreground: #f1f5f9;
+  --sidebar-border: #334155;
+  --sidebar-ring: #6366f1;
 
-  --gradient-brand: linear-gradient(135deg, #ce6823, #f89925);
+  --gradient-brand: linear-gradient(135deg, #4f46e5, #6366f1);
 }
 
 @layer base {
@@ -123,75 +124,12 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4, h5 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
-    letter-spacing: -0.01em;
-  }
-}
-
-@layer components {
-  .brand-gradient {
-    background-image: var(--gradient-brand);
-  }
-  .nowrap-date {
-    white-space: nowrap;
-  }
-}
-
-/* ---------------------------------------------------------------------------
-   Print-optimized stylesheet — light background, black text, no chrome.
-   Triggered by the Download / Print actions (window.print()).
---------------------------------------------------------------------------- */
-@media print {
-  @page {
-    margin: 0.6in;
-  }
-  html,
-  body {
-    background: #ffffff !important;
-    color: #111111 !important;
-  }
-  /* Hide app chrome */
-  aside,
-  header,
-  footer,
-  .no-print,
-  [data-no-print] {
-    display: none !important;
-  }
-  /* Drop the left offset reserved for the sidebar */
-  .lg\:pl-64 {
-    padding-left: 0 !important;
-  }
-  main {
-    padding: 0 !important;
-  }
-  /* Flatten cards / tables to printable ink */
-  .bg-card,
-  .bg-background,
-  .bg-sidebar,
-  [class*="bg-card"] {
-    background: #ffffff !important;
-    color: #111111 !important;
-    box-shadow: none !important;
-  }
-  table {
-    color: #111111 !important;
-    border-color: #999 !important;
-  }
-  thead {
-    background: #e5e7eb !important;
-    color: #111111 !important;
-  }
-  th,
-  td {
-    border-color: #999 !important;
-  }
-  .print-block {
-    display: block !important;
-  }
-  .print-section {
-    break-inside: avoid;
-    page-break-inside: avoid;
   }
 }
