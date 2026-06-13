@@ -6,7 +6,7 @@ import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { HardHat } from "lucide-react";
+import logo from "@/assets/dunrite-logo.png.asset.json";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -81,9 +81,7 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md rounded-2xl border bg-card p-8 shadow-sm">
         <div className="mb-6 flex flex-col items-center text-center">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary">
-            <HardHat className="h-10 w-10 text-primary-foreground" />
-          </div>
+          <img src={logo.url} alt="12412 Curley St, San Antonio, FL 33576" className="h-14 w-auto" />
           <h1 className="mt-4 font-display text-2xl font-bold">12412 Curley St, San Antonio, FL 33576</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             {mode === "signin" ? "Sign in to the project dashboard" : "Create your account"}
