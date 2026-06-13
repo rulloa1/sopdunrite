@@ -23,7 +23,7 @@ const updateSchema = z.object({
 });
 
 async function assertAdmin(context: {
-  supabase: { rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: unknown; error: unknown }> };
+  supabase: SupabaseClient<Database>;
   userId: string;
 }) {
   const { data, error } = await context.supabase.rpc("has_role", {
