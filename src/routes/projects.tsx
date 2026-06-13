@@ -88,6 +88,7 @@ function ProjectsPage() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [docsProject, setDocsProject] = useState<ProjectRow | null>(null);
 
   const load = async () => {
     setLoading(true);
