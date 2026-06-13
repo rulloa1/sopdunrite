@@ -234,40 +234,79 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
           </p>
         ) : (
           <ul className="space-y-2">
-            {docs.map((doc) => (
-              <li
-                key={doc.id}
-                className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2"
-              >
-                <FileText className="h-4 w-4 shrink-0 text-muted-foreground" />
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium">{doc.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {formatSize(doc.file_size)}
-                    {doc.file_size != null ? " · " : ""}
-                    {new Date(doc.created_at).toLocaleDateString()}
-                  </p>
-                </div>
-                <button
-                  onClick={() => download(doc)}
-                  disabled={busyId === doc.id}
-                  className="rounded p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-50"
-                  aria-label="Download document"
-                >
-                  <Download className="h-4 w-4" />
-                </button>
-                {canDelete(doc) && (
-                  <button
-                    onClick={() => remove(doc)}
-                    disabled={busyId === doc.id}
-                    className="rounded p-1.5 text-muted-foreground hover:bg-destructive/10 hover:text-destructive disabled:opacity-50"
-                    aria-label="Delete document"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                )}
-              </li>
-            ))}
+            {docs.map((doc) => {
+              const isExtracting =
+                extractingIds.includes(doc.id) || doc.extraction_status === "processing";
+              const hasText = !!doc.extracted_text?.trim();
+              const expanded = expandedId === doc.id;
+              return (
+                <li key={doc.id} className="rounded-lg border bg-card">
+                  <div className="flex items-center gap-3 px-3 py-2">
+                    <FileText className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{doc.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {formatSize(doc.file_size)}
+                        {doc.file_size != null ? " · " : ""}
+                        {new Date(doc.created_at).toLocaleDateString()}
+                        {isExtracting && " · Extracting text…"}
+                        {!isExtracting && doc.extraction_status === "unsupported" &&
+                          " · No text found"}
+                        {!isExtracting && doc.extraction_status === "error" &&
+                          " · Extraction failed"}
+                      </p>
+                    </div>
+                    {isExtracting && (
+                      <Loader2 className="h-4 w-4 shrink-0 animate-spin text-muted-foreground" />
+                    )}
+                    {!isExtracting && hasText && (
+                      <button
+                        onClick={() => setExpandedId(expanded ? null : doc.id)}
+                        className="rounded p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                        aria-label="View extracted text"
+                      >
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                    )}
+                    {!isExtracting && !hasText && doc.extraction_status !== "unsupported" && (
+                      <button
+                        onClick={() => extract(doc.id)}
+                        className="rounded p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                        aria-label="Extract text"
+                      >
+                        <ScanText className="h-4 w-4" />
+                      </button>
+                    )}
+                    <button
+                      onClick={() => download(doc)}
+                      disabled={busyId === doc.id}
+                      className="rounded p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-50"
+                      aria-label="Download document"
+                    >
+                      <Download className="h-4 w-4" />
+                    </button>
+                    {canDelete(doc) && (
+                      <button
+                        onClick={() => remove(doc)}
+                        disabled={busyId === doc.id}
+                        className="rounded p-1.5 text-muted-foreground hover:bg-destructive/10 hover:text-destructive disabled:opacity-50"
+                        aria-label="Delete document"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    )}
+                  </div>
+                  {expanded && hasText && (
+                    <pre className="max-h-64 overflow-auto whitespace-pre-wrap border-t bg-muted/40 px-3 py-2 text-xs text-foreground">
+                      {doc.extracted_text}
+                    </pre>
+                  )}
+                </li>
+              );
+            })}
+
           </ul>
         )}
       </DialogContent>
