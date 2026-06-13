@@ -1,7 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Download, FileText, Loader2, Trash2, Upload } from "lucide-react";
+import {
+  ChevronDown,
+  Download,
+  FileText,
+  Loader2,
+  ScanText,
+  Trash2,
+  Upload,
+} from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canCreateProjects, isAdmin } from "@/lib/auth";
+import { extractDocumentText } from "@/lib/document-extract.functions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -19,6 +29,8 @@ interface ProjectDocument {
   file_size: number | null;
   uploaded_by: string | null;
   created_at: string;
+  extracted_text: string | null;
+  extraction_status: string | null;
 }
 
 interface Props {
@@ -27,6 +39,7 @@ interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
+
 
 function formatSize(bytes: number | null): string {
   if (!bytes && bytes !== 0) return "";
