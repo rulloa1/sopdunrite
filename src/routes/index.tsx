@@ -1,29 +1,41 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import {
   TrendingDown,
   TrendingUp,
   Wallet,
   FileSignature,
   CircleDollarSign,
-  CheckCircle2,
   Clock,
+  CheckCircle2,
   CalendarClock,
-  FileDown,
+  Printer,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { downloadWorkbookPdf } from "@/lib/workbook-pdf";
 import { Layout } from "@/components/Layout";
 import { StatusBadge } from "@/components/PageHeader";
-import { DocActions } from "@/components/DocActions";
+import { SectionActions } from "@/components/SectionActions";
 import {
-  BUDGET,
-  MILESTONES,
   PROJECT,
+  MILESTONES,
+  currency,
+  formatDate,
+  getOriginalControlEstimate,
+  getApprovedNOCIs,
+  getCurrentBudget,
+  getCommittedToDate,
+  getCommittedPct,
+  getContingencyVariance,
+  getContingencyVariancePct,
+  getOpenRfiCount,
+  getOpenSubmittalCount,
+  getTotalDelayDays,
+  getMilestoneProgress,
+  getCompletedMilestones,
   RFIS,
   SUBMITTALS,
   DELAYS,
-  currency,
-} from "@/lib/project-data";
+} from "@/data/projectData";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -32,79 +44,68 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Executive summary dashboard for Dun Rite Construction — schedule milestones, budget tracking, RFIs, submittals and procurement at a glance.",
+          "Executive summary for Baker's Bay Golf & Ocean Club — schedule milestones, budget, RFIs, submittals and procurement at a glance.",
       },
       { property: "og:title", content: "Dun Rite Construction — Project Dashboard" },
-      {
-        property: "og:description",
-        content: "Schedule, budget and project controls for Dun Rite Construction.",
-      },
+      { property: "og:description", content: "Schedule, budget and project controls for Baker's Bay Golf & Ocean Club." },
     ],
   }),
   component: Dashboard,
 });
 
 function Dashboard() {
-  const completed = MILESTONES.filter((m) => m.status === "complete").length;
-  const progress = Math.round((completed / MILESTONES.length) * 100);
-  const openRFIs = RFIS.filter((r) => r.status === "open").length;
-  const openSubs = SUBMITTALS.filter((s) => s.status === "open").length;
-  const totalDelayDays = DELAYS.reduce((a, d) => a + d.days, 0);
-  const variancePct = ((BUDGET.contingencyVariance / BUDGET.currentBudget) * 100).toFixed(1);
+  const progress = getMilestoneProgress();
+  const contVar = getContingencyVariance();
+  const committed = getCommittedToDate();
 
   const budgetCards = [
-    { label: "Original Control Estimate", value: BUDGET.originalControlEstimate, icon: Wallet, tone: "muted" },
-    { label: "Approved NOCIs", value: BUDGET.approvedNOCIs, icon: FileSignature, tone: "muted" },
-    { label: "Current Budget", value: BUDGET.currentBudget, icon: CircleDollarSign, tone: "primary" },
-    { label: "Committed to Date", value: BUDGET.committed, icon: TrendingUp, tone: "muted" },
-  ] as const;
+    { label: "Original Control Estimate", value: getOriginalControlEstimate(), icon: Wallet, primary: false, sub: undefined as string | undefined },
+    { label: "Approved NOCIs", value: getApprovedNOCIs(), icon: FileSignature, primary: false, sub: undefined },
+    { label: "Current Budget", value: getCurrentBudget(), icon: CircleDollarSign, primary: true, sub: "Estimate + NOCIs" },
+    { label: "Committed to Date", value: committed, icon: TrendingUp, primary: false, sub: `${getCommittedPct()}% of current budget` },
+  ];
 
   return (
     <Layout>
-      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
-        <div>
+      <div className="mb-6 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
+        <div className="min-w-0">
           <h2 className="font-display text-2xl font-bold">
             <span className="text-primary">1. </span>Executive Summary
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
-            {PROJECT.scheduleMonths}-month schedule · Started {PROJECT.startDate} · Target completion{" "}
-            {PROJECT.currentCompletion}
+            {PROJECT.scheduleMonths}-month schedule · Started {formatDate(PROJECT.startDate)} · Target completion{" "}
+            {formatDate(PROJECT.targetCompletion)}
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <Button onClick={() => downloadWorkbookPdf()} className="gap-2">
-            <FileDown className="h-4 w-4" /> Download Workbook
+        <div className="flex shrink-0 items-center gap-3 no-print">
+          <Button onClick={() => window.print()} className="gap-2">
+            <Printer className="h-4 w-4" /> Download Workbook
           </Button>
-          <DocActions label="Executive Summary" />
+          <SectionActions label="Executive Summary" />
         </div>
       </div>
 
-      {/* Budget cards */}
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {budgetCards.map((c) => (
           <div
             key={c.label}
-            className={`rounded-xl border bg-card p-5 shadow-sm ${
-              c.tone === "primary" ? "ring-1 ring-primary/30" : ""
-            }`}
+            className={`rounded-xl border bg-card p-5 shadow-sm ${c.primary ? "ring-1 ring-primary/40" : ""}`}
           >
             <div className="flex items-center justify-between">
               <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">{c.label}</p>
-              <c.icon className={`h-5 w-5 ${c.tone === "primary" ? "text-primary" : "text-muted-foreground"}`} />
+              <c.icon className={`h-5 w-5 ${c.primary ? "text-primary" : "text-muted-foreground"}`} />
             </div>
             <p className="mt-3 font-display text-2xl font-bold tabular-nums">{currency(c.value)}</p>
+            {c.sub && <p className="mt-1 text-xs text-muted-foreground">{c.sub}</p>}
           </div>
         ))}
       </div>
 
-      {/* Variance + quick stats */}
-      <div className="mt-4 grid gap-4 lg:grid-cols-4">
+      <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="rounded-xl border bg-card p-5 shadow-sm">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-              Contingency Variance
-            </p>
-            {BUDGET.contingencyVariance < 0 ? (
+            <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Contingency Variance</p>
+            {contVar < 0 ? (
               <TrendingDown className="h-5 w-5 text-destructive" />
             ) : (
               <TrendingUp className="h-5 w-5 text-success" />
@@ -112,42 +113,37 @@ function Dashboard() {
           </div>
           <p
             className={`mt-3 font-display text-2xl font-bold tabular-nums ${
-              BUDGET.contingencyVariance < 0 ? "text-destructive" : "text-success"
+              contVar < 0 ? "text-destructive" : "text-success"
             }`}
           >
-            {currency(BUDGET.contingencyVariance)}
+            {currency(contVar)}
           </p>
-          <p className="mt-1 text-xs text-muted-foreground">{variancePct}% of current budget</p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            {getContingencyVariancePct().toFixed(1)}% of current budget
+          </p>
         </div>
 
-        <StatCard icon={Clock} label="Open RFIs" value={openRFIs} sub={`${RFIS.length} total`} />
-        <StatCard icon={CheckCircle2} label="Open Submittals" value={openSubs} sub={`${SUBMITTALS.length} total`} />
-        <StatCard
-          icon={CalendarClock}
-          label="Schedule Delay Days"
-          value={totalDelayDays}
-          sub={`${DELAYS.length} logged events`}
-        />
+        <StatCard icon={Clock} label="Open RFIs" value={getOpenRfiCount()} sub={`${RFIS.length} total`} />
+        <StatCard icon={CheckCircle2} label="Open Submittals" value={getOpenSubmittalCount()} sub={`${SUBMITTALS.length} total`} />
+        <StatCard icon={CalendarClock} label="Schedule Delay Days" value={getTotalDelayDays()} sub={`${DELAYS.length} logged events`} />
       </div>
 
-      {/* Schedule milestones */}
-      <div className="mt-6 rounded-xl border bg-card p-5 shadow-sm lg:p-6">
+      <div className="mt-6 rounded-xl border bg-card p-5 shadow-sm lg:p-6 print-section">
         <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
           <h3 className="font-display text-lg font-semibold">Schedule Milestones</h3>
           <div className="flex items-center gap-3">
             <div className="h-2 w-40 overflow-hidden rounded-full bg-muted">
               <div className="h-full brand-gradient" style={{ width: `${progress}%` }} />
             </div>
-            <span className="text-sm font-medium tabular-nums">{progress}%</span>
+            <span className="text-sm font-medium tabular-nums">
+              {getCompletedMilestones()}/{MILESTONES.length} · {progress}%
+            </span>
           </div>
         </div>
 
-        <ol className="relative space-y-1">
+        <ol className="space-y-1">
           {MILESTONES.map((m, i) => (
-            <li
-              key={m.name}
-              className="flex flex-wrap items-center gap-3 rounded-lg px-2 py-2.5 hover:bg-muted/50"
-            >
+            <li key={m.name} className="flex flex-wrap items-center gap-3 rounded-lg px-2 py-2.5 hover:bg-muted/40">
               <span
                 className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
                   m.status === "complete"
@@ -159,29 +155,28 @@ function Dashboard() {
               >
                 {i + 1}
               </span>
-              <span className="flex-1 min-w-40 text-sm font-medium">{m.name}</span>
-              <span className="text-xs text-muted-foreground">Sched: {m.scheduled}</span>
-              <span className="w-28 text-xs text-muted-foreground">Actual: {m.actual}</span>
+              <span className="min-w-40 flex-1 text-sm font-medium">{m.name}</span>
+              <span className="nowrap-date text-xs text-muted-foreground">Sched: {formatDate(m.scheduled)}</span>
+              <span className="nowrap-date w-32 text-xs text-muted-foreground">Actual: {formatDate(m.actual)}</span>
               <StatusBadge status={m.status} />
             </li>
           ))}
         </ol>
       </div>
+
+      <div className="mt-6 no-print">
+        <Link
+          to="/projects"
+          className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+        >
+          View all projects →
+        </Link>
+      </div>
     </Layout>
   );
 }
 
-function StatCard({
-  icon: Icon,
-  label,
-  value,
-  sub,
-}: {
-  icon: typeof Clock;
-  label: string;
-  value: number;
-  sub: string;
-}) {
+function StatCard({ icon: Icon, label, value, sub }: { icon: typeof Clock; label: string; value: number; sub: string }) {
   return (
     <div className="rounded-xl border bg-card p-5 shadow-sm">
       <div className="flex items-center justify-between">
