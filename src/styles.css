@@ -133,4 +133,65 @@
   .brand-gradient {
     background-image: var(--gradient-brand);
   }
+  .nowrap-date {
+    white-space: nowrap;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print-optimized stylesheet — light background, black text, no chrome.
+   Triggered by the Download / Print actions (window.print()).
+--------------------------------------------------------------------------- */
+@media print {
+  @page {
+    margin: 0.6in;
+  }
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+  /* Hide app chrome */
+  aside,
+  header,
+  footer,
+  .no-print,
+  [data-no-print] {
+    display: none !important;
+  }
+  /* Drop the left offset reserved for the sidebar */
+  .lg\:pl-64 {
+    padding-left: 0 !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+  /* Flatten cards / tables to printable ink */
+  .bg-card,
+  .bg-background,
+  .bg-sidebar,
+  [class*="bg-card"] {
+    background: #ffffff !important;
+    color: #111111 !important;
+    box-shadow: none !important;
+  }
+  table {
+    color: #111111 !important;
+    border-color: #999 !important;
+  }
+  thead {
+    background: #e5e7eb !important;
+    color: #111111 !important;
+  }
+  th,
+  td {
+    border-color: #999 !important;
+  }
+  .print-block {
+    display: block !important;
+  }
+  .print-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
 }
