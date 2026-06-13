@@ -19,9 +19,9 @@ export const EXECUTIVES: Executive[] = [
 ];
 
 export const PROJECT = {
-  name: "Baker's Bay Golf & Ocean Club",
-  lot: "Lot #142",
-  location: "Guana Cay, Abaco, The Bahamas",
+  name: "Dun Rite Construction",
+  lot: "",
+  location: "12412 Curley St San Antonio, FL 33576",
   scheduleMonths: 18,
   startDate: "Mar 3, 2025",
   contractCompletion: "Sep 15, 2026",
