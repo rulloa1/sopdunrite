@@ -12,7 +12,7 @@ import {
   canEditProject,
 } from "@/lib/auth";
 import { STATUSES, type ProjectRow, type ProjectStatus } from "@/lib/projects";
-import { currency } from "@/lib/project-data";
+import { currency } from "@/data/projectData";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
