@@ -49,7 +49,7 @@ function sectionLabel(pathname: string) {
 function LogoChip({ className = "" }: { className?: string }) {
   return (
     <div className={`inline-flex items-center justify-center rounded-lg bg-white p-2 shadow-sm ${className}`}>
-      <img src={logo.url} alt="12412 Curley St, San Antonio, FL 33576 logo" className="h-10 w-auto" />
+      <img src={logo.url} alt="450 Innovation Drive, Austin, TX 78701 logo" className="h-10 w-auto" />
     </div>
   );
 }
@@ -162,9 +162,7 @@ export function Layout({ children }: { children: ReactNode }) {
           </Sheet>
 
           <div className="min-w-0">
-            <h1 className="truncate font-display text-base font-semibold text-foreground">
-              {PROJECT.name}
-            </h1>
+            <h1 className="truncate font-display text-base font-semibold text-foreground">{PROJECT.name}</h1>
             <p className="truncate text-xs text-muted-foreground">
               {PROJECT.lot} · {PROJECT.location}
             </p>
@@ -207,3 +205,4 @@ export function Layout({ children }: { children: ReactNode }) {
     </div>
   );
 }
+lot;
