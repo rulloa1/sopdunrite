@@ -242,6 +242,13 @@ function ProjectsPage() {
                         <div className="flex items-start justify-between gap-2">
                           <p className="text-sm font-semibold leading-snug">{p.name}</p>
                           <div className="flex shrink-0 gap-1">
+                            <button
+                              onClick={() => setDocsProject(p)}
+                              className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+                              aria-label="Project documents"
+                            >
+                              <FileText className="h-3.5 w-3.5" />
+                            </button>
                             {editable && (
                               <button
                                 onClick={() => openEdit(p)}
