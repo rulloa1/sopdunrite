@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Plus, Pencil, Trash2, Building2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Building2, FileText } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { RequireAuth } from "@/components/RequireAuth";
+import { ProjectDocumentsDialog } from "@/components/ProjectDocumentsDialog";
 import { supabase } from "@/integrations/supabase/client";
 import {
   useAuth,
