@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Plus, Pencil, Trash2, Building2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Building2, FileText } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { RequireAuth } from "@/components/RequireAuth";
+import { ProjectDocumentsDialog } from "@/components/ProjectDocumentsDialog";
 import { supabase } from "@/integrations/supabase/client";
 import {
   useAuth,
@@ -87,6 +88,7 @@ function ProjectsPage() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [docsProject, setDocsProject] = useState<ProjectRow | null>(null);
 
   const load = async () => {
     setLoading(true);
@@ -240,6 +242,13 @@ function ProjectsPage() {
                         <div className="flex items-start justify-between gap-2">
                           <p className="text-sm font-semibold leading-snug">{p.name}</p>
                           <div className="flex shrink-0 gap-1">
+                            <button
+                              onClick={() => setDocsProject(p)}
+                              className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+                              aria-label="Project documents"
+                            >
+                              <FileText className="h-3.5 w-3.5" />
+                            </button>
                             {editable && (
                               <button
                                 onClick={() => openEdit(p)}
@@ -396,6 +405,15 @@ function ProjectsPage() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {docsProject && (
+        <ProjectDocumentsDialog
+          projectId={docsProject.id}
+          projectName={docsProject.name}
+          open={!!docsProject}
+          onOpenChange={(o) => !o && setDocsProject(null)}
+        />
+      )}
     </Layout>
   );
 }
