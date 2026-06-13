@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
 import { PageHeader } from "@/components/PageHeader";
-import { DocActions } from "@/components/DocActions";
-import { Table, Th, Td, Tr } from "@/components/Table";
-import { PURCHASE_ORDERS, currency } from "@/lib/project-data";
+import { SectionActions } from "@/components/SectionActions";
+import { DataTable, type Column } from "@/components/DataTable";
+import { PURCHASE_ORDERS, type PurchaseOrder, currency, formatDate, getTotalPOIssued } from "@/data/projectData";
 
 export const Route = createFileRoute("/purchase-orders")({
   head: () => ({
@@ -15,47 +15,40 @@ export const Route = createFileRoute("/purchase-orders")({
   component: POLog,
 });
 
+const columns: Column<PurchaseOrder>[] = [
+  { key: "po", header: "PO #", sortValue: (r) => r.po, cell: (r) => <span className="font-mono text-xs font-medium">{r.po}</span> },
+  { key: "code", header: "Cost Code", sortValue: (r) => r.code, cell: (r) => <span className="font-mono text-xs text-muted-foreground">{r.code}</span> },
+  { key: "vendor", header: "Subcontractor / Vendor", sortValue: (r) => r.vendor, cell: (r) => r.vendor },
+  { key: "desc", header: "Description", sortValue: (r) => r.description, cell: (r) => <span className="text-muted-foreground">{r.description}</span> },
+  { key: "date", header: "Issue Date", sortValue: (r) => r.issueDate, cell: (r) => <span className="nowrap-date">{formatDate(r.issueDate)}</span> },
+  { key: "amount", header: "Amount", align: "right", sortValue: (r) => r.amount, cell: (r) => <span className="tabular-nums font-medium">{currency(r.amount)}</span> },
+];
+
 function POLog() {
-  const total = PURCHASE_ORDERS.reduce((a, r) => a + r.amount, 0);
   return (
     <Layout>
       <PageHeader
         number={4}
         title="Purchase Order Log"
-        description="Issued purchase orders by vendor and cost code."
+        description="Issued purchase orders by vendor and cost code, in issue-date order."
         actions={
           <div className="flex items-center gap-3">
-            <div className="rounded-xl border bg-card px-4 py-2 shadow-sm">
+            <div className="rounded-xl border bg-card px-4 py-2 shadow-sm no-print">
               <span className="text-xs uppercase tracking-wide text-muted-foreground">Total Issued </span>
-              <span className="font-display text-lg font-bold tabular-nums">{currency(total)}</span>
+              <span className="font-display text-lg font-bold tabular-nums">{currency(getTotalPOIssued())}</span>
             </div>
-            <DocActions label="Purchase Order Log" />
+            <SectionActions label="Purchase Order Log" />
           </div>
         }
       />
-      <Table
-        head={
-          <tr>
-            <Th>PO #</Th>
-            <Th>Cost Code</Th>
-            <Th>Subcontractor / Vendor</Th>
-            <Th>Description</Th>
-            <Th>Issue Date</Th>
-            <Th right>Amount</Th>
-          </tr>
-        }
-      >
-        {PURCHASE_ORDERS.map((r) => (
-          <Tr key={r.po}>
-            <Td className="font-mono text-xs font-medium">{r.po}</Td>
-            <Td className="font-mono text-xs text-muted-foreground">{r.code}</Td>
-            <Td>{r.vendor}</Td>
-            <Td className="text-muted-foreground">{r.description}</Td>
-            <Td>{r.issueDate}</Td>
-            <Td right className="tabular-nums font-medium">{currency(r.amount)}</Td>
-          </Tr>
-        ))}
-      </Table>
+      <DataTable
+        columns={columns}
+        rows={PURCHASE_ORDERS}
+        getRowKey={(r) => r.po}
+        initialSort={{ key: "po", dir: "asc" }}
+        minWidthClass="min-w-[820px]"
+        emptyTitle="No purchase orders"
+      />
     </Layout>
   );
 }
