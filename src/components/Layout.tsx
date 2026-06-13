@@ -116,7 +116,7 @@ export function Layout({ children }: { children: ReactNode }) {
               {PROJECT.name}
             </h1>
             <p className="truncate text-xs text-muted-foreground">
-              {PROJECT.lot} · {PROJECT.location}
+              {PROJECT.lot ? `${PROJECT.lot} · ${PROJECT.location}` : PROJECT.location}
             </p>
           </div>
           <span className="ml-auto hidden rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground sm:inline">
