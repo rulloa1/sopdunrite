@@ -1,9 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Layout } from "@/components/Layout";
-import { PageHeader } from "@/components/PageHeader";
-import { DocActions } from "@/components/DocActions";
-import { Table, Th, Td, Tr } from "@/components/Table";
-import { BIDS, currency } from "@/lib/project-data";
+import { PageHeader, Variance } from "@/components/PageHeader";
+import { SectionActions } from "@/components/SectionActions";
+import { DataTable, type Column } from "@/components/DataTable";
+import { BIDS, type Bid, currency } from "@/data/projectData";
 
 export const Route = createFileRoute("/bids")({
   head: () => ({
@@ -15,41 +15,72 @@ export const Route = createFileRoute("/bids")({
   component: Bids,
 });
 
+const fmtOthers = (b: Bid) =>
+  b.bids
+    .filter((x) => x.status !== "awarded")
+    .map((x) => currency(x.amount))
+    .join(" · ") || "—";
+
+const columns: Column<Bid>[] = [
+  { key: "code", header: "Cost Code", sortValue: (r) => r.code, cell: (r) => <span className="font-mono text-xs font-medium">{r.code}</span> },
+  {
+    key: "desc",
+    header: "Description",
+    sortValue: (r) => r.description,
+    cell: (r) => (
+      <span>
+        {r.description}
+        {r.footnote && <sup className="ml-0.5 font-bold text-destructive">*</sup>}
+      </span>
+    ),
+  },
+  { key: "count", header: "Bids", align: "right", sortValue: (r) => r.bids.length, cell: (r) => r.bids.length },
+  { key: "low", header: "Low Qualified Bid", align: "right", sortValue: (r) => r.awardedAmount, cell: (r) => <span className="tabular-nums font-medium">{currency(r.awardedAmount)}</span> },
+  { key: "others", header: "Other Bids", align: "right", sortable: false, cell: (r) => <span className="tabular-nums text-xs text-muted-foreground">{fmtOthers(r)}</span> },
+  { key: "awarded", header: "Awarded To", sortValue: (r) => r.awardedVendor, cell: (r) => r.awardedVendor },
+  { key: "budget", header: "Budget", align: "right", sortValue: (r) => r.budget, cell: (r) => <span className="tabular-nums">{currency(r.budget)}</span> },
+  {
+    key: "variance",
+    header: "Variance",
+    align: "right",
+    sortValue: (r) => r.budget - r.awardedAmount,
+    cell: (r) => {
+      const v = r.budget - r.awardedAmount;
+      return <Variance value={v}>{currency(v)}</Variance>;
+    },
+  },
+];
+
 function Bids() {
+  const notes = BIDS.filter((b) => b.footnote);
   return (
     <Layout>
-      <PageHeader number={3} title="Bid Log" description="Competitive bids by cost code with awarded subcontractor and budget variance." actions={<DocActions label="Bid Log" />} />
-      <Table
-        head={
-          <tr>
-            <Th>Cost Code</Th>
-            <Th>Description</Th>
-            <Th right>Bids</Th>
-            <Th right>Low Qualified Bid</Th>
-            <Th right>Bid 2</Th>
-            <Th right>Bid 3</Th>
-            <Th>Awarded To</Th>
-            <Th right>Budget</Th>
-            <Th right>Variance</Th>
-          </tr>
-        }
-      >
-        {BIDS.map((r) => (
-          <Tr key={r.code}>
-            <Td className="font-mono text-xs font-medium">{r.code}</Td>
-            <Td>{r.desc}</Td>
-            <Td right>{r.contacted}</Td>
-            <Td right className="tabular-nums font-medium">{currency(r.lowBid)}</Td>
-            <Td right className="tabular-nums text-muted-foreground">{currency(r.bid2)}</Td>
-            <Td right className="tabular-nums text-muted-foreground">{currency(r.bid3)}</Td>
-            <Td>{r.awardedTo}</Td>
-            <Td right className="tabular-nums">{currency(r.budget)}</Td>
-            <Td right className={`tabular-nums font-medium ${r.variance >= 0 ? "text-success" : "text-destructive"}`}>
-              {currency(r.variance)}
-            </Td>
-          </Tr>
-        ))}
-      </Table>
+      <PageHeader
+        number={3}
+        title="Bid Log"
+        description="Competitive bids by cost code with awarded subcontractor and budget variance."
+        actions={<SectionActions label="Bid Log" />}
+      />
+      <DataTable
+        columns={columns}
+        rows={BIDS}
+        getRowKey={(r) => r.code}
+        initialSort={{ key: "code", dir: "asc" }}
+        minWidthClass="min-w-[920px]"
+        emptyTitle="No bids recorded"
+      />
+      {notes.length > 0 && (
+        <div className="mt-4 rounded-xl border bg-card p-4 text-xs text-muted-foreground print-section">
+          <p className="mb-1 font-semibold text-foreground">Footnotes</p>
+          <ul className="space-y-1">
+            {notes.map((n) => (
+              <li key={n.code}>
+                <span className="font-bold text-destructive">*</span> {n.code} — {n.footnote}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </Layout>
   );
 }
