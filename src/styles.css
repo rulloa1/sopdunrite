@@ -52,93 +52,63 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-:root {
+/* ---------------------------------------------------------------------------
+   DunRite brand — dark navy + amber. Dark is the default and ONLY theme.
+--------------------------------------------------------------------------- */
+:root,
+.dark {
   --radius: 0.75rem;
 
-  --background: oklch(0.975 0.005 240);
-  --foreground: oklch(0.22 0.03 255);
+  --background: #10162e;
+  --foreground: #f2f4fb;
 
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.22 0.03 255);
+  --card: #1c2448;
+  --card-foreground: #f2f4fb;
 
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.22 0.03 255);
+  --popover: #1c2448;
+  --popover-foreground: #f2f4fb;
 
-  --primary: oklch(0.62 0.15 238);
-  --primary-foreground: oklch(0.99 0.005 240);
+  --primary: #f89925; /* amber */
+  --primary-foreground: #10162e; /* dark navy text on amber (AA) */
 
-  --secondary: oklch(0.95 0.012 240);
-  --secondary-foreground: oklch(0.3 0.03 255);
+  --secondary: #ce6823; /* burnt orange */
+  --secondary-foreground: #f2f4fb;
 
-  --muted: oklch(0.95 0.01 240);
-  --muted-foreground: oklch(0.52 0.02 255);
+  --muted: #1c2448;
+  --muted-foreground: #9aa3c0;
 
-  --accent: oklch(0.93 0.04 235);
-  --accent-foreground: oklch(0.3 0.06 250);
+  --accent: #2a3358;
+  --accent-foreground: #f2f4fb;
 
-  --destructive: oklch(0.58 0.21 25);
-  --destructive-foreground: oklch(0.99 0.005 240);
+  --destructive: #e64343;
+  --destructive-foreground: #ffffff;
 
-  --success: oklch(0.62 0.14 158);
-  --success-foreground: oklch(0.99 0.005 240);
+  --success: #27a86d;
+  --success-foreground: #ffffff;
 
-  --warning: oklch(0.74 0.15 70);
-  --warning-foreground: oklch(0.25 0.04 70);
+  --warning: #f89925;
+  --warning-foreground: #10162e;
 
-  --border: oklch(0.9 0.01 245);
-  --input: oklch(0.9 0.01 245);
-  --ring: oklch(0.62 0.15 238);
+  --border: #2a3358;
+  --input: #2a3358;
+  --ring: #f89925;
 
-  --chart-1: oklch(0.62 0.15 238);
-  --chart-2: oklch(0.68 0.12 210);
-  --chart-3: oklch(0.62 0.14 158);
-  --chart-4: oklch(0.74 0.15 70);
-  --chart-5: oklch(0.58 0.21 25);
+  --chart-1: #f89925;
+  --chart-2: #ce6823;
+  --chart-3: #27a86d;
+  --chart-4: #9aa3c0;
+  --chart-5: #e64343;
 
-  --sidebar: oklch(0.24 0.035 257);
-  --sidebar-foreground: oklch(0.88 0.015 245);
-  --sidebar-primary: oklch(0.68 0.14 232);
-  --sidebar-primary-foreground: oklch(0.99 0.005 240);
-  --sidebar-accent: oklch(0.3 0.04 257);
-  --sidebar-accent-foreground: oklch(0.97 0.005 240);
-  --sidebar-border: oklch(0.32 0.035 257);
-  --sidebar-ring: oklch(0.68 0.14 232);
+  --sidebar: #0b1022;
+  --sidebar-foreground: #f2f4fb;
+  --sidebar-primary: #f89925;
+  --sidebar-primary-foreground: #10162e;
+  --sidebar-accent: #1c2448;
+  --sidebar-accent-foreground: #f2f4fb;
+  --sidebar-border: #2a3358;
+  --sidebar-ring: #f89925;
 
-  --gradient-brand: linear-gradient(135deg, oklch(0.68 0.14 232), oklch(0.55 0.16 252));
-}
-
-.dark {
-  --background: oklch(0.18 0.025 257);
-  --foreground: oklch(0.95 0.01 245);
-  --card: oklch(0.22 0.03 257);
-  --card-foreground: oklch(0.95 0.01 245);
-  --popover: oklch(0.22 0.03 257);
-  --popover-foreground: oklch(0.95 0.01 245);
-  --primary: oklch(0.68 0.14 232);
-  --primary-foreground: oklch(0.18 0.025 257);
-  --secondary: oklch(0.28 0.03 257);
-  --secondary-foreground: oklch(0.95 0.01 245);
-  --muted: oklch(0.28 0.03 257);
-  --muted-foreground: oklch(0.68 0.02 245);
-  --accent: oklch(0.3 0.04 250);
-  --accent-foreground: oklch(0.95 0.01 245);
-  --destructive: oklch(0.62 0.2 25);
-  --destructive-foreground: oklch(0.99 0.005 240);
-  --success: oklch(0.65 0.14 158);
-  --success-foreground: oklch(0.15 0.02 158);
-  --warning: oklch(0.76 0.15 70);
-  --warning-foreground: oklch(0.2 0.04 70);
-  --border: oklch(0.32 0.03 257);
-  --input: oklch(0.32 0.03 257);
-  --ring: oklch(0.68 0.14 232);
-  --sidebar: oklch(0.16 0.025 257);
-  --sidebar-foreground: oklch(0.88 0.015 245);
-  --sidebar-primary: oklch(0.68 0.14 232);
-  --sidebar-primary-foreground: oklch(0.16 0.025 257);
-  --sidebar-accent: oklch(0.26 0.03 257);
-  --sidebar-accent-foreground: oklch(0.97 0.005 240);
-  --sidebar-border: oklch(0.28 0.03 257);
-  --sidebar-ring: oklch(0.68 0.14 232);
+  --gradient-brand: linear-gradient(135deg, #ce6823, #f89925);
 }
 
 @layer base {
@@ -162,5 +132,66 @@
 @layer components {
   .brand-gradient {
     background-image: var(--gradient-brand);
+  }
+  .nowrap-date {
+    white-space: nowrap;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Print-optimized stylesheet — light background, black text, no chrome.
+   Triggered by the Download / Print actions (window.print()).
+--------------------------------------------------------------------------- */
+@media print {
+  @page {
+    margin: 0.6in;
+  }
+  html,
+  body {
+    background: #ffffff !important;
+    color: #111111 !important;
+  }
+  /* Hide app chrome */
+  aside,
+  header,
+  footer,
+  .no-print,
+  [data-no-print] {
+    display: none !important;
+  }
+  /* Drop the left offset reserved for the sidebar */
+  .lg\:pl-64 {
+    padding-left: 0 !important;
+  }
+  main {
+    padding: 0 !important;
+  }
+  /* Flatten cards / tables to printable ink */
+  .bg-card,
+  .bg-background,
+  .bg-sidebar,
+  [class*="bg-card"] {
+    background: #ffffff !important;
+    color: #111111 !important;
+    box-shadow: none !important;
+  }
+  table {
+    color: #111111 !important;
+    border-color: #999 !important;
+  }
+  thead {
+    background: #e5e7eb !important;
+    color: #111111 !important;
+  }
+  th,
+  td {
+    border-color: #999 !important;
+  }
+  .print-block {
+    display: block !important;
+  }
+  .print-section {
+    break-inside: avoid;
+    page-break-inside: avoid;
   }
 }
