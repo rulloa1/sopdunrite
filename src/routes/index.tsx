@@ -9,13 +9,13 @@ import { SectionActions } from "@/components/SectionActions";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dashboard | Dun Rite Construction" },
+      { title: "Dashboard | 12412 Curley St, San Antonio, FL 33576" },
       {
         name: "description",
         content:
-          "Executive summary dashboard for Dun Rite Construction — schedule, budget, RFIs, submittals and procurement at a glance.",
+          "Executive summary dashboard for 12412 Curley St, San Antonio, FL 33576 — schedule, budget, RFIs, submittals and procurement at a glance.",
       },
-      { property: "og:title", content: "Dun Rite Construction — Project Dashboard" },
+      { property: "og:title", content: "12412 Curley St, San Antonio, FL 33576 — Project Dashboard" },
       { property: "og:description", content: "Schedule, budget and project controls dashboard." },
     ],
   }),

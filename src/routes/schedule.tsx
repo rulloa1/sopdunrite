@@ -18,7 +18,7 @@ import {
 export const Route = createFileRoute("/schedule")({
   head: () => ({
     meta: [
-      { title: "Schedule Delays | Dun Rite Construction" },
+      { title: "Schedule Delays | 12412 Curley St, San Antonio, FL 33576" },
       { name: "description", content: "Milestone schedule and logged delay events impacting the Baker's Bay completion." },
     ],
   }),

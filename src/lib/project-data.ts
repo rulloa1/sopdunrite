@@ -1,5 +1,5 @@
 export const COMPANY = {
-  name: "Dun Rite Construction",
+  name: "12412 Curley St, San Antonio, FL 33576",
   tagline: "Project Management & Standard Operating Procedures",
 };
 

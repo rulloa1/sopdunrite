@@ -187,7 +187,7 @@ export async function buildWorkbookDocxBlob(): Promise<Blob> {
             type: "png",
             data: logoBytes,
             transformation: { width: 90, height: 90 },
-            altText: { title: "Dun Rite Construction", description: "Company logo", name: "Logo" },
+            altText: { title: "12412 Curley St, San Antonio, FL 33576", description: "Company logo", name: "Logo" },
           }),
         ],
       }),
