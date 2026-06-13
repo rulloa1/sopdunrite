@@ -405,6 +405,15 @@ function ProjectsPage() {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
+
+      {docsProject && (
+        <ProjectDocumentsDialog
+          projectId={docsProject.id}
+          projectName={docsProject.name}
+          open={!!docsProject}
+          onOpenChange={(o) => !o && setDocsProject(null)}
+        />
+      )}
     </Layout>
   );
 }
