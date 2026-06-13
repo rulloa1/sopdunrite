@@ -37,7 +37,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Dun Rite Construction — Project Dashboard" },
       {
         property: "og:description",
-        content: "Schedule, budget and project controls for the Baker's Bay residence.",
+        content: "Schedule, budget and project controls for Dun Rite Construction.",
       },
     ],
   }),
