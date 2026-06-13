@@ -28,15 +28,15 @@ export function PageHeader({
   number?: number;
 }) {
   return (
-    <div className="mb-6 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4">
+    <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
-        <h2 className="font-display text-2xl font-bold text-foreground">
+        <h2 className="font-display text-xl font-bold text-foreground sm:text-2xl">
           {number != null && <span className="text-primary">{number}. </span>}
           {title}
         </h2>
         {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
       </div>
-      {actions && <div className="shrink-0">{actions}</div>}
+      {actions && <div className="flex shrink-0 flex-wrap items-center gap-3">{actions}</div>}
     </div>
   );
 }

@@ -67,9 +67,9 @@ function Dashboard() {
 
   return (
     <Layout>
-      <div className="mb-6 grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
-          <h2 className="font-display text-2xl font-bold">
+          <h2 className="font-display text-xl font-bold sm:text-2xl">
             <span className="text-primary">1. </span>Executive Summary
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
@@ -77,7 +77,7 @@ function Dashboard() {
             {formatDate(PROJECT.targetCompletion)}
           </p>
         </div>
-        <div className="flex shrink-0 items-center gap-3 no-print">
+        <div className="flex shrink-0 flex-wrap items-center gap-3 no-print">
           <Button onClick={() => window.print()} className="gap-2">
             <Printer className="h-4 w-4" /> Download Workbook
           </Button>
