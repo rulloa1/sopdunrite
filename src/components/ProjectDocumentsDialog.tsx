@@ -83,10 +83,26 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
     }
   }, [open, load]);
 
+  const extract = useCallback(
+    async (documentId: string) => {
+      setExtractingIds((ids) => [...ids, documentId]);
+      try {
+        await runExtract({ data: { documentId } });
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Text extraction failed.");
+      } finally {
+        setExtractingIds((ids) => ids.filter((id) => id !== documentId));
+        await load();
+      }
+    },
+    [runExtract, load],
+  );
+
   const handleFiles = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     setError(null);
     setUploading(true);
+    const newIds: string[] = [];
     try {
       for (const file of Array.from(files)) {
         if (file.size > MAX_SIZE) {
@@ -102,26 +118,37 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
           setError(upErr.message);
           continue;
         }
-        const { error: insErr } = await supabase.from("project_documents").insert({
-          project_id: projectId,
-          name: file.name,
-          file_path: path,
-          content_type: file.type || null,
-          file_size: file.size,
-          uploaded_by: user?.id ?? null,
-        });
-        if (insErr) {
+        const { data: inserted, error: insErr } = await supabase
+          .from("project_documents")
+          .insert({
+            project_id: projectId,
+            name: file.name,
+            file_path: path,
+            content_type: file.type || null,
+            file_size: file.size,
+            uploaded_by: user?.id ?? null,
+          })
+          .select("id")
+          .single();
+        if (insErr || !inserted) {
           // best-effort cleanup of the orphaned file
           await supabase.storage.from("project-documents").remove([path]);
-          setError(insErr.message);
+          setError(insErr?.message ?? "Could not save the document.");
+          continue;
         }
+        newIds.push(inserted.id as string);
       }
       await load();
+      // Kick off automatic text extraction for each new document.
+      for (const id of newIds) {
+        void extract(id);
+      }
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = "";
     }
   };
+
 
   const download = async (doc: ProjectDocument) => {
     setBusyId(doc.id);
