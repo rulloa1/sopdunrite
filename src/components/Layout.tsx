@@ -39,13 +39,10 @@ export function Layout({ children }: { children: ReactNode }) {
   return (
     <div className="flex min-h-screen bg-background">
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-sidebar text-sidebar-foreground lg:flex">
-        <div className="flex items-center gap-3 px-6 py-6">
-          <img src={logo.url} alt="Dun Rite Construction logo" className="h-10 w-auto" />
-          <div className="leading-tight">
-            <p className="font-display text-sm font-semibold text-sidebar-accent-foreground">Dun Rite</p>
-            <p className="text-xs text-sidebar-foreground/70">Construction</p>
-          </div>
+        <div className="flex items-center px-6 py-6">
+          <img src={logo.url} alt="Dun Rite Construction logo" className="h-16 w-auto" />
         </div>
+
 
         <nav className="flex-1 space-y-1 px-3 py-2">
           {NAV.map(({ to, label, icon: Icon }) => {
