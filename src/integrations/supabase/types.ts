@@ -45,6 +45,8 @@ export type Database = {
         Row: {
           content_type: string | null
           created_at: string
+          extracted_text: string | null
+          extraction_status: string
           file_path: string
           file_size: number | null
           id: string
@@ -55,6 +57,8 @@ export type Database = {
         Insert: {
           content_type?: string | null
           created_at?: string
+          extracted_text?: string | null
+          extraction_status?: string
           file_path: string
           file_size?: number | null
           id?: string
@@ -65,6 +69,8 @@ export type Database = {
         Update: {
           content_type?: string | null
           created_at?: string
+          extracted_text?: string | null
+          extraction_status?: string
           file_path?: string
           file_size?: number | null
           id?: string

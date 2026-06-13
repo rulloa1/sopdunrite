@@ -1,7 +1,17 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Download, FileText, Loader2, Trash2, Upload } from "lucide-react";
+import {
+  ChevronDown,
+  Download,
+  FileText,
+  Loader2,
+  ScanText,
+  Trash2,
+  Upload,
+} from "lucide-react";
+import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canCreateProjects, isAdmin } from "@/lib/auth";
+import { extractDocumentText } from "@/lib/document-extract.functions";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -19,6 +29,8 @@ interface ProjectDocument {
   file_size: number | null;
   uploaded_by: string | null;
   created_at: string;
+  extracted_text: string | null;
+  extraction_status: string | null;
 }
 
 interface Props {
@@ -27,6 +39,7 @@ interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
+
 
 function formatSize(bytes: number | null): string {
   if (!bytes && bytes !== 0) return "";
@@ -45,7 +58,11 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busyId, setBusyId] = useState<string | null>(null);
+  const [extractingIds, setExtractingIds] = useState<string[]>([]);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const runExtract = useServerFn(extractDocumentText);
+
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -66,10 +83,26 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
     }
   }, [open, load]);
 
+  const extract = useCallback(
+    async (documentId: string) => {
+      setExtractingIds((ids) => [...ids, documentId]);
+      try {
+        await runExtract({ data: { documentId } });
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Text extraction failed.");
+      } finally {
+        setExtractingIds((ids) => ids.filter((id) => id !== documentId));
+        await load();
+      }
+    },
+    [runExtract, load],
+  );
+
   const handleFiles = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
     setError(null);
     setUploading(true);
+    const newIds: string[] = [];
     try {
       for (const file of Array.from(files)) {
         if (file.size > MAX_SIZE) {
@@ -85,26 +118,37 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
           setError(upErr.message);
           continue;
         }
-        const { error: insErr } = await supabase.from("project_documents").insert({
-          project_id: projectId,
-          name: file.name,
-          file_path: path,
-          content_type: file.type || null,
-          file_size: file.size,
-          uploaded_by: user?.id ?? null,
-        });
-        if (insErr) {
+        const { data: inserted, error: insErr } = await supabase
+          .from("project_documents")
+          .insert({
+            project_id: projectId,
+            name: file.name,
+            file_path: path,
+            content_type: file.type || null,
+            file_size: file.size,
+            uploaded_by: user?.id ?? null,
+          })
+          .select("id")
+          .single();
+        if (insErr || !inserted) {
           // best-effort cleanup of the orphaned file
           await supabase.storage.from("project-documents").remove([path]);
-          setError(insErr.message);
+          setError(insErr?.message ?? "Could not save the document.");
+          continue;
         }
+        newIds.push(inserted.id as string);
       }
       await load();
+      // Kick off automatic text extraction for each new document.
+      for (const id of newIds) {
+        void extract(id);
+      }
     } finally {
       setUploading(false);
       if (fileRef.current) fileRef.current.value = "";
     }
   };
+
 
   const download = async (doc: ProjectDocument) => {
     setBusyId(doc.id);
@@ -190,40 +234,79 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
           </p>
         ) : (
           <ul className="space-y-2">
-            {docs.map((doc) => (
-              <li
-                key={doc.id}
-                className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2"
-              >
-                <FileText className="h-4 w-4 shrink-0 text-muted-foreground" />
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium">{doc.name}</p>
-                  <p className="text-xs text-muted-foreground">
-                    {formatSize(doc.file_size)}
-                    {doc.file_size != null ? " · " : ""}
-                    {new Date(doc.created_at).toLocaleDateString()}
-                  </p>
-                </div>
-                <button
-                  onClick={() => download(doc)}
-                  disabled={busyId === doc.id}
-                  className="rounded p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-50"
-                  aria-label="Download document"
-                >
-                  <Download className="h-4 w-4" />
-                </button>
-                {canDelete(doc) && (
-                  <button
-                    onClick={() => remove(doc)}
-                    disabled={busyId === doc.id}
-                    className="rounded p-1.5 text-muted-foreground hover:bg-destructive/10 hover:text-destructive disabled:opacity-50"
-                    aria-label="Delete document"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                )}
-              </li>
-            ))}
+            {docs.map((doc) => {
+              const isExtracting =
+                extractingIds.includes(doc.id) || doc.extraction_status === "processing";
+              const hasText = !!doc.extracted_text?.trim();
+              const expanded = expandedId === doc.id;
+              return (
+                <li key={doc.id} className="rounded-lg border bg-card">
+                  <div className="flex items-center gap-3 px-3 py-2">
+                    <FileText className="h-4 w-4 shrink-0 text-muted-foreground" />
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-medium">{doc.name}</p>
+                      <p className="text-xs text-muted-foreground">
+                        {formatSize(doc.file_size)}
+                        {doc.file_size != null ? " · " : ""}
+                        {new Date(doc.created_at).toLocaleDateString()}
+                        {isExtracting && " · Extracting text…"}
+                        {!isExtracting && doc.extraction_status === "unsupported" &&
+                          " · No text found"}
+                        {!isExtracting && doc.extraction_status === "error" &&
+                          " · Extraction failed"}
+                      </p>
+                    </div>
+                    {isExtracting && (
+                      <Loader2 className="h-4 w-4 shrink-0 animate-spin text-muted-foreground" />
+                    )}
+                    {!isExtracting && hasText && (
+                      <button
+                        onClick={() => setExpandedId(expanded ? null : doc.id)}
+                        className="rounded p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                        aria-label="View extracted text"
+                      >
+                        <ChevronDown
+                          className={`h-4 w-4 transition-transform ${expanded ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                    )}
+                    {!isExtracting && !hasText && doc.extraction_status !== "unsupported" && (
+                      <button
+                        onClick={() => extract(doc.id)}
+                        className="rounded p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground"
+                        aria-label="Extract text"
+                      >
+                        <ScanText className="h-4 w-4" />
+                      </button>
+                    )}
+                    <button
+                      onClick={() => download(doc)}
+                      disabled={busyId === doc.id}
+                      className="rounded p-1.5 text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-50"
+                      aria-label="Download document"
+                    >
+                      <Download className="h-4 w-4" />
+                    </button>
+                    {canDelete(doc) && (
+                      <button
+                        onClick={() => remove(doc)}
+                        disabled={busyId === doc.id}
+                        className="rounded p-1.5 text-muted-foreground hover:bg-destructive/10 hover:text-destructive disabled:opacity-50"
+                        aria-label="Delete document"
+                      >
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    )}
+                  </div>
+                  {expanded && hasText && (
+                    <pre className="max-h-64 overflow-auto whitespace-pre-wrap border-t bg-muted/40 px-3 py-2 text-xs text-foreground">
+                      {doc.extracted_text}
+                    </pre>
+                  )}
+                </li>
+              );
+            })}
+
           </ul>
         )}
       </DialogContent>
