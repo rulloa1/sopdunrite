@@ -45,8 +45,8 @@ import {
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects | Dun Rite Construction" },
-      { name: "description", content: "Track bid, contract, and active projects across Dun Rite Construction." },
+      { title: "Projects | 12412 Curley St, San Antonio, FL 33576" },
+      { name: "description", content: "Track bid, contract, and active projects across 12412 Curley St, San Antonio, FL 33576." },
       { name: "robots", content: "noindex" },
     ],
   }),

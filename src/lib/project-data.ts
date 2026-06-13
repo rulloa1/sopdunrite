@@ -1,5 +1,5 @@
 export const COMPANY = {
-  name: "Dun Rite Construction",
+  name: "12412 Curley St, San Antonio, FL 33576",
   tagline: "Project Management & Standard Operating Procedures",
 };
 
@@ -19,7 +19,7 @@ export const EXECUTIVES: Executive[] = [
 ];
 
 export const PROJECT = {
-  name: "Dun Rite Construction",
+  name: "12412 Curley St, San Antonio, FL 33576",
   lot: "12412 Curley St, San Antonio, FL 33576",
   location: "12412 Curley St, San Antonio, FL 33576",
   scheduleMonths: 18,

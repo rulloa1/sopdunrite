@@ -1,6 +1,6 @@
 // =============================================================================
 // SINGLE SOURCE OF TRUTH
-// Dun Rite Construction — Baker's Bay Project Management Workbook
+// 12412 Curley St, San Antonio, FL 33576 — Baker's Bay Project Management Workbook
 //
 // Every total, subtotal, count and KPI shown anywhere in the app is COMPUTED
 // from the row data below via the selector functions at the bottom of this file.
@@ -124,12 +124,12 @@ export const PROJECT = {
 };
 
 export const CONTRACTOR = {
-  name: "Dun Rite Construction",
+  name: "12412 Curley St, San Antonio, FL 33576",
   address: "12412 Curley St, San Antonio, FL 33576",
 };
 
 export const COMPANY = {
-  name: "Dun Rite Construction",
+  name: "12412 Curley St, San Antonio, FL 33576",
   tagline: "Project Management Workbook",
 };
 

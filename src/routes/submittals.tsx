@@ -10,7 +10,7 @@ import { SUBMITTALS, type Submittal, formatDate, daysOpen, isOverdue, type LogSt
 export const Route = createFileRoute("/submittals")({
   head: () => ({
     meta: [
-      { title: "Submittal Log | Dun Rite Construction" },
+      { title: "Submittal Log | 12412 Curley St, San Antonio, FL 33576" },
       { name: "description", content: "Submittal log tracking shop drawings, samples and product data with required, received dates and aging." },
     ],
   }),
