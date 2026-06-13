@@ -116,7 +116,7 @@ export const TODAY = new Date(2026, 5, 13); // Jun 13, 2026
 // ---------------------------------------------------------------------------
 export const PROJECT = {
   name: "Baker's Bay Golf & Ocean Club",
-  lot: "Lot #142",
+  lot: "12412 Curley St, San Antonio, FL 33576",
   location: "Guana Cay, Abaco, The Bahamas",
   scheduleMonths: 18,
   startDate: "2025-03-03",
