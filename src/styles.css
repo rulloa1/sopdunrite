@@ -54,32 +54,32 @@
 }
 
 /* ---------------------------------------------------------------------------
-   BuildFlow Pro brand – slate charcoal + indigo. Dark is the default and ONLY theme.
-      --------------------------------------------------------------------------- */
+   BuildFlow Pro brand – charcoal grey + logo blues. Dark is the default and ONLY theme.
+   --------------------------------------------------------------------------- */
 :root,
 .dark {
   --radius: 0.75rem;
 
-  --background: #0f172a;
-  --foreground: #f1f5f9;
+  --background: #0f1419;
+  --foreground: #e2e8f0;
 
-  --card: #1e293b;
-  --card-foreground: #f1f5f9;
+  --card: #1a2029;
+  --card-foreground: #e2e8f0;
 
-  --popover: #1e293b;
-  --popover-foreground: #f1f5f9;
+  --popover: #1a2029;
+  --popover-foreground: #e2e8f0;
 
-  --primary: #6366f1; /* indigo */
-  --primary-foreground: #ffffff; /* white text on indigo */
+  --primary: #20c0e0; /* logo sky blue */
+  --primary-foreground: #0f1419; /* dark text on blue */
 
-  --secondary: #4f46e5; /* deeper indigo */
-  --secondary-foreground: #f1f5f9;
+  --secondary: #2060c0; /* logo dark blue */
+  --secondary-foreground: #e2e8f0;
 
   --muted: #1e293b;
   --muted-foreground: #94a3b8;
 
-  --accent: #312e81; /* dark indigo accent */
-  --accent-foreground: #c7d2fe;
+  --accent: #0a1f35; /* deep navy */
+  --accent-foreground: #bfeeff;
 
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
@@ -88,28 +88,28 @@
   --success-foreground: #ffffff;
 
   --warning: #f59e0b;
-  --warning-foreground: #0f172a;
+  --warning-foreground: #0f1419;
 
-  --border: #334155;
-  --input: #1e293b;
-  --ring: #6366f1;
+  --border: #2a3441;
+  --input: #1a2029;
+  --ring: #20c0e0;
 
-  --chart-1: #6366f1;
-  --chart-2: #8b5cf6;
-  --chart-3: #06b6d4;
-  --chart-4: #10b981;
-  --chart-5: #f59e0b;
+  --chart-1: #20c0e0;
+  --chart-2: #2060c0;
+  --chart-3: #3b82f6;
+  --chart-4: #60a5fa;
+  --chart-5: #93c5fd;
 
-  --sidebar: #1e293b;
-  --sidebar-foreground: #f1f5f9;
-  --sidebar-primary: #6366f1; /* indigo */
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #334155;
-  --sidebar-accent-foreground: #f1f5f9;
-  --sidebar-border: #334155;
-  --sidebar-ring: #6366f1;
+  --sidebar: #1a2029;
+  --sidebar-foreground: #e2e8f0;
+  --sidebar-primary: #20c0e0; /* logo sky blue */
+  --sidebar-primary-foreground: #0f1419;
+  --sidebar-accent: #2a3441;
+  --sidebar-accent-foreground: #e2e8f0;
+  --sidebar-border: #2a3441;
+  --sidebar-ring: #20c0e0;
 
-  --gradient-brand: linear-gradient(135deg, #4f46e5, #6366f1);
+  --gradient-brand: linear-gradient(135deg, #2060c0, #20c0e0);
 }
 
 @layer base {
