@@ -12,7 +12,7 @@ import {
   PROCUREMENT,
   currency,
 } from "@/lib/project-data";
-import logo from "@/assets/dunrite-logo.png.asset.json";
+import logo from "@/assets/dunrite-logo.jpg.asset.json";
 
 // Brand palette matching the printed Project Management Workbook
 const BRAND = "20C0E0"; // logo sky blue
