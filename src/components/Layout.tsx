@@ -15,7 +15,7 @@ import {
   LogIn,
   Menu,
 } from "lucide-react";
-import logo from "@/assets/dunrite-logo.png.asset.json";
+import logo from "@/assets/dunrite-logo.jpg.asset.json";
 import { WorkbookBanner } from "@/components/WorkbookBanner";
 import { Breadcrumb } from "@/components/PageHeader";
 import { PROJECT, CONTRACTOR } from "@/data/projectData";
@@ -44,12 +44,10 @@ function sectionLabel(pathname: string) {
   return item?.label ?? "Dashboard";
 }
 
-// TODO: swap `dunrite-logo` for a white/amber logo PNG; once that lands the
-// white chip wrapper below can be removed.
 function LogoChip({ className = "" }: { className?: string }) {
   return (
-    <div className={`inline-flex items-center justify-center rounded-lg bg-white p-2 shadow-sm ${className}`}>
-      <img src={logo.url} alt="450 Innovation Drive, Austin, TX 78701 logo" className="h-10 w-auto" />
+    <div className={`inline-flex items-center justify-center overflow-hidden rounded-lg shadow-sm ${className}`}>
+      <img src={logo.url} alt="Dunrite Construction Group LLC logo" className="h-12 w-auto" />
     </div>
   );
 }
