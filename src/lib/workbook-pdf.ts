@@ -15,7 +15,7 @@ import {
 import logo from "@/assets/dunrite-logo.png.asset.json";
 
 // Brand palette matching the printed Project Management Workbook
-const BRAND: [number, number, number] = [41, 171, 226]; // sky blue
+const BRAND: [number, number, number] = [32, 192, 224]; // logo sky blue #20C0E0
 const DARK: [number, number, number] = [51, 51, 51];
 const GREY: [number, number, number] = [120, 120, 120];
 const RULE: [number, number, number] = [190, 190, 190];
