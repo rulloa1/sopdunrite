@@ -6,7 +6,7 @@ import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import logo from "@/assets/dunrite-logo.png.asset.json";
+import logo from "@/assets/dunrite-logo.jpg.asset.json";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
