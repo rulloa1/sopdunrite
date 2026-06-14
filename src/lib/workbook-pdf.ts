@@ -75,7 +75,7 @@ export async function buildWorkbookDoc() {
     // white logo sits inside a brand-blue rounded badge
     doc.setFillColor(...BRAND);
     doc.roundedRect(margin, 70, 86, 86, 10, 10, "F");
-    doc.addImage(logoData, "PNG", margin + 13, 83, 60, 60, undefined, "FAST");
+    doc.addImage(logoData, "JPEG", margin + 13, 83, 60, 60, undefined, "FAST");
   }
   doc.setTextColor(...BRAND);
   doc.setFont("helvetica", "bold");
@@ -132,7 +132,7 @@ export async function buildWorkbookDoc() {
     // brand banner with logo
     doc.setFillColor(...BRAND);
     doc.rect(0, 0, pageW, 56, "F");
-    if (logoData) doc.addImage(logoData, "PNG", margin, 12, 32, 32, undefined, "FAST");
+    if (logoData) doc.addImage(logoData, "JPEG", margin, 12, 32, 32, undefined, "FAST");
     doc.setTextColor(255, 255, 255);
     doc.setFont("helvetica", "bold");
     doc.setFontSize(11);
