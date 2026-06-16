@@ -10,7 +10,7 @@ import { RFIS, type Rfi, currency, formatDate, daysOpen, isOverdue, type LogStat
 export const Route = createFileRoute("/rfis")({
   head: () => ({
     meta: [
-      { title: "RFI Log | 12412 Curley St, San Antonio, FL 33576" },
+      { title: "RFI Log | Longleaf Amenity Center" },
       { name: "description", content: "Requests for information log — issue dates, required dates, cost impact, days open and status." },
     ],
   }),

@@ -11,8 +11,8 @@ import logo from "@/assets/dunrite-logo.jpg.asset.json";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign In | 12412 Curley St, San Antonio, FL 33576" },
-      { name: "description", content: "Secure executive sign-in for the 12412 Curley St, San Antonio, FL 33576 project dashboard." },
+      { title: "Sign In | Longleaf Amenity Center" },
+      { name: "description", content: "Secure executive sign-in for the Longleaf Amenity Center project dashboard." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -81,8 +81,9 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md rounded-2xl border bg-card p-8 shadow-sm">
         <div className="mb-6 flex flex-col items-center text-center">
-          <img src={logo.url} alt="12412 Curley St, San Antonio, FL 33576" className="h-14 w-auto" />
-          <h1 className="mt-4 font-display text-2xl font-bold">12412 Curley St, San Antonio, FL 33576</h1>
+          <img src={logo.url} alt="Dunrite Construction Group LLC" className="h-14 w-auto" />
+          <h1 className="mt-4 font-display text-2xl font-bold">Dunrite Construction Group</h1>
+          <p className="text-xs text-muted-foreground">Longleaf Amenity Center — Project Dashboard</p>
           <p className="mt-1 text-sm text-muted-foreground">
             {mode === "signin" ? "Sign in to the project dashboard" : "Create your account"}
           </p>

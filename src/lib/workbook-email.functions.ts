@@ -33,7 +33,7 @@ export const sendWorkbookEmail = createServerFn({ method: "POST" })
     const shareUrl = signed.signedUrl;
 
     const senderEmail =
-      (context.claims as { email?: string } | undefined)?.email ?? "12412 Curley St, San Antonio, FL 33576";
+      (context.claims as { email?: string } | undefined)?.email ?? "Dunrite Construction Group LLC";
 
     try {
       const origin = new URL(getRequest().url).origin;

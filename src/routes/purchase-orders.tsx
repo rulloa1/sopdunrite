@@ -8,7 +8,7 @@ import { PURCHASE_ORDERS, type PurchaseOrder, currency, formatDate, getTotalPOIs
 export const Route = createFileRoute("/purchase-orders")({
   head: () => ({
     meta: [
-      { title: "PO Log | 12412 Curley St, San Antonio, FL 33576" },
+      { title: "PO Log | Longleaf Amenity Center" },
       { name: "description", content: "Purchase order log tracking PO number, vendor, description, issue date and amount." },
     ],
   }),

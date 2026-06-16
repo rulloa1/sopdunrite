@@ -11,7 +11,7 @@ import { PROCUREMENT, poForCode, type ProcurementItem, type ProcStatus } from "@
 export const Route = createFileRoute("/procurement")({
   head: () => ({
     meta: [
-      { title: "Procurement Buyout Log | 12412 Curley St, San Antonio, FL 33576" },
+      { title: "Procurement Buyout Log | Longleaf Amenity Center" },
       { name: "description", content: "Procurement buyout tracking — committed and purchased status, vendors, POs and expected delivery." },
     ],
   }),

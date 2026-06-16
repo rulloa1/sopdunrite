@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "@tanstack/react-router";
 import { ChevronRight, AlertTriangle } from "lucide-react";
+import { PROJECT } from "@/data/projectData";
 
 export function Breadcrumb({ section }: { section: string }) {
   return (
@@ -9,7 +10,7 @@ export function Breadcrumb({ section }: { section: string }) {
       className="mb-3 flex flex-wrap items-center gap-1 text-xs text-muted-foreground no-print"
     >
       <Link to="/" className="transition-colors hover:text-foreground">
-        450 Innovation Drive, Austin, TX 78701
+        {PROJECT.name}
       </Link>
       <ChevronRight className="h-3 w-3 shrink-0" />
       <span>Project Management Workbook</span>

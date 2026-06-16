@@ -1,4 +1,5 @@
 import { Printer, Mail, ChevronDown } from "lucide-react";
+import { PROJECT } from "@/data/projectData";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -25,9 +26,9 @@ export function SectionActions({ label }: { label: string }) {
   const email = () => {
     if (typeof window === "undefined") return;
     const url = window.location.href;
-    const subject = encodeURIComponent(`${label} — 12412 Curley St, San Antonio, FL 33576 Workbook`);
+    const subject = encodeURIComponent(`${label} — ${PROJECT.name} Workbook`);
     const body = encodeURIComponent(
-      `Here is the ${label} from the 12412 Curley St, San Antonio, FL 33576 — Baker's Bay Project Management Workbook.\n\nView it online: ${url}\n\nTo save a PDF copy, open the link and use the Download button (Print to PDF).`,
+      `Here is the ${label} from the ${PROJECT.name} — Dunrite Construction Group Project Management Workbook.\n\nView it online: ${url}\n\nTo save a PDF copy, open the link and use the Download button (Print to PDF).`,
     );
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
   };

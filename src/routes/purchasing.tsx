@@ -16,8 +16,8 @@ import {
 export const Route = createFileRoute("/purchasing")({
   head: () => ({
     meta: [
-      { title: "Purchasing Log | 12412 Curley St, San Antonio, FL 33576" },
-      { name: "description", content: "Cost-code budget vs. contracted amounts for Baker's Bay Golf & Ocean Club." },
+      { title: "Purchasing Log | Longleaf Amenity Center" },
+      { name: "description", content: "Cost-code budget vs. contracted amounts for Longleaf Amenity Center." },
     ],
   }),
   component: Purchasing,

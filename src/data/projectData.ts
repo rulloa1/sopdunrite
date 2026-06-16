@@ -1,6 +1,6 @@
 // =============================================================================
 // SINGLE SOURCE OF TRUTH
-// 450 Innovation Drive, Austin, TX 78701 — Baker's Bay Project Management Workbook
+// Longleaf Amenity Center — Dunrite Construction Group Project Management Workbook
 //
 // Every total, subtotal, count and KPI shown anywhere in the app is COMPUTED
 // from the row data below via the selector functions at the bottom of this file.
@@ -115,8 +115,8 @@ export const TODAY = new Date(2026, 5, 13); // Jun 13, 2026
 // Project & contractor
 // ---------------------------------------------------------------------------
 export const PROJECT = {
-  name: "Riverside Tech Campus",
-  lot: "450 Innovation Drive, Austin, TX 78701",
+  name: "Longleaf Amenity Center",
+  lot: "Austin, TX 78701",
   location: "Austin, TX 78701",
   scheduleMonths: 18,
   startDate: "2025-03-03",
@@ -124,12 +124,12 @@ export const PROJECT = {
 };
 
 export const CONTRACTOR = {
-  name: "BuildFlow Pro",
-  address: "450 Innovation Drive, Austin, TX 78701",
+  name: "Dunrite Construction Group",
+  address: "Austin, TX",
 };
 
 export const COMPANY = {
-  name: "BuildFlow Pro",
+  name: "Dunrite Construction Group LLC",
   tagline: "Project Management Workbook",
 };
 

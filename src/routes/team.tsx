@@ -43,7 +43,7 @@ import {
 export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Team & Roles | 12412 Curley St, San Antonio, FL 33576" },
+      { title: "Team & Roles | Longleaf Amenity Center" },
       { name: "description", content: "Manage team member roles and permissions." },
       { name: "robots", content: "noindex" },
     ],

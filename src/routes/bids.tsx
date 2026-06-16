@@ -8,7 +8,7 @@ import { BIDS, type Bid, currency } from "@/data/projectData";
 export const Route = createFileRoute("/bids")({
   head: () => ({
     meta: [
-      { title: "Bid Log | 12412 Curley St, San Antonio, FL 33576" },
+      { title: "Bid Log | Longleaf Amenity Center" },
       { name: "description", content: "Competitive bid tracking by cost code — bids received, low qualified bid, award and budget variance." },
     ],
   }),
