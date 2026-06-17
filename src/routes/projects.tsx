@@ -1,9 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Plus, Pencil, Trash2, Building2, FileText } from "lucide-react";
+import { Plus, Pencil, Trash2, Building2, FileText, Cloud } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { RequireAuth } from "@/components/RequireAuth";
 import { ProjectDocumentsDialog } from "@/components/ProjectDocumentsDialog";
+import { DropboxDocumentsDialog } from "@/components/DropboxDocumentsDialog";
 import { supabase } from "@/integrations/supabase/client";
 import {
   useAuth,
@@ -89,8 +90,9 @@ function ProjectsPage() {
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [docsProject, setDocsProject] = useState<ProjectRow | null>(null);
+  const [dropboxProject, setDropboxProject] = useState<ProjectRow | null>(null);
 
-  const load = async () => {
+  const load = useCallback(async () => {
     setLoading(true);
     const [{ data: proj, error: pErr }, { data: prof }] = await Promise.all([
       supabase.from("projects").select("*").order("created_at", { ascending: false }),
@@ -100,12 +102,11 @@ function ProjectsPage() {
     setProjects((proj as ProjectRow[]) ?? []);
     setProfiles((prof as Profile[]) ?? []);
     setLoading(false);
-  };
+  }, []);
 
   useEffect(() => {
     load();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [load]);
 
   const grouped = useMemo(() => {
     const map: Record<ProjectStatus, ProjectRow[]> = {
@@ -245,9 +246,18 @@ function ProjectsPage() {
                             <button
                               onClick={() => setDocsProject(p)}
                               className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
-                              aria-label="Project documents"
+                              aria-label="Supabase documents"
+                              title="Supabase documents"
                             >
                               <FileText className="h-3.5 w-3.5" />
+                            </button>
+                            <button
+                              onClick={() => setDropboxProject(p)}
+                              className="rounded p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
+                              aria-label="Dropbox documents"
+                              title="Dropbox documents"
+                            >
+                              <Cloud className="h-3.5 w-3.5" />
                             </button>
                             {editable && (
                               <button
@@ -412,6 +422,15 @@ function ProjectsPage() {
           projectName={docsProject.name}
           open={!!docsProject}
           onOpenChange={(o) => !o && setDocsProject(null)}
+        />
+      )}
+
+      {dropboxProject && (
+        <DropboxDocumentsDialog
+          projectId={dropboxProject.id}
+          projectName={dropboxProject.name}
+          open={!!dropboxProject}
+          onOpenChange={(o) => !o && setDropboxProject(null)}
         />
       )}
     </Layout>

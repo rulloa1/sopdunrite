@@ -42,7 +42,8 @@ interface Props {
 
 
 function formatSize(bytes: number | null): string {
-  if (!bytes && bytes !== 0) return "";
+  if (bytes == null) return "";
+  if (bytes === 0) return "0 B";
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
@@ -103,10 +104,11 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
     setError(null);
     setUploading(true);
     const newIds: string[] = [];
+    const errors: string[] = [];
     try {
       for (const file of Array.from(files)) {
         if (file.size > MAX_SIZE) {
-          setError(`"${file.name}" exceeds the 20MB limit.`);
+          errors.push(`"${file.name}" exceeds the 20MB limit.`);
           continue;
         }
         const ext = file.name.includes(".") ? file.name.split(".").pop() : "";
@@ -115,7 +117,7 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
           .from("project-documents")
           .upload(path, file, { contentType: file.type || undefined });
         if (upErr) {
-          setError(upErr.message);
+          errors.push(upErr.message);
           continue;
         }
         const { data: inserted, error: insErr } = await supabase
@@ -133,12 +135,14 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
         if (insErr || !inserted) {
           // best-effort cleanup of the orphaned file
           await supabase.storage.from("project-documents").remove([path]);
-          setError(insErr?.message ?? "Could not save the document.");
+          errors.push(insErr?.message ?? "Could not save the document.");
           continue;
         }
         newIds.push(inserted.id as string);
       }
       await load();
+      // Collect all errors and surface them together.
+      if (errors.length > 0) setError(errors.join(' | '));
       // Kick off automatic text extraction for each new document.
       for (const id of newIds) {
         void extract(id);
