@@ -3,6 +3,7 @@ import { Layout } from "@/components/Layout";
 import { PageHeader, StatusBadge } from "@/components/PageHeader";
 import { SectionActions } from "@/components/SectionActions";
 import { DataTable, type Column } from "@/components/DataTable";
+import { GanttChart } from "@/components/GanttChart";
 import {
   DELAYS,
   type DelayEvent,
@@ -51,7 +52,12 @@ function ScheduleDelays() {
         }
       />
 
+      <div className="mb-6">
+        <GanttChart />
+      </div>
+
       <div className="mb-6 rounded-xl border bg-card p-5 shadow-sm print-section">
+
         <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
           <h3 className="font-display text-lg font-semibold">Milestones</h3>
           <span className="text-sm font-medium tabular-nums">
