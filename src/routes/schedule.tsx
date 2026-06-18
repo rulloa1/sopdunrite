@@ -3,6 +3,7 @@ import { Layout } from "@/components/Layout";
 import { PageHeader, StatusBadge } from "@/components/PageHeader";
 import { SectionActions } from "@/components/SectionActions";
 import { DataTable, type Column } from "@/components/DataTable";
+import { GanttChart } from "@/components/GanttChart";
 import {
   DELAYS,
   type DelayEvent,
