@@ -8,8 +8,6 @@ import {
   type GanttTask,
 } from "@/data/ganttData";
 
-const TODAY_TZ = "America/New_York";
-
 function durationLabel(task: GanttTask): string {
   return task.durationDays != null ? `${task.durationDays} days` : "—";
 }
