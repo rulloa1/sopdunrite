@@ -108,28 +108,25 @@ export function GanttChart() {
                     </div>
 
                     <div
-                      className="relative grid flex-1"
+                      className="relative grid min-h-9 flex-1"
                       style={{ gridTemplateColumns: `repeat(${colCount}, minmax(0, 1fr))` }}
                     >
                       {WEEKS.map((w) => (
                         <div key={w.index} className="border-l" />
                       ))}
                       <div
-                        className="pointer-events-none absolute inset-y-1.5 flex items-center"
+                        className={`pointer-events-none absolute top-1/2 h-5 -translate-y-1/2 rounded-md shadow-sm transition-all ${
+                          isActive ? "ring-2 ring-primary/60" : ""
+                        }`}
                         style={{
                           left: `${(task.startWeek / colCount) * 100}%`,
                           width: `${(span / colCount) * 100}%`,
+                          background: "var(--gradient-brand)",
                         }}
-                      >
-                        <div
-                          className={`h-full w-full rounded-md shadow-sm transition-all ${
-                            isActive ? "ring-2 ring-primary/60" : ""
-                          }`}
-                          style={{ background: "var(--gradient-brand)" }}
-                          title={`${task.name} · ${durationLabel(task)}`}
-                        />
-                      </div>
+                        title={`${task.name} · ${durationLabel(task)}`}
+                      />
                     </div>
+
                   </div>
                 );
               })}
