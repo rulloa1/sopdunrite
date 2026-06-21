@@ -122,6 +122,12 @@ export const canCreateProjects = (role: AppRole | null) =>
   role === "admin" || role === "executive" || role === "project_manager";
 export const canDeleteProjects = (role: AppRole | null) => role === "admin";
 
+// ===== Operational log permissions (bids, RFIs, submittals, purchasing, POs, delays) =====
+// Mirrors the projects table RLS: managers create/edit, only admins delete.
+export const canManageLogs = (role: AppRole | null) =>
+  role === "admin" || role === "executive" || role === "project_manager";
+export const canDeleteLogs = (role: AppRole | null) => role === "admin";
+
 export function canEditProject(
   role: AppRole | null,
   assignedTo: string | null,
