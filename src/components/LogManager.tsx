@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState, type ReactNode } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canManageLogs, canDeleteLogs } from "@/lib/auth";
@@ -165,13 +165,21 @@ export function LogManager({ config }: { config: LogConfig }) {
       );
   }, []);
 
+  // Monotonic request token: when the user switches projects (or a mutation
+  // triggers a refresh) faster than Supabase responds, only the most recent
+  // request is allowed to write state, so a slow earlier response can't
+  // overwrite the current project's rows.
+  const requestRef = useRef(0);
+
   const loadRows = useCallback(async () => {
     if (!projectId) return;
+    const reqId = ++requestRef.current;
     setLoading(true);
     const { data, error: rErr } = await supabase
       .from(config.table)
       .select("*")
       .eq("project_id", projectId);
+    if (reqId !== requestRef.current) return; // superseded by a newer request
     if (rErr) setError(rErr.message);
     setRows((data as LogRow[]) ?? []);
     setLoading(false);
