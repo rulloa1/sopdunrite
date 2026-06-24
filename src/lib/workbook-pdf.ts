@@ -1,17 +1,5 @@
-import {
-  COMPANY,
-  PROJECT,
-  BUDGET,
-  MILESTONES,
-  PURCHASING,
-  BIDS,
-  PURCHASE_ORDERS,
-  RFIS,
-  SUBMITTALS,
-  DELAYS,
-  PROCUREMENT,
-  currency,
-} from "@/lib/project-data";
+import { currency } from "@/lib/project-data";
+import type { WorkbookData } from "@/lib/workbook-data";
 import logo from "@/assets/dunrite-logo.jpg.asset.json";
 
 // Brand palette matching the printed Project Management Workbook
@@ -45,12 +33,25 @@ async function loadLogo(): Promise<string | null> {
   }
 }
 
-export async function downloadWorkbookPdf() {
-  const doc = await buildWorkbookDoc();
-  doc.save(`Dun-Rite-Workbook-${PROJECT.name.replace(/[^a-z0-9]+/gi, "-")}.pdf`);
+export async function downloadWorkbookPdf(data: WorkbookData) {
+  const doc = await buildWorkbookDoc(data);
+  doc.save(`Dun-Rite-Workbook-${data.PROJECT.name.replace(/[^a-z0-9]+/gi, "-")}.pdf`);
 }
 
-export async function buildWorkbookDoc() {
+export async function buildWorkbookDoc(data: WorkbookData) {
+  const {
+    COMPANY,
+    PROJECT,
+    BUDGET,
+    MILESTONES,
+    PURCHASING,
+    BIDS,
+    PURCHASE_ORDERS,
+    RFIS,
+    SUBMITTALS,
+    DELAYS,
+    PROCUREMENT,
+  } = data;
   const [{ jsPDF }, autoTableMod, fonts] = await Promise.all([
     import("jspdf"),
     import("jspdf-autotable"),

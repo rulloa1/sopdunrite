@@ -1,17 +1,5 @@
-import {
-  COMPANY,
-  PROJECT,
-  BUDGET,
-  MILESTONES,
-  PURCHASING,
-  BIDS,
-  PURCHASE_ORDERS,
-  RFIS,
-  SUBMITTALS,
-  DELAYS,
-  PROCUREMENT,
-  currency,
-} from "@/lib/project-data";
+import { currency } from "@/lib/project-data";
+import type { WorkbookData } from "@/lib/workbook-data";
 import logo from "@/assets/dunrite-logo.jpg.asset.json";
 
 // Brand palette matching the printed Project Management Workbook
@@ -57,19 +45,32 @@ async function loadLogoBytes(): Promise<ArrayBuffer | null> {
 }
 
 /** Build and download the branded workbook as a native .docx file. */
-export async function downloadWorkbookDocx() {
-  const blob = await buildWorkbookDocxBlob();
+export async function downloadWorkbookDocx(data: WorkbookData) {
+  const blob = await buildWorkbookDocxBlob(data);
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `Dun-Rite-Workbook-${PROJECT.name.replace(/[^a-z0-9]+/gi, "-")}.docx`;
+  a.download = `Dun-Rite-Workbook-${data.PROJECT.name.replace(/[^a-z0-9]+/gi, "-")}.docx`;
   document.body.appendChild(a);
   a.click();
   a.remove();
   URL.revokeObjectURL(url);
 }
 
-export async function buildWorkbookDocxBlob(): Promise<Blob> {
+export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
+  const {
+    COMPANY,
+    PROJECT,
+    BUDGET,
+    MILESTONES,
+    PURCHASING,
+    BIDS,
+    PURCHASE_ORDERS,
+    RFIS,
+    SUBMITTALS,
+    DELAYS,
+    PROCUREMENT,
+  } = data;
   const {
     Document,
     Packer,
