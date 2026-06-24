@@ -6,12 +6,7 @@ import { RequireAuth } from "@/components/RequireAuth";
 import { ProjectDocumentsDialog } from "@/components/ProjectDocumentsDialog";
 import { DropboxDocumentsDialog } from "@/components/DropboxDocumentsDialog";
 import { supabase } from "@/integrations/supabase/client";
-import {
-  useAuth,
-  canCreateProjects,
-  canDeleteProjects,
-  canEditProject,
-} from "@/lib/auth";
+import { useAuth, canCreateProjects, canDeleteProjects, canEditProject } from "@/lib/auth";
 import { STATUSES, type ProjectRow, type ProjectStatus } from "@/lib/projects";
 import { currency } from "@/data/projectData";
 import { Button } from "@/components/ui/button";
@@ -47,7 +42,10 @@ export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
       { title: "Projects | Longleaf Amenity Center" },
-      { name: "description", content: "Track bid, contract, and active projects across Longleaf Amenity Center." },
+      {
+        name: "description",
+        content: "Track bid, contract, and active projects across Longleaf Amenity Center.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -74,6 +72,8 @@ const emptyForm = {
   assigned_to: "" as string,
   bid_due_date: "",
   start_date: "",
+  contract_completion: "",
+  current_completion: "",
   notes: "",
 };
 type FormState = typeof emptyForm;
@@ -143,6 +143,8 @@ function ProjectsPage() {
       assigned_to: p.assigned_to ?? "",
       bid_due_date: p.bid_due_date ?? "",
       start_date: p.start_date ?? "",
+      contract_completion: p.contract_completion ?? "",
+      current_completion: p.current_completion ?? "",
       notes: p.notes ?? "",
     });
     setDialogOpen(true);
@@ -160,6 +162,8 @@ function ProjectsPage() {
       assigned_to: form.assigned_to || null,
       bid_due_date: form.bid_due_date || null,
       start_date: form.start_date || null,
+      contract_completion: form.contract_completion || null,
+      current_completion: form.current_completion || null,
       notes: form.notes.trim() || null,
     };
     let res;
@@ -234,7 +238,9 @@ function ProjectsPage() {
                 </div>
                 <div className="flex-1 space-y-3 p-3">
                   {items.length === 0 && (
-                    <p className="px-1 py-6 text-center text-xs text-muted-foreground">No projects</p>
+                    <p className="px-1 py-6 text-center text-xs text-muted-foreground">
+                      No projects
+                    </p>
                   )}
                   {items.map((p) => {
                     const editable = canEditProject(role, p.assigned_to, user?.id ?? null);
@@ -317,16 +323,28 @@ function ProjectsPage() {
           <div className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="p-name">Project name *</Label>
-              <Input id="p-name" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} />
+              <Input
+                id="p-name"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+              />
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-1.5">
                 <Label htmlFor="p-client">Client / Account</Label>
-                <Input id="p-client" value={form.client} onChange={(e) => setForm({ ...form, client: e.target.value })} />
+                <Input
+                  id="p-client"
+                  value={form.client}
+                  onChange={(e) => setForm({ ...form, client: e.target.value })}
+                />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="p-location">Location</Label>
-                <Input id="p-location" value={form.location} onChange={(e) => setForm({ ...form, location: e.target.value })} />
+                <Input
+                  id="p-location"
+                  value={form.location}
+                  onChange={(e) => setForm({ ...form, location: e.target.value })}
+                />
               </div>
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -341,7 +359,10 @@ function ProjectsPage() {
               </div>
               <div className="space-y-1.5">
                 <Label>Status</Label>
-                <Select value={form.status} onValueChange={(v) => setForm({ ...form, status: v as ProjectStatus })}>
+                <Select
+                  value={form.status}
+                  onValueChange={(v) => setForm({ ...form, status: v as ProjectStatus })}
+                >
                   <SelectTrigger>
                     <SelectValue />
                   </SelectTrigger>
@@ -377,16 +398,51 @@ function ProjectsPage() {
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-1.5">
                 <Label htmlFor="p-bid">Bid due date</Label>
-                <Input id="p-bid" type="date" value={form.bid_due_date} onChange={(e) => setForm({ ...form, bid_due_date: e.target.value })} />
+                <Input
+                  id="p-bid"
+                  type="date"
+                  value={form.bid_due_date}
+                  onChange={(e) => setForm({ ...form, bid_due_date: e.target.value })}
+                />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="p-start">Start date</Label>
-                <Input id="p-start" type="date" value={form.start_date} onChange={(e) => setForm({ ...form, start_date: e.target.value })} />
+                <Input
+                  id="p-start"
+                  type="date"
+                  value={form.start_date}
+                  onChange={(e) => setForm({ ...form, start_date: e.target.value })}
+                />
+              </div>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="space-y-1.5">
+                <Label htmlFor="p-contract">Contract completion</Label>
+                <Input
+                  id="p-contract"
+                  type="date"
+                  value={form.contract_completion}
+                  onChange={(e) => setForm({ ...form, contract_completion: e.target.value })}
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="p-current">Current completion (forecast)</Label>
+                <Input
+                  id="p-current"
+                  type="date"
+                  value={form.current_completion}
+                  onChange={(e) => setForm({ ...form, current_completion: e.target.value })}
+                />
               </div>
             </div>
             <div className="space-y-1.5">
               <Label htmlFor="p-notes">Notes</Label>
-              <Textarea id="p-notes" rows={3} value={form.notes} onChange={(e) => setForm({ ...form, notes: e.target.value })} />
+              <Textarea
+                id="p-notes"
+                rows={3}
+                value={form.notes}
+                onChange={(e) => setForm({ ...form, notes: e.target.value })}
+              />
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
