@@ -21,16 +21,21 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { generateAndUploadWorkbook, type WorkbookFormat } from "@/lib/workbook-upload";
+import { buildWorkbookData } from "@/lib/workbook-data";
 import { sendWorkbookEmail } from "@/lib/workbook-email.functions";
 
 export function EmailWorkbookDialog({
   open,
   onOpenChange,
   label,
+  projectId,
+  projectName,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
   label: string;
+  projectId: string;
+  projectName: string;
 }) {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -51,7 +56,8 @@ export function EmailWorkbookDialog({
     setBusy(true);
     setShareUrl(null);
     try {
-      const { path, fileName } = await generateAndUploadWorkbook(format);
+      const data = await buildWorkbookData(projectId);
+      const { path, fileName } = await generateAndUploadWorkbook(format, data);
       const result = await sendWorkbookEmail({
         data: {
           recipientEmail: email.trim(),
@@ -69,7 +75,8 @@ export function EmailWorkbookDialog({
       } else {
         setShareUrl(result.shareUrl);
         toast.message("Email delivery isn't set up yet", {
-          description: "Your workbook was uploaded — copy the secure download link below to share it.",
+          description:
+            "Your workbook was uploaded — copy the secure download link below to share it.",
         });
       }
     } catch (e) {
@@ -91,7 +98,8 @@ export function EmailWorkbookDialog({
         <DialogHeader>
           <DialogTitle>Email workbook</DialogTitle>
           <DialogDescription>
-            Generate the {label.toLowerCase()} and email a secure download link to any recipient.
+            Generate the {label.toLowerCase()} for {projectName} and email a secure download link to
+            any recipient.
           </DialogDescription>
         </DialogHeader>
 
@@ -118,7 +126,11 @@ export function EmailWorkbookDialog({
           </div>
           <div className="space-y-1.5">
             <Label htmlFor="wb-format">Format</Label>
-            <Select value={format} onValueChange={(v) => setFormat(v as WorkbookFormat)} disabled={busy}>
+            <Select
+              value={format}
+              onValueChange={(v) => setFormat(v as WorkbookFormat)}
+              disabled={busy}
+            >
               <SelectTrigger id="wb-format">
                 <SelectValue />
               </SelectTrigger>

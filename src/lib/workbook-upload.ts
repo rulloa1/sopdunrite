@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import type { WorkbookData } from "@/lib/workbook-data";
 
 export type WorkbookFormat = "word" | "pdf";
 
@@ -7,7 +8,10 @@ export type WorkbookFormat = "word" | "pdf";
  * private "workbooks" storage bucket under the current user's folder.
  * Returns the storage path + the download file name.
  */
-export async function generateAndUploadWorkbook(format: WorkbookFormat): Promise<{
+export async function generateAndUploadWorkbook(
+  format: WorkbookFormat,
+  data: WorkbookData,
+): Promise<{
   path: string;
   fileName: string;
 }> {
@@ -19,17 +23,16 @@ export async function generateAndUploadWorkbook(format: WorkbookFormat): Promise
   let ext: string;
   if (format === "word") {
     const { buildWorkbookDocxBlob } = await import("@/lib/workbook-docx");
-    blob = await buildWorkbookDocxBlob();
+    blob = await buildWorkbookDocxBlob(data);
     ext = "docx";
   } else {
     const { buildWorkbookDoc } = await import("@/lib/workbook-pdf");
-    const doc = await buildWorkbookDoc();
+    const doc = await buildWorkbookDoc(data);
     blob = doc.output("blob");
     ext = "pdf";
   }
 
-  const { PROJECT } = await import("@/lib/project-data");
-  const safe = PROJECT.name.replace(/[^a-z0-9]+/gi, "-");
+  const safe = data.PROJECT.name.replace(/[^a-z0-9]+/gi, "-");
   const fileName = `Dun-Rite-Workbook-${safe}.${ext}`;
   const path = `${userId}/${Date.now()}-${fileName}`;
 
