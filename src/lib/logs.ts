@@ -8,7 +8,9 @@ export type LogTable =
   | "submittal_logs"
   | "purchasing_logs"
   | "po_logs"
-  | "schedule_delays";
+  | "schedule_delays"
+  | "project_milestones"
+  | "procurement_items";
 
 // Loosely-typed log row. Each table has its own columns; the generic
 // LogManager reads/writes them by name, so a permissive shape keeps it simple.
@@ -33,6 +35,9 @@ export interface LogField {
   mono?: boolean;
   /** Span the full width of the form grid (long text). */
   full?: boolean;
+  /** Labels for a `boolean` field; defaults to the Closed/Open log treatment. */
+  trueLabel?: string;
+  falseLabel?: string;
 }
 
 export interface ComputedColumn {
@@ -74,6 +79,18 @@ const PO_STATUS = [
   { value: "partial", label: "Partial" },
   { value: "received", label: "Received" },
   { value: "closed", label: "Closed" },
+];
+
+const MILESTONE_STATUS = [
+  { value: "upcoming", label: "Upcoming" },
+  { value: "in-progress", label: "In Progress" },
+  { value: "complete", label: "Complete" },
+];
+
+const PROC_STATUS = [
+  { value: "not-started", label: "Not Started" },
+  { value: "in-progress", label: "In Progress" },
+  { value: "complete", label: "Complete" },
 ];
 
 export const LOG_CONFIGS: Record<LogTable, LogConfig> = {
@@ -205,6 +222,52 @@ export const LOG_CONFIGS: Record<LogTable, LogConfig> = {
       { name: "days_delayed", label: "Days", type: "number", align: "right" },
       { name: "reason", label: "Reason", type: "text" },
       { name: "impact", label: "Impact", type: "text" },
+      { name: "notes", label: "Notes", type: "textarea", full: true, column: false },
+    ],
+  },
+
+  project_milestones: {
+    table: "project_milestones",
+    singular: "Milestone",
+    defaultSort: { key: "scheduled", dir: "asc" },
+    minWidthClass: "min-w-[760px]",
+    summary: (rows) =>
+      `${rows.filter((r) => r.status === "complete").length} of ${rows.length} complete`,
+    fields: [
+      { name: "name", label: "Milestone", type: "text", required: true },
+      { name: "scheduled", label: "Scheduled", type: "date" },
+      { name: "actual", label: "Actual", type: "date" },
+      { name: "status", label: "Status", type: "select", options: MILESTONE_STATUS },
+      { name: "notes", label: "Notes", type: "textarea", full: true, column: false },
+    ],
+  },
+
+  procurement_items: {
+    table: "procurement_items",
+    singular: "Procurement Item",
+    defaultSort: { key: "item", dir: "asc" },
+    minWidthClass: "min-w-[980px]",
+    summary: (rows) => `${rows.filter((r) => r.purchased).length} of ${rows.length} purchased`,
+    fields: [
+      { name: "item", label: "Item", type: "text", required: true },
+      {
+        name: "committed",
+        label: "Committed",
+        type: "boolean",
+        trueLabel: "Yes",
+        falseLabel: "No",
+      },
+      {
+        name: "purchased",
+        label: "Purchased",
+        type: "boolean",
+        trueLabel: "Yes",
+        falseLabel: "No",
+      },
+      { name: "vendor", label: "Vendor", type: "text" },
+      { name: "po_number", label: "PO #", type: "text", mono: true },
+      { name: "expected_delivery", label: "Expected Delivery", type: "text" },
+      { name: "status", label: "Status", type: "select", options: PROC_STATUS },
       { name: "notes", label: "Notes", type: "textarea", full: true, column: false },
     ],
   },

@@ -58,11 +58,11 @@ function ValueBadge({ field, value }: { field: LogField; value: string }) {
   if (!value) return <span className="text-muted-foreground">—</span>;
   const label = field.options?.find((o) => o.value === value)?.label ?? value;
   const tone =
-    value === "awarded" || value === "accepted" || value === "received"
+    value === "awarded" || value === "accepted" || value === "received" || value === "complete"
       ? "bg-success/15 text-success"
       : value === "rejected"
         ? "bg-destructive/15 text-destructive"
-        : value === "closed"
+        : value === "closed" || value === "not-started" || value === "upcoming"
           ? "bg-muted text-muted-foreground"
           : "bg-primary/15 text-primary";
   return (
@@ -96,6 +96,17 @@ function renderCell(field: LogField, row: LogRow): ReactNode {
         </span>
       );
     case "boolean":
+      if (field.trueLabel || field.falseLabel) {
+        return value ? (
+          <span className="inline-flex items-center whitespace-nowrap rounded-full bg-success/15 px-2.5 py-0.5 text-xs font-medium text-success">
+            {field.trueLabel ?? "Yes"}
+          </span>
+        ) : (
+          <span className="inline-flex items-center whitespace-nowrap rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium text-muted-foreground">
+            {field.falseLabel ?? "No"}
+          </span>
+        );
+      }
       return <StatusBadge status={value ? "closed" : "open"} />;
     case "select":
       return <ValueBadge field={field} value={(value as string) ?? ""} />;
@@ -478,7 +489,8 @@ function FieldInput({
     return (
       <div className={`flex items-center justify-between rounded-md border px-3 py-2 ${cls}`}>
         <Label htmlFor={id}>
-          {field.label} {value ? "(Closed)" : "(Open)"}
+          {field.label}{" "}
+          {value ? `(${field.trueLabel ?? "Closed"})` : `(${field.falseLabel ?? "Open"})`}
         </Label>
         <Switch id={id} checked={Boolean(value)} onCheckedChange={(c) => onChange(c)} />
       </div>

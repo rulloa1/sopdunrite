@@ -26,7 +26,6 @@ import {
 import { supabase } from "@/integrations/supabase/client";
 import { currency } from "@/data/projectData";
 import { STATUS_BY_VALUE, type ProjectRow } from "@/lib/projects";
-import type { LogTable } from "@/lib/logs";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,9 +62,21 @@ interface ProjectStat {
   delayDays: number;
   bidCount: number;
   bidTotal: number;
+  milestonesComplete: number;
+  milestonesTotal: number;
 }
 
 type Row = Record<string, unknown>;
+
+interface DashLogs {
+  bid_logs: Row[];
+  rfi_logs: Row[];
+  submittal_logs: Row[];
+  purchasing_logs: Row[];
+  po_logs: Row[];
+  schedule_delays: Row[];
+  project_milestones: Row[];
+}
 const num = (v: unknown) => (v == null ? 0 : Number(v) || 0);
 
 /** Group log rows by their project_id for O(1) per-project lookups. */
@@ -82,13 +93,14 @@ function groupByProject(rows: Row[]): Map<string, Row[]> {
 
 function Dashboard() {
   const [projects, setProjects] = useState<ProjectRow[]>([]);
-  const [logs, setLogs] = useState<Record<LogTable, Row[]>>({
+  const [logs, setLogs] = useState<DashLogs>({
     bid_logs: [],
     rfi_logs: [],
     submittal_logs: [],
     purchasing_logs: [],
     po_logs: [],
     schedule_delays: [],
+    project_milestones: [],
   });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -97,16 +109,21 @@ function Dashboard() {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const [proj, purchasing, bids, pos, rfis, submittals, delays] = await Promise.all([
-        supabase.from("projects").select("*").order("created_at", { ascending: false }),
-        supabase.from("purchasing_logs").select("project_id, original_budget, contract_amount"),
-        supabase.from("bid_logs").select("project_id, bid_amount"),
-        supabase.from("po_logs").select("project_id, amount"),
-        supabase.from("rfi_logs").select("project_id, closed"),
-        supabase.from("submittal_logs").select("project_id, closed"),
-        supabase.from("schedule_delays").select("project_id, days_delayed"),
-      ]);
-      const firstErr = [proj, purchasing, bids, pos, rfis, submittals, delays].find((r) => r.error);
+      const [proj, purchasing, bids, pos, rfis, submittals, delays, milestones] = await Promise.all(
+        [
+          supabase.from("projects").select("*").order("created_at", { ascending: false }),
+          supabase.from("purchasing_logs").select("project_id, original_budget, contract_amount"),
+          supabase.from("bid_logs").select("project_id, bid_amount"),
+          supabase.from("po_logs").select("project_id, amount"),
+          supabase.from("rfi_logs").select("project_id, closed"),
+          supabase.from("submittal_logs").select("project_id, closed"),
+          supabase.from("schedule_delays").select("project_id, days_delayed"),
+          supabase.from("project_milestones").select("project_id, status"),
+        ],
+      );
+      const firstErr = [proj, purchasing, bids, pos, rfis, submittals, delays, milestones].find(
+        (r) => r.error,
+      );
       if (firstErr?.error) setError(firstErr.error.message);
       const list = (proj.data as ProjectRow[]) ?? [];
       setProjects(list);
@@ -117,6 +134,7 @@ function Dashboard() {
         purchasing_logs: (purchasing.data as Row[]) ?? [],
         po_logs: (pos.data as Row[]) ?? [],
         schedule_delays: (delays.data as Row[]) ?? [],
+        project_milestones: (milestones.data as Row[]) ?? [],
       });
       setExportId((curr) => curr || list[0]?.id || "");
       setLoading(false);
@@ -130,6 +148,7 @@ function Dashboard() {
     const byRfis = groupByProject(logs.rfi_logs);
     const bySubs = groupByProject(logs.submittal_logs);
     const byDelays = groupByProject(logs.schedule_delays);
+    const byMilestones = groupByProject(logs.project_milestones);
 
     return projects.map((p) => {
       const purchasing = byPurchasing.get(p.id) ?? [];
@@ -138,6 +157,7 @@ function Dashboard() {
       const rfis = byRfis.get(p.id) ?? [];
       const subs = bySubs.get(p.id) ?? [];
       const delays = byDelays.get(p.id) ?? [];
+      const milestones = byMilestones.get(p.id) ?? [];
 
       const budget = purchasing.reduce((a, r) => a + num(r.original_budget), 0);
       const contracted = purchasing.reduce((a, r) => a + num(r.contract_amount), 0);
@@ -157,6 +177,8 @@ function Dashboard() {
         delayDays: delays.reduce((a, r) => a + num(r.days_delayed), 0),
         bidCount: bids.length,
         bidTotal: bids.reduce((a, r) => a + num(r.bid_amount), 0),
+        milestonesComplete: milestones.filter((r) => r.status === "complete").length,
+        milestonesTotal: milestones.length,
       };
     });
   }, [projects, logs]);
@@ -176,6 +198,8 @@ function Dashboard() {
           delayDays: a.delayDays + s.delayDays,
           bidCount: a.bidCount + s.bidCount,
           bidTotal: a.bidTotal + s.bidTotal,
+          milestonesComplete: a.milestonesComplete + s.milestonesComplete,
+          milestonesTotal: a.milestonesTotal + s.milestonesTotal,
         }),
         {
           value: 0,
@@ -189,6 +213,8 @@ function Dashboard() {
           delayDays: 0,
           bidCount: 0,
           bidTotal: 0,
+          milestonesComplete: 0,
+          milestonesTotal: 0,
         },
       ),
     [stats],
@@ -268,6 +294,17 @@ function Dashboard() {
       ),
     },
     {
+      key: "milestones",
+      header: "Milestones",
+      align: "right",
+      sortValue: (s) => (s.milestonesTotal ? s.milestonesComplete / s.milestonesTotal : -1),
+      cell: (s) => (
+        <span className="tabular-nums">
+          {s.milestonesComplete}/{s.milestonesTotal}
+        </span>
+      ),
+    },
+    {
       key: "delays",
       header: "Delay Days",
       align: "right",
@@ -338,7 +375,7 @@ function Dashboard() {
         />
       ) : (
         <>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7">
             <StatCard
               icon={FolderKanban}
               label="Projects"
@@ -368,6 +405,12 @@ function Dashboard() {
               label="Open RFIs"
               value={`${totals.openRfis}`}
               sub={`of ${totals.totalRfis} total`}
+            />
+            <StatCard
+              icon={FileCheck2}
+              label="Milestones"
+              value={`${totals.milestonesComplete}/${totals.milestonesTotal}`}
+              sub="complete"
             />
             <StatCard
               icon={CalendarClock}

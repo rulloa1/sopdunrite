@@ -197,13 +197,124 @@ export type Database = {
           },
         ]
       }
+      procurement_items: {
+        Row: {
+          committed: boolean
+          created_at: string
+          created_by: string | null
+          expected_delivery: string | null
+          id: string
+          item: string
+          notes: string | null
+          po_number: string | null
+          project_id: string
+          purchased: boolean
+          sort_order: number
+          status: string
+          updated_at: string
+          vendor: string | null
+        }
+        Insert: {
+          committed?: boolean
+          created_at?: string
+          created_by?: string | null
+          expected_delivery?: string | null
+          id?: string
+          item: string
+          notes?: string | null
+          po_number?: string | null
+          project_id: string
+          purchased?: boolean
+          sort_order?: number
+          status?: string
+          updated_at?: string
+          vendor?: string | null
+        }
+        Update: {
+          committed?: boolean
+          created_at?: string
+          created_by?: string | null
+          expected_delivery?: string | null
+          id?: string
+          item?: string
+          notes?: string | null
+          po_number?: string | null
+          project_id?: string
+          purchased?: boolean
+          sort_order?: number
+          status?: string
+          updated_at?: string
+          vendor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "procurement_items_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_milestones: {
+        Row: {
+          actual: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          name: string
+          notes: string | null
+          project_id: string
+          scheduled: string | null
+          sort_order: number
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          actual?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          project_id: string
+          scheduled?: string | null
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          actual?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          project_id?: string
+          scheduled?: string | null
+          sort_order?: number
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_milestones_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
           assigned_to: string | null
           bid_due_date: string | null
           client: string | null
+          contract_completion: string | null
           created_at: string
           created_by: string | null
+          current_completion: string | null
           id: string
           location: string | null
           name: string
@@ -217,8 +328,10 @@ export type Database = {
           assigned_to?: string | null
           bid_due_date?: string | null
           client?: string | null
+          contract_completion?: string | null
           created_at?: string
           created_by?: string | null
+          current_completion?: string | null
           id?: string
           location?: string | null
           name: string
@@ -232,8 +345,10 @@ export type Database = {
           assigned_to?: string | null
           bid_due_date?: string | null
           client?: string | null
+          contract_completion?: string | null
           created_at?: string
           created_by?: string | null
+          current_completion?: string | null
           id?: string
           location?: string | null
           name?: string

@@ -30,7 +30,7 @@ export const NAV = [
   { to: "/purchase-orders", label: "PO Log", icon: FileText },
   { to: "/rfis", label: "RFI Log", icon: HelpCircle },
   { to: "/submittals", label: "Submittal Log", icon: FileCheck2 },
-  { to: "/schedule", label: "Schedule Delays", icon: CalendarClock },
+  { to: "/schedule", label: "Schedule", icon: CalendarClock },
   { to: "/procurement", label: "Procurement", icon: PackageSearch },
 ] as const;
 
