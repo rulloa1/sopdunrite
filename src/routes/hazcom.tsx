@@ -112,6 +112,9 @@ function buildEmptyForm() {
 }
 type FormState = ReturnType<typeof buildEmptyForm>;
 
+/** Only http(s) links are safe to render as an href (blocks javascript: URIs). */
+const isHttpUrl = (u: string | null | undefined) => !!u && /^https?:\/\//i.test(u.trim());
+
 function HazCom() {
   const { user, role } = useAuth();
   const [rows, setRows] = useState<ChemicalRow[]>([]);
@@ -169,6 +172,11 @@ function HazCom() {
   };
 
   const save = async () => {
+    const sdsUrl = form.sds_url.trim();
+    if (sdsUrl && !isHttpUrl(sdsUrl)) {
+      setError("SDS link must be a full http:// or https:// URL.");
+      return;
+    }
     setSaving(true);
     setError(null);
     const payload = {
@@ -242,11 +250,11 @@ function HazCom() {
       {
         key: "sds",
         header: "SDS",
-        sortValue: (r) => (r.sds_on_file ? 1 : 0),
+        sortValue: (r) => (r.sds_on_file || isHttpUrl(r.sds_url) ? 1 : 0),
         cell: (r) =>
-          r.sds_url ? (
+          isHttpUrl(r.sds_url) ? (
             <a
-              href={r.sds_url}
+              href={r.sds_url!}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-primary underline-offset-2 hover:underline"
@@ -297,7 +305,7 @@ function HazCom() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canManage, canDelete]);
 
-  const missingSds = rows.filter((r) => !r.sds_on_file && !r.sds_url).length;
+  const missingSds = rows.filter((r) => !r.sds_on_file && !isHttpUrl(r.sds_url)).length;
 
   return (
     <Layout>
