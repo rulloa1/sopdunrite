@@ -8,7 +8,7 @@
 CREATE TABLE public.vehicle_inspections (
   id uuid NOT NULL DEFAULT gen_random_uuid() PRIMARY KEY,
   vehicle text NOT NULL,
-  inspection_date date NOT NULL DEFAULT (now() AT TIME ZONE 'utc')::date,
+  inspection_date date NOT NULL DEFAULT now()::date,
   inspector_name text,
   odometer numeric(12,1),
   -- Checklist items: true = OK, false = needs attention. Default OK.
@@ -24,7 +24,7 @@ CREATE TABLE public.vehicle_inspections (
   status text NOT NULL DEFAULT 'pass'
     CHECK (status IN ('pass', 'needs-attention', 'fail')),
   defects text,
-  inspected_by uuid REFERENCES auth.users(id) ON DELETE SET NULL,
+  inspected_by uuid DEFAULT auth.uid() REFERENCES auth.users(id) ON DELETE SET NULL,
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now()
 );

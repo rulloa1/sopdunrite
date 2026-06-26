@@ -78,7 +78,12 @@ const STATUS_OPTIONS = [
   { value: "fail", label: "Fail / Out of Service" },
 ];
 
-const today = () => new Date().toISOString().slice(0, 10);
+// Operator's LOCAL calendar date (toISOString() would give the UTC day, which
+// rolls over early evening for time zones west of UTC and misorders the log).
+const today = () => {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+};
 
 function buildEmptyForm() {
   const checks = Object.fromEntries(CHECKLIST.map((c) => [c.key, true])) as Record<
