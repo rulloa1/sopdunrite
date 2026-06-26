@@ -21,7 +21,8 @@ CREATE TABLE public.vehicle_inspections (
   brake_lights_ok boolean NOT NULL DEFAULT true,
   blinkers_ok boolean NOT NULL DEFAULT true,
   clearance_lights_ok boolean NOT NULL DEFAULT true,
-  status text NOT NULL DEFAULT 'pass',
+  status text NOT NULL DEFAULT 'pass'
+    CHECK (status IN ('pass', 'needs-attention', 'fail')),
   defects text,
   inspected_by uuid REFERENCES auth.users(id) ON DELETE SET NULL,
   created_at timestamptz NOT NULL DEFAULT now(),
