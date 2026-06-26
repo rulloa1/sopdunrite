@@ -138,6 +138,7 @@ function HandbookForms() {
   const [editId, setEditId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   const canManage = canManageLogs(role);
   const canDelete = canDeleteLogs(role);
@@ -213,8 +214,9 @@ function HandbookForms() {
       .delete()
       .eq("id", deleteId);
     if (dErr) {
-      // Keep the confirmation dialog open so the failure stays in context.
-      setError(dErr.message);
+      // Keep the confirmation dialog open and show the error inside it, so the
+      // failure stays visible (a page-level banner would sit behind the dialog).
+      setDeleteError(dErr.message);
       return;
     }
     setDeleteId(null);
@@ -280,7 +282,10 @@ function HandbookForms() {
                   )}
                   {canDelete && (
                     <button
-                      onClick={() => setDeleteId(r.id)}
+                      onClick={() => {
+                        setDeleteError(null);
+                        setDeleteId(r.id);
+                      }}
                       className="rounded p-1 text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
                       aria-label="Delete acknowledgment"
                     >
@@ -450,7 +455,15 @@ function HandbookForms() {
         </DialogContent>
       </Dialog>
 
-      <AlertDialog open={!!deleteId} onOpenChange={(o) => !o && setDeleteId(null)}>
+      <AlertDialog
+        open={!!deleteId}
+        onOpenChange={(o) => {
+          if (!o) {
+            setDeleteId(null);
+            setDeleteError(null);
+          }
+        }}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Remove this acknowledgment?</AlertDialogTitle>
@@ -459,9 +472,19 @@ function HandbookForms() {
               action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
+          {deleteError && <p className="text-sm text-destructive">{deleteError}</p>}
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmDelete}>Delete</AlertDialogAction>
+            <AlertDialogAction
+              onClick={(e) => {
+                // Prevent Radix's default close-on-click so the dialog can stay
+                // open (and show the error in context) when the delete fails.
+                e.preventDefault();
+                confirmDelete();
+              }}
+            >
+              Delete
+            </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
