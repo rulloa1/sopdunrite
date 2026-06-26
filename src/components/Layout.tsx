@@ -10,6 +10,7 @@ import {
   CalendarClock,
   PackageSearch,
   FolderKanban,
+  Truck,
   Users,
   LogOut,
   LogIn,
@@ -32,6 +33,7 @@ export const NAV = [
   { to: "/submittals", label: "Submittal Log", icon: FileCheck2 },
   { to: "/schedule", label: "Schedule", icon: CalendarClock },
   { to: "/procurement", label: "Procurement", icon: PackageSearch },
+  { to: "/inspections", label: "Pre-Use Inspections", icon: Truck },
 ] as const;
 
 function isActivePath(pathname: string, to: string) {
@@ -46,7 +48,9 @@ function sectionLabel(pathname: string) {
 
 function LogoChip({ className = "" }: { className?: string }) {
   return (
-    <div className={`inline-flex items-center justify-center overflow-hidden rounded-lg shadow-sm ${className}`}>
+    <div
+      className={`inline-flex items-center justify-center overflow-hidden rounded-lg shadow-sm ${className}`}
+    >
       <img src={logo.url} alt="Dunrite Construction Group LLC logo" className="h-12 w-auto" />
     </div>
   );
@@ -99,7 +103,9 @@ function UserBlock() {
       {user ? (
         <div className="space-y-2">
           <div className="px-2">
-            <p className="truncate text-xs font-medium text-sidebar-accent-foreground">{user.email}</p>
+            <p className="truncate text-xs font-medium text-sidebar-accent-foreground">
+              {user.email}
+            </p>
             {role && <p className="text-[11px] text-sidebar-foreground/60">{ROLE_LABELS[role]}</p>}
           </div>
           <button
@@ -160,7 +166,9 @@ export function Layout({ children }: { children: ReactNode }) {
           </Sheet>
 
           <div className="min-w-0">
-            <h1 className="truncate font-display text-base font-semibold text-foreground">{PROJECT.name}</h1>
+            <h1 className="truncate font-display text-base font-semibold text-foreground">
+              {PROJECT.name}
+            </h1>
             <p className="truncate text-xs text-muted-foreground">
               {PROJECT.lot} · {PROJECT.location}
             </p>
@@ -184,7 +192,9 @@ export function Layout({ children }: { children: ReactNode }) {
                     key={to}
                     to={to}
                     className={`transition-colors ${
-                      active ? "font-semibold text-primary" : "text-muted-foreground hover:text-foreground"
+                      active
+                        ? "font-semibold text-primary"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     {label}
