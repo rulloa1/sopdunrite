@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
 import { ShieldAlert, UserPlus, Pencil, Trash2, KeyRound, Loader2 } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { RequireAuth } from "@/components/RequireAuth";
@@ -43,7 +44,7 @@ import {
 export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Team & Roles | Longleaf Amenity Center" },
+      { title: "Team & Roles | Dunrite Construction Group" },
       { name: "description", content: "Manage team member roles and permissions." },
       { name: "robots", content: "noindex" },
     ],
@@ -74,6 +75,21 @@ const emptyForm = {
   role: "viewer" as AppRole,
 };
 type FormState = typeof emptyForm;
+
+/**
+ * Server functions can reject with an Error, a plain string, an object with a
+ * `message`, or (on a 500) an HTML error page. Extract something readable so a
+ * failure is never swallowed into a silent no-op.
+ */
+function errorMessage(e: unknown): string {
+  if (e instanceof Error && e.message) return e.message;
+  if (typeof e === "string" && e.trim()) return e;
+  if (e && typeof e === "object" && "message" in e) {
+    const m = (e as { message?: unknown }).message;
+    if (typeof m === "string" && m.trim()) return m;
+  }
+  return "Something went wrong. Please try again.";
+}
 
 function TeamPage() {
   const { role, user, refreshRoles } = useAuth();
@@ -123,13 +139,18 @@ function TeamPage() {
     setSavingId(userId);
     setError(null);
     await supabase.from("user_roles").delete().eq("user_id", userId);
-    const { error: iErr } = await supabase.from("user_roles").insert({ user_id: userId, role: newRole });
+    const { error: iErr } = await supabase
+      .from("user_roles")
+      .insert({ user_id: userId, role: newRole });
     setSavingId(null);
     if (iErr) {
+      console.error("[team] role change failed", iErr);
       setError(iErr.message);
+      toast.error(iErr.message);
       return;
     }
     setMembers((prev) => prev.map((m) => (m.id === userId ? { ...m, role: newRole } : m)));
+    toast.success(`Role updated to ${ROLE_LABELS[newRole]}.`);
     if (userId === user?.id) refreshRoles();
   };
 
@@ -160,9 +181,14 @@ function TeamPage() {
     try {
       if (form.id) {
         await updateUser({
-          data: { userId: form.id, fullName: form.fullName.trim(), title: form.title.trim() || undefined },
+          data: {
+            userId: form.id,
+            fullName: form.fullName.trim(),
+            title: form.title.trim() || undefined,
+          },
         });
         if (form.role) await changeRole(form.id, form.role);
+        toast.success(`Saved changes to ${form.fullName.trim() || "user"}.`);
       } else {
         await createUser({
           data: {
@@ -174,11 +200,15 @@ function TeamPage() {
           },
         });
         setNotice(`Account created for ${form.email.trim()}.`);
+        toast.success(`Account created for ${form.email.trim()}.`);
       }
       setDialogOpen(false);
       await load();
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Something went wrong.");
+      console.error("[team] user create/update failed", e);
+      const msg = errorMessage(e);
+      setError(msg);
+      toast.error(msg);
     } finally {
       setSaving(false);
     }
@@ -189,11 +219,15 @@ function TeamPage() {
     setError(null);
     try {
       await deleteUser({ data: { userId: deleteMember.id } });
+      toast.success(`Deleted ${deleteMember.full_name || deleteMember.email || "user"}.`);
       setDeleteMember(null);
       await load();
     } catch (e) {
+      console.error("[team] delete user failed", e);
       setDeleteMember(null);
-      setError(e instanceof Error ? e.message : "Could not delete user.");
+      const msg = errorMessage(e);
+      setError(msg);
+      toast.error(msg);
     }
   };
 
@@ -205,8 +239,12 @@ function TeamPage() {
     try {
       await sendReset({ data: { email: m.email } });
       setNotice(`Password reset email sent to ${m.email}.`);
+      toast.success(`Password reset email sent to ${m.email}.`);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Could not send reset email.");
+      console.error("[team] password reset failed", e);
+      const msg = errorMessage(e);
+      setError(msg);
+      toast.error(msg);
     } finally {
       setSavingId(null);
     }
@@ -226,11 +264,20 @@ function TeamPage() {
     );
   }
 
-  const valid = form.id
-    ? form.fullName.trim().length > 0
-    : form.fullName.trim().length > 0 &&
-      /\S+@\S+\.\S+/.test(form.email.trim()) &&
-      form.password.length >= 8;
+  // Explain *why* the submit button is disabled, so a blocked form never looks
+  // like a button that silently does nothing.
+  const validationReason: string | null = form.id
+    ? form.fullName.trim().length === 0
+      ? "Enter a full name."
+      : null
+    : form.fullName.trim().length === 0
+      ? "Enter a full name."
+      : !/\S+@\S+\.\S+/.test(form.email.trim())
+        ? "Enter a valid email address."
+        : form.password.length < 8
+          ? "Temporary password must be at least 8 characters."
+          : null;
+  const valid = validationReason === null;
 
   return (
     <Layout>
@@ -278,7 +325,9 @@ function TeamPage() {
                   <td className="px-4 py-3 font-medium">
                     {m.full_name || "—"}
                     {m.title && (
-                      <span className="block text-xs font-normal text-muted-foreground">{m.title}</span>
+                      <span className="block text-xs font-normal text-muted-foreground">
+                        {m.title}
+                      </span>
                     )}
                     {m.id === user?.id && (
                       <span className="ml-2 rounded bg-secondary px-1.5 py-0.5 text-[10px] text-secondary-foreground">
@@ -388,14 +437,18 @@ function TeamPage() {
                     placeholder="At least 8 characters"
                   />
                   <p className="text-xs text-muted-foreground">
-                    Share this with the user — they can change it later, or use the reset-password action.
+                    Share this with the user — they can change it later, or use the reset-password
+                    action.
                   </p>
                 </div>
               </>
             )}
             <div className="space-y-1.5">
               <Label>Role</Label>
-              <Select value={form.role} onValueChange={(v) => setForm({ ...form, role: v as AppRole })}>
+              <Select
+                value={form.role}
+                onValueChange={(v) => setForm({ ...form, role: v as AppRole })}
+              >
                 <SelectTrigger>
                   <SelectValue />
                 </SelectTrigger>
@@ -410,7 +463,10 @@ function TeamPage() {
             </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
-          <DialogFooter>
+          <DialogFooter className="flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-end">
+            {validationReason && (
+              <p className="text-xs text-muted-foreground sm:mr-auto">{validationReason}</p>
+            )}
             <Button variant="outline" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>
@@ -426,8 +482,9 @@ function TeamPage() {
           <AlertDialogHeader>
             <AlertDialogTitle>Delete this user?</AlertDialogTitle>
             <AlertDialogDescription>
-              This permanently removes {deleteMember?.full_name || deleteMember?.email || "the user"} and
-              their access. This action cannot be undone.
+              This permanently removes{" "}
+              {deleteMember?.full_name || deleteMember?.email || "the user"} and their access. This
+              action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
