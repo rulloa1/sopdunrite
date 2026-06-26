@@ -360,6 +360,72 @@ export type Database = {
         }
         Relationships: []
       }
+      vehicle_inspections: {
+        Row: {
+          blinkers_ok: boolean
+          brake_lights_ok: boolean
+          clearance_lights_ok: boolean
+          controls_ok: boolean
+          created_at: string
+          defects: string | null
+          fluids_ok: boolean
+          guards_ok: boolean
+          headlights_ok: boolean
+          id: string
+          inspected_by: string | null
+          inspection_date: string
+          inspector_name: string | null
+          odometer: number | null
+          running_lights_ok: boolean
+          status: string
+          tires_ok: boolean
+          updated_at: string
+          vehicle: string
+        }
+        Insert: {
+          blinkers_ok?: boolean
+          brake_lights_ok?: boolean
+          clearance_lights_ok?: boolean
+          controls_ok?: boolean
+          created_at?: string
+          defects?: string | null
+          fluids_ok?: boolean
+          guards_ok?: boolean
+          headlights_ok?: boolean
+          id?: string
+          inspected_by?: string | null
+          inspection_date?: string
+          inspector_name?: string | null
+          odometer?: number | null
+          running_lights_ok?: boolean
+          status?: string
+          tires_ok?: boolean
+          updated_at?: string
+          vehicle: string
+        }
+        Update: {
+          blinkers_ok?: boolean
+          brake_lights_ok?: boolean
+          clearance_lights_ok?: boolean
+          controls_ok?: boolean
+          created_at?: string
+          defects?: string | null
+          fluids_ok?: boolean
+          guards_ok?: boolean
+          headlights_ok?: boolean
+          id?: string
+          inspected_by?: string | null
+          inspection_date?: string
+          inspector_name?: string | null
+          odometer?: number | null
+          running_lights_ok?: boolean
+          status?: string
+          tires_ok?: boolean
+          updated_at?: string
+          vehicle?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

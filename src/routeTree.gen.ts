@@ -18,6 +18,7 @@ import { Route as PurchasingRouteImport } from './routes/purchasing'
 import { Route as PurchaseOrdersRouteImport } from './routes/purchase-orders'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProcurementRouteImport } from './routes/procurement'
+import { Route as InspectionsRouteImport } from './routes/inspections'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -67,6 +68,11 @@ const ProcurementRoute = ProcurementRouteImport.update({
   path: '/procurement',
   getParentRoute: () => rootRouteImport,
 } as any)
+const InspectionsRoute = InspectionsRouteImport.update({
+  id: '/inspections',
+  path: '/inspections',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BidsRoute = BidsRouteImport.update({
   id: '/bids',
   path: '/bids',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
+  '/inspections': typeof InspectionsRoute
   '/procurement': typeof ProcurementRoute
   '/projects': typeof ProjectsRoute
   '/purchase-orders': typeof PurchaseOrdersRoute
@@ -101,6 +108,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
+  '/inspections': typeof InspectionsRoute
   '/procurement': typeof ProcurementRoute
   '/projects': typeof ProjectsRoute
   '/purchase-orders': typeof PurchaseOrdersRoute
@@ -116,6 +124,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
+  '/inspections': typeof InspectionsRoute
   '/procurement': typeof ProcurementRoute
   '/projects': typeof ProjectsRoute
   '/purchase-orders': typeof PurchaseOrdersRoute
@@ -132,6 +141,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/bids'
+    | '/inspections'
     | '/procurement'
     | '/projects'
     | '/purchase-orders'
@@ -146,6 +156,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/bids'
+    | '/inspections'
     | '/procurement'
     | '/projects'
     | '/purchase-orders'
@@ -160,6 +171,7 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/bids'
+    | '/inspections'
     | '/procurement'
     | '/projects'
     | '/purchase-orders'
@@ -175,6 +187,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   BidsRoute: typeof BidsRoute
+  InspectionsRoute: typeof InspectionsRoute
   ProcurementRoute: typeof ProcurementRoute
   ProjectsRoute: typeof ProjectsRoute
   PurchaseOrdersRoute: typeof PurchaseOrdersRoute
@@ -251,6 +264,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProcurementRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/inspections': {
+      id: '/inspections'
+      path: '/inspections'
+      fullPath: '/inspections'
+      preLoaderRoute: typeof InspectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bids': {
       id: '/bids'
       path: '/bids'
@@ -279,6 +299,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   BidsRoute: BidsRoute,
+  InspectionsRoute: InspectionsRoute,
   ProcurementRoute: ProcurementRoute,
   ProjectsRoute: ProjectsRoute,
   PurchaseOrdersRoute: PurchaseOrdersRoute,
