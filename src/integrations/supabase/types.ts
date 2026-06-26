@@ -14,6 +14,45 @@ export type Database = {
   }
   public: {
     Tables: {
+      handbook_acknowledgments: {
+        Row: {
+          acknowledged_date: string
+          created_at: string
+          created_by: string | null
+          employee_name: string
+          form_type: string
+          id: string
+          notes: string | null
+          signed_on_file: boolean
+          supervisor: string | null
+          updated_at: string
+        }
+        Insert: {
+          acknowledged_date?: string
+          created_at?: string
+          created_by?: string | null
+          employee_name: string
+          form_type?: string
+          id?: string
+          notes?: string | null
+          signed_on_file?: boolean
+          supervisor?: string | null
+          updated_at?: string
+        }
+        Update: {
+          acknowledged_date?: string
+          created_at?: string
+          created_by?: string | null
+          employee_name?: string
+          form_type?: string
+          id?: string
+          notes?: string | null
+          signed_on_file?: boolean
+          supervisor?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       incident_reports: {
         Row: {
           action_taken: string | null
