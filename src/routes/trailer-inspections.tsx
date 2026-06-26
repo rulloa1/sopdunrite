@@ -203,11 +203,12 @@ function TrailerInspections() {
       defects: form.defects.trim() || null,
       ...checks,
     };
+    // On insert, omit inspected_by and let the DB DEFAULT auth.uid() supply it —
+    // this always satisfies the WITH CHECK (inspected_by = auth.uid()) policy,
+    // even if the client auth context is momentarily unresolved.
     const res = editId
       ? await supabase.from("trailer_inspections").update(payload).eq("id", editId)
-      : await supabase
-          .from("trailer_inspections")
-          .insert({ ...payload, inspected_by: user?.id ?? null });
+      : await supabase.from("trailer_inspections").insert(payload);
     setSaving(false);
     if (res.error) {
       setError(res.error.message);
@@ -220,11 +221,12 @@ function TrailerInspections() {
   const confirmDelete = async () => {
     if (!deleteId) return;
     const { error: dErr } = await supabase.from("trailer_inspections").delete().eq("id", deleteId);
-    setDeleteId(null);
     if (dErr) {
+      // Keep the confirmation dialog open so the failure stays in context.
       setError(dErr.message);
       return;
     }
+    setDeleteId(null);
     load();
   };
 
