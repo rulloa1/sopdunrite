@@ -11,6 +11,7 @@ import {
   PackageSearch,
   FolderKanban,
   Truck,
+  TriangleAlert,
   Users,
   LogOut,
   LogIn,
@@ -34,6 +35,7 @@ export const NAV = [
   { to: "/schedule", label: "Schedule", icon: CalendarClock },
   { to: "/procurement", label: "Procurement", icon: PackageSearch },
   { to: "/inspections", label: "Pre-Use Inspections", icon: Truck },
+  { to: "/incidents", label: "Incident Reports", icon: TriangleAlert },
 ] as const;
 
 function isActivePath(pathname: string, to: string) {

@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      incident_reports: {
+        Row: {
+          action_taken: string | null
+          created_at: string
+          damage_description: string | null
+          description: string
+          equipment_ownership: string
+          id: string
+          incident_date: string
+          incident_time: string | null
+          injuries: boolean
+          injury_description: string | null
+          location: string | null
+          people_involved: string | null
+          property_damage: boolean
+          report_type: string
+          reported_by: string | null
+          status: string
+          updated_at: string
+          vehicle: string | null
+          witnesses: string | null
+        }
+        Insert: {
+          action_taken?: string | null
+          created_at?: string
+          damage_description?: string | null
+          description: string
+          equipment_ownership?: string
+          id?: string
+          incident_date?: string
+          incident_time?: string | null
+          injuries?: boolean
+          injury_description?: string | null
+          location?: string | null
+          people_involved?: string | null
+          property_damage?: boolean
+          report_type?: string
+          reported_by?: string | null
+          status?: string
+          updated_at?: string
+          vehicle?: string | null
+          witnesses?: string | null
+        }
+        Update: {
+          action_taken?: string | null
+          created_at?: string
+          damage_description?: string | null
+          description?: string
+          equipment_ownership?: string
+          id?: string
+          incident_date?: string
+          incident_time?: string | null
+          injuries?: boolean
+          injury_description?: string | null
+          location?: string | null
+          people_involved?: string | null
+          property_damage?: boolean
+          report_type?: string
+          reported_by?: string | null
+          status?: string
+          updated_at?: string
+          vehicle?: string | null
+          witnesses?: string | null
+        }
+        Relationships: []
+      }
       bid_logs: {
         Row: {
           bid_amount: number | null
