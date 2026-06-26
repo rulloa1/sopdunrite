@@ -138,7 +138,7 @@ function HazCom() {
       .select("*")
       .order("chemical_name");
     if (lErr) setError(lErr.message);
-    setRows((data as ChemicalRow[]) ?? []);
+    else setRows((data as ChemicalRow[]) ?? []);
     setLoading(false);
   }, []);
 
