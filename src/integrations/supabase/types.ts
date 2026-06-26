@@ -128,6 +128,81 @@ export type Database = {
         }
         Relationships: []
       }
+      trailer_inspections: {
+        Row: {
+          brakes_ok: boolean
+          coupler_ok: boolean
+          created_at: string
+          deck_floor_ok: boolean
+          defects: string | null
+          frame_welds_ok: boolean
+          id: string
+          inspected_by: string | null
+          inspection_date: string
+          inspector_name: string | null
+          landing_gear_ok: boolean
+          lights_ok: boolean
+          plate_registration_ok: boolean
+          ramps_gates_ok: boolean
+          safety_chains_ok: boolean
+          status: string
+          suspension_ok: boolean
+          tie_downs_ok: boolean
+          tires_wheels_ok: boolean
+          trailer: string
+          trailer_type: string
+          updated_at: string
+        }
+        Insert: {
+          brakes_ok?: boolean
+          coupler_ok?: boolean
+          created_at?: string
+          deck_floor_ok?: boolean
+          defects?: string | null
+          frame_welds_ok?: boolean
+          id?: string
+          inspected_by?: string | null
+          inspection_date?: string
+          inspector_name?: string | null
+          landing_gear_ok?: boolean
+          lights_ok?: boolean
+          plate_registration_ok?: boolean
+          ramps_gates_ok?: boolean
+          safety_chains_ok?: boolean
+          status?: string
+          suspension_ok?: boolean
+          tie_downs_ok?: boolean
+          tires_wheels_ok?: boolean
+          trailer: string
+          trailer_type?: string
+          updated_at?: string
+        }
+        Update: {
+          brakes_ok?: boolean
+          coupler_ok?: boolean
+          created_at?: string
+          deck_floor_ok?: boolean
+          defects?: string | null
+          frame_welds_ok?: boolean
+          id?: string
+          inspected_by?: string | null
+          inspection_date?: string
+          inspector_name?: string | null
+          landing_gear_ok?: boolean
+          lights_ok?: boolean
+          plate_registration_ok?: boolean
+          ramps_gates_ok?: boolean
+          safety_chains_ok?: boolean
+          status?: string
+          suspension_ok?: boolean
+          tie_downs_ok?: boolean
+          tires_wheels_ok?: boolean
+          trailer?: string
+          trailer_type?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bid_logs: {
         Row: {
           bid_amount: number | null

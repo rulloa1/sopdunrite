@@ -13,6 +13,7 @@ import {
   Truck,
   TriangleAlert,
   FlaskConical,
+  Container,
   Users,
   LogOut,
   LogIn,
@@ -38,6 +39,7 @@ export const NAV = [
   { to: "/inspections", label: "Pre-Use Inspections", icon: Truck },
   { to: "/incidents", label: "Incident Reports", icon: TriangleAlert },
   { to: "/hazcom", label: "Hazard Communication", icon: FlaskConical },
+  { to: "/trailer-inspections", label: "Trailer Inspections", icon: Container },
 ] as const;
 
 function isActivePath(pathname: string, to: string) {
