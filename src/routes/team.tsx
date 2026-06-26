@@ -81,14 +81,19 @@ type FormState = typeof emptyForm;
  * `message`, or (on a 500) an HTML error page. Extract something readable so a
  * failure is never swallowed into a silent no-op.
  */
+const GENERIC_ERROR = "Something went wrong. Please try again.";
+
+/** An HTML document (e.g. a 500 error page) is noise, not a user-facing message. */
+const looksLikeHtml = (s: string) => /^\s*<(?:!doctype|html|\?xml|head|body)/i.test(s);
+
 function errorMessage(e: unknown): string {
-  if (e instanceof Error && e.message) return e.message;
-  if (typeof e === "string" && e.trim()) return e;
+  if (e instanceof Error && e.message) return looksLikeHtml(e.message) ? GENERIC_ERROR : e.message;
+  if (typeof e === "string" && e.trim()) return looksLikeHtml(e) ? GENERIC_ERROR : e;
   if (e && typeof e === "object" && "message" in e) {
     const m = (e as { message?: unknown }).message;
-    if (typeof m === "string" && m.trim()) return m;
+    if (typeof m === "string" && m.trim()) return looksLikeHtml(m) ? GENERIC_ERROR : m;
   }
-  return "Something went wrong. Please try again.";
+  return GENERIC_ERROR;
 }
 
 function TeamPage() {
@@ -135,7 +140,8 @@ function TeamPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const changeRole = async (userId: string, newRole: AppRole) => {
+  /** Returns true on success, false on failure (failure is surfaced here). */
+  const changeRole = async (userId: string, newRole: AppRole): Promise<boolean> => {
     setSavingId(userId);
     setError(null);
     await supabase.from("user_roles").delete().eq("user_id", userId);
@@ -147,11 +153,12 @@ function TeamPage() {
       console.error("[team] role change failed", iErr);
       setError(iErr.message);
       toast.error(iErr.message);
-      return;
+      return false;
     }
     setMembers((prev) => prev.map((m) => (m.id === userId ? { ...m, role: newRole } : m)));
     toast.success(`Role updated to ${ROLE_LABELS[newRole]}.`);
     if (userId === user?.id) refreshRoles();
+    return true;
   };
 
   const openCreate = () => {
@@ -187,7 +194,11 @@ function TeamPage() {
             title: form.title.trim() || undefined,
           },
         });
-        if (form.role) await changeRole(form.id, form.role);
+        if (form.role) {
+          // changeRole surfaces its own error; bail without a false success.
+          const ok = await changeRole(form.id, form.role);
+          if (!ok) return;
+        }
         toast.success(`Saved changes to ${form.fullName.trim() || "user"}.`);
       } else {
         await createUser({
