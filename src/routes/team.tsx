@@ -195,9 +195,14 @@ function TeamPage() {
           },
         });
         if (form.role) {
-          // changeRole surfaces its own error; bail without a false success.
           const ok = await changeRole(form.id, form.role);
-          if (!ok) return;
+          // The profile update already persisted, so reflect it (close + refresh)
+          // even if the role change failed — changeRole surfaced its own error.
+          if (!ok) {
+            setDialogOpen(false);
+            await load();
+            return;
+          }
         }
         toast.success(`Saved changes to ${form.fullName.trim() || "user"}.`);
       } else {
