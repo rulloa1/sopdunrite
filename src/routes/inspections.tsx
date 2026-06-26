@@ -133,6 +133,7 @@ function Inspections() {
 
   const load = useCallback(async () => {
     setLoading(true);
+    setError(null);
     const { data, error: lErr } = await supabase
       .from("vehicle_inspections")
       .select("*")
