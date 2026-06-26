@@ -12,6 +12,7 @@ import {
   FolderKanban,
   Truck,
   TriangleAlert,
+  FlaskConical,
   Users,
   LogOut,
   LogIn,
@@ -36,6 +37,7 @@ export const NAV = [
   { to: "/procurement", label: "Procurement", icon: PackageSearch },
   { to: "/inspections", label: "Pre-Use Inspections", icon: Truck },
   { to: "/incidents", label: "Incident Reports", icon: TriangleAlert },
+  { to: "/hazcom", label: "Hazard Communication", icon: FlaskConical },
 ] as const;
 
 function isActivePath(pathname: string, to: string) {

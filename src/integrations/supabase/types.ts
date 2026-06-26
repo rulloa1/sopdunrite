@@ -80,6 +80,54 @@ export type Database = {
         }
         Relationships: []
       }
+      hazardous_chemicals: {
+        Row: {
+          chemical_name: string
+          container_labeling: string | null
+          created_at: string
+          created_by: string | null
+          hazards: string | null
+          id: string
+          location: string | null
+          manufacturer: string | null
+          notes: string | null
+          quantity: string | null
+          sds_on_file: boolean
+          sds_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          chemical_name: string
+          container_labeling?: string | null
+          created_at?: string
+          created_by?: string | null
+          hazards?: string | null
+          id?: string
+          location?: string | null
+          manufacturer?: string | null
+          notes?: string | null
+          quantity?: string | null
+          sds_on_file?: boolean
+          sds_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          chemical_name?: string
+          container_labeling?: string | null
+          created_at?: string
+          created_by?: string | null
+          hazards?: string | null
+          id?: string
+          location?: string | null
+          manufacturer?: string | null
+          notes?: string | null
+          quantity?: string | null
+          sds_on_file?: boolean
+          sds_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       bid_logs: {
         Row: {
           bid_amount: number | null
