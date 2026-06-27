@@ -19,15 +19,19 @@ CREATE TABLE public.maintenance_records (
   status text NOT NULL DEFAULT 'open'
     CHECK (status IN ('open', 'in-progress', 'completed')),
   vendor text,
-  cost numeric,
+  cost numeric(12, 2) CHECK (cost IS NULL OR cost >= 0),
   odometer_hours text,
   notes text,
   created_by uuid DEFAULT auth.uid() REFERENCES auth.users(id) ON DELETE SET NULL,
   created_at timestamptz NOT NULL DEFAULT now(),
   updated_at timestamptz NOT NULL DEFAULT now(),
-  -- A completion can't precede the report; allow either date to be unset.
+  -- A completion can't precede the report (reported_date is always set).
   CONSTRAINT maintenance_completed_after_reported CHECK (
-    completed_date IS NULL OR reported_date IS NULL OR completed_date >= reported_date
+    completed_date IS NULL OR completed_date >= reported_date
+  ),
+  -- A completed record must carry a completion date so it is truly closed out.
+  CONSTRAINT maintenance_completed_requires_date CHECK (
+    status <> 'completed' OR completed_date IS NOT NULL
   )
 );
 

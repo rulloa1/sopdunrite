@@ -142,6 +142,7 @@ function Maintenance() {
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const canManage = canManageLogs(role);
   const canDelete = canDeleteLogs(role);
@@ -157,11 +158,10 @@ function Maintenance() {
       .from("maintenance_records")
       .select("*")
       .order("reported_date", { ascending: false });
-    if (seq !== loadSeq.current) {
-      // Superseded by a newer load; clear our own loading flag and bail.
-      setLoading(false);
-      return;
-    }
+    // Superseded by a newer load: bail without touching state — the newest
+    // load always runs to completion and owns the loading flag, so this can't
+    // leave the spinner stuck, and it avoids clearing it prematurely.
+    if (seq !== loadSeq.current) return;
     if (lErr) setError(lErr.message);
     else setRows((data as MaintRow[]) ?? []);
     setLoading(false);
@@ -203,9 +203,13 @@ function Maintenance() {
       setError("Completed date can't be before the reported date.");
       return;
     }
+    if (form.status === "completed" && !form.completed_date) {
+      setError("Set a completed date before marking this record completed.");
+      return;
+    }
     const costTrim = form.cost.trim();
-    if (costTrim && Number.isNaN(Number(costTrim))) {
-      setError("Cost must be a number.");
+    if (costTrim && (Number.isNaN(Number(costTrim)) || Number(costTrim) < 0)) {
+      setError("Cost must be a number that is 0 or more.");
       return;
     }
     setSaving(true);
@@ -238,8 +242,10 @@ function Maintenance() {
   };
 
   const confirmDelete = async () => {
-    if (!deleteId) return;
+    if (!deleteId || deleting) return;
+    setDeleting(true);
     const { error: dErr } = await supabase.from("maintenance_records").delete().eq("id", deleteId);
+    setDeleting(false);
     if (dErr) {
       setDeleteError(dErr.message);
       return;
@@ -342,7 +348,7 @@ function Maintenance() {
     return [...base, ...actions];
   }, [canManage, canDelete]);
 
-  const openCount = rows.filter((r) => r.status !== "completed").length;
+  const outstandingCount = rows.filter((r) => r.status !== "completed").length;
 
   return (
     <Layout>
@@ -357,7 +363,9 @@ function Maintenance() {
           <h3 className="font-display text-lg font-semibold">Maintenance Log</h3>
           <p className="text-sm text-muted-foreground">
             {rows.length} record{rows.length === 1 ? "" : "s"}
-            {openCount > 0 && <span className="text-destructive"> · {openCount} open</span>}
+            {outstandingCount > 0 && (
+              <span className="text-destructive"> · {outstandingCount} open or in progress</span>
+            )}
           </p>
         </div>
         {canManage && (
@@ -575,12 +583,13 @@ function Maintenance() {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
+              disabled={deleting}
               onClick={(e) => {
                 e.preventDefault();
                 confirmDelete();
               }}
             >
-              Delete
+              {deleting ? "Deleting…" : "Delete"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
