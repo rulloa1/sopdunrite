@@ -27,6 +27,7 @@ import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as MaintenanceRouteImport } from './routes/maintenance'
 import { Route as CertificationsRouteImport } from './routes/certifications'
 import { Route as DriverQualificationsRouteImport } from './routes/driver-qualifications'
+import { Route as ToolboxTalksRouteImport } from './routes/toolbox-talks'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -121,6 +122,11 @@ const DriverQualificationsRoute = DriverQualificationsRouteImport.update({
   path: '/driver-qualifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToolboxTalksRoute = ToolboxTalksRouteImport.update({
+  id: '/toolbox-talks',
+  path: '/toolbox-talks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BidsRoute = BidsRouteImport.update({
   id: '/bids',
   path: '/bids',
@@ -148,6 +154,7 @@ export interface FileRoutesByFullPath {
   '/maintenance': typeof MaintenanceRoute
   '/certifications': typeof CertificationsRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
+  '/toolbox-talks': typeof ToolboxTalksRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -171,6 +178,7 @@ export interface FileRoutesByTo {
   '/maintenance': typeof MaintenanceRoute
   '/certifications': typeof CertificationsRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
+  '/toolbox-talks': typeof ToolboxTalksRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -195,6 +203,7 @@ export interface FileRoutesById {
   '/maintenance': typeof MaintenanceRoute
   '/certifications': typeof CertificationsRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
+  '/toolbox-talks': typeof ToolboxTalksRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -220,6 +229,7 @@ export interface FileRouteTypes {
     | '/maintenance'
     | '/certifications'
     | '/driver-qualifications'
+    | '/toolbox-talks'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -243,6 +253,7 @@ export interface FileRouteTypes {
     | '/maintenance'
     | '/certifications'
     | '/driver-qualifications'
+    | '/toolbox-talks'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -266,6 +277,7 @@ export interface FileRouteTypes {
     | '/maintenance'
     | '/certifications'
     | '/driver-qualifications'
+    | '/toolbox-talks'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -290,6 +302,7 @@ export interface RootRouteChildren {
   MaintenanceRoute: typeof MaintenanceRoute
   CertificationsRoute: typeof CertificationsRoute
   DriverQualificationsRoute: typeof DriverQualificationsRoute
+  ToolboxTalksRoute: typeof ToolboxTalksRoute
   InspectionsRoute: typeof InspectionsRoute
   TrailerInspectionsRoute: typeof TrailerInspectionsRoute
   ProcurementRoute: typeof ProcurementRoute
@@ -431,6 +444,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverQualificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/toolbox-talks': {
+      id: '/toolbox-talks'
+      path: '/toolbox-talks'
+      fullPath: '/toolbox-talks'
+      preLoaderRoute: typeof ToolboxTalksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bids': {
       id: '/bids'
       path: '/bids'
@@ -466,6 +486,7 @@ const rootRouteChildren: RootRouteChildren = {
   MaintenanceRoute: MaintenanceRoute,
   CertificationsRoute: CertificationsRoute,
   DriverQualificationsRoute: DriverQualificationsRoute,
+  ToolboxTalksRoute: ToolboxTalksRoute,
   InspectionsRoute: InspectionsRoute,
   TrailerInspectionsRoute: TrailerInspectionsRoute,
   ProcurementRoute: ProcurementRoute,
