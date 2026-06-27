@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { ShieldCheck, FlaskRound, Truck } from "lucide-react";
 import { Layout } from "@/components/Layout";
@@ -176,7 +176,21 @@ const POLICIES: Policy[] = [
 
 function Policies() {
   const [active, setActive] = useState<string>(POLICIES[0].id);
-  const policy = POLICIES.find((p) => p.id === active) ?? POLICIES[0];
+
+  // Honor a #policy-id in the URL on mount, so a shared/emailed link (which
+  // carries the hash) opens the policy the sender was viewing rather than the
+  // default first one. Client-only to avoid an SSR hydration mismatch.
+  useEffect(() => {
+    const id = window.location.hash.replace(/^#/, "");
+    if (POLICIES.some((p) => p.id === id)) setActive(id);
+  }, []);
+
+  const select = (id: string) => {
+    setActive(id);
+    // Reflect the selection in the URL without a navigation or history entry,
+    // so SectionActions' "Email this section" link points to this policy.
+    if (typeof window !== "undefined") window.history.replaceState(null, "", `#${id}`);
+  };
 
   return (
     <Layout>
@@ -194,7 +208,7 @@ function Policies() {
           return (
             <button
               key={p.id}
-              onClick={() => setActive(p.id)}
+              onClick={() => select(p.id)}
               className={`inline-flex items-center gap-2 rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                 isActive
                   ? "border-primary bg-primary text-primary-foreground shadow-sm"
