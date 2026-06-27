@@ -25,6 +25,8 @@ import { Route as TrailerInspectionsRouteImport } from './routes/trailer-inspect
 import { Route as HandbookFormsRouteImport } from './routes/handbook-forms'
 import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as MaintenanceRouteImport } from './routes/maintenance'
+import { Route as CertificationsRouteImport } from './routes/certifications'
+import { Route as DriverQualificationsRouteImport } from './routes/driver-qualifications'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -109,6 +111,16 @@ const MaintenanceRoute = MaintenanceRouteImport.update({
   path: '/maintenance',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CertificationsRoute = CertificationsRouteImport.update({
+  id: '/certifications',
+  path: '/certifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DriverQualificationsRoute = DriverQualificationsRouteImport.update({
+  id: '/driver-qualifications',
+  path: '/driver-qualifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BidsRoute = BidsRouteImport.update({
   id: '/bids',
   path: '/bids',
@@ -134,6 +146,8 @@ export interface FileRoutesByFullPath {
   '/handbook-forms': typeof HandbookFormsRoute
   '/policies': typeof PoliciesRoute
   '/maintenance': typeof MaintenanceRoute
+  '/certifications': typeof CertificationsRoute
+  '/driver-qualifications': typeof DriverQualificationsRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -155,6 +169,8 @@ export interface FileRoutesByTo {
   '/handbook-forms': typeof HandbookFormsRoute
   '/policies': typeof PoliciesRoute
   '/maintenance': typeof MaintenanceRoute
+  '/certifications': typeof CertificationsRoute
+  '/driver-qualifications': typeof DriverQualificationsRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -177,6 +193,8 @@ export interface FileRoutesById {
   '/handbook-forms': typeof HandbookFormsRoute
   '/policies': typeof PoliciesRoute
   '/maintenance': typeof MaintenanceRoute
+  '/certifications': typeof CertificationsRoute
+  '/driver-qualifications': typeof DriverQualificationsRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -200,6 +218,8 @@ export interface FileRouteTypes {
     | '/handbook-forms'
     | '/policies'
     | '/maintenance'
+    | '/certifications'
+    | '/driver-qualifications'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -221,6 +241,8 @@ export interface FileRouteTypes {
     | '/handbook-forms'
     | '/policies'
     | '/maintenance'
+    | '/certifications'
+    | '/driver-qualifications'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -242,6 +264,8 @@ export interface FileRouteTypes {
     | '/handbook-forms'
     | '/policies'
     | '/maintenance'
+    | '/certifications'
+    | '/driver-qualifications'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -264,6 +288,8 @@ export interface RootRouteChildren {
   HandbookFormsRoute: typeof HandbookFormsRoute
   PoliciesRoute: typeof PoliciesRoute
   MaintenanceRoute: typeof MaintenanceRoute
+  CertificationsRoute: typeof CertificationsRoute
+  DriverQualificationsRoute: typeof DriverQualificationsRoute
   InspectionsRoute: typeof InspectionsRoute
   TrailerInspectionsRoute: typeof TrailerInspectionsRoute
   ProcurementRoute: typeof ProcurementRoute
@@ -391,6 +417,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MaintenanceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/certifications': {
+      id: '/certifications'
+      path: '/certifications'
+      fullPath: '/certifications'
+      preLoaderRoute: typeof CertificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/driver-qualifications': {
+      id: '/driver-qualifications'
+      path: '/driver-qualifications'
+      fullPath: '/driver-qualifications'
+      preLoaderRoute: typeof DriverQualificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bids': {
       id: '/bids'
       path: '/bids'
@@ -424,6 +464,8 @@ const rootRouteChildren: RootRouteChildren = {
   HandbookFormsRoute: HandbookFormsRoute,
   PoliciesRoute: PoliciesRoute,
   MaintenanceRoute: MaintenanceRoute,
+  CertificationsRoute: CertificationsRoute,
+  DriverQualificationsRoute: DriverQualificationsRoute,
   InspectionsRoute: InspectionsRoute,
   TrailerInspectionsRoute: TrailerInspectionsRoute,
   ProcurementRoute: ProcurementRoute,

@@ -68,6 +68,93 @@ export type Database = {
         }
         Relationships: []
       }
+      certifications: {
+        Row: {
+          certificate_number: string | null
+          certification: string
+          created_at: string
+          created_by: string | null
+          employee_name: string
+          expires_date: string | null
+          id: string
+          issued_date: string | null
+          issuing_organization: string | null
+          notes: string | null
+          updated_at: string
+        }
+        Insert: {
+          certificate_number?: string | null
+          certification: string
+          created_at?: string
+          created_by?: string | null
+          employee_name: string
+          expires_date?: string | null
+          id?: string
+          issued_date?: string | null
+          issuing_organization?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Update: {
+          certificate_number?: string | null
+          certification?: string
+          created_at?: string
+          created_by?: string | null
+          employee_name?: string
+          expires_date?: string | null
+          id?: string
+          issued_date?: string | null
+          issuing_organization?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      driver_qualifications: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          driver_name: string
+          endorsements: string | null
+          id: string
+          last_mvr_review: string | null
+          license_class: string | null
+          license_expires: string | null
+          license_number: string | null
+          medical_card_expires: string | null
+          notes: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          driver_name: string
+          endorsements?: string | null
+          id?: string
+          last_mvr_review?: string | null
+          license_class?: string | null
+          license_expires?: string | null
+          license_number?: string | null
+          medical_card_expires?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          driver_name?: string
+          endorsements?: string | null
+          id?: string
+          last_mvr_review?: string | null
+          license_class?: string | null
+          license_expires?: string | null
+          license_number?: string | null
+          medical_card_expires?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       handbook_acknowledgments: {
         Row: {
           acknowledged_date: string

@@ -17,6 +17,8 @@ import {
   ClipboardCheck,
   ShieldCheck,
   Wrench,
+  Award,
+  IdCard,
   Users,
   LogOut,
   LogIn,
@@ -46,6 +48,8 @@ export const NAV = [
   { to: "/handbook-forms", label: "Handbook Forms", icon: ClipboardCheck },
   { to: "/policies", label: "Safety Policies", icon: ShieldCheck },
   { to: "/maintenance", label: "Maintenance & Repairs", icon: Wrench },
+  { to: "/certifications", label: "Training & Certs", icon: Award },
+  { to: "/driver-qualifications", label: "Driver Qualifications", icon: IdCard },
 ] as const;
 
 function isActivePath(pathname: string, to: string) {
