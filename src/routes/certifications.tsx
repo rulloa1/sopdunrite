@@ -140,6 +140,12 @@ function Certifications() {
   };
 
   const save = async () => {
+    // Mirror the DB CHECK so the user gets a clear message, not a raw
+    // constraint error. yyyy-mm-dd strings compare chronologically.
+    if (form.issued_date && form.expires_date && form.expires_date < form.issued_date) {
+      setError("Expiration date can't be before the issued date.");
+      return;
+    }
     setSaving(true);
     setError(null);
     const payload = {

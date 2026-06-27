@@ -17,7 +17,11 @@ CREATE TABLE public.certifications (
   notes text,
   created_by uuid DEFAULT auth.uid() REFERENCES auth.users(id) ON DELETE SET NULL,
   created_at timestamptz NOT NULL DEFAULT now(),
-  updated_at timestamptz NOT NULL DEFAULT now()
+  updated_at timestamptz NOT NULL DEFAULT now(),
+  -- An expiration can't precede issuance; allow either date to be unset.
+  CONSTRAINT certifications_expires_after_issued CHECK (
+    expires_date IS NULL OR issued_date IS NULL OR expires_date >= issued_date
+  )
 );
 
 CREATE INDEX idx_certifications_employee ON public.certifications(employee_name);
