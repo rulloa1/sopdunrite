@@ -199,7 +199,11 @@ function Maintenance() {
   };
 
   const save = async () => {
-    if (form.completed_date && form.reported_date && form.completed_date < form.reported_date) {
+    if (!form.reported_date) {
+      setError("A reported date is required.");
+      return;
+    }
+    if (form.completed_date && form.completed_date < form.reported_date) {
       setError("Completed date can't be before the reported date.");
       return;
     }
@@ -219,7 +223,7 @@ function Maintenance() {
       asset_type: form.asset_type,
       service_type: form.service_type,
       description: form.description.trim(),
-      reported_date: form.reported_date || today(),
+      reported_date: form.reported_date,
       completed_date: form.completed_date || null,
       status: form.status,
       vendor: form.vendor.trim() || null,
@@ -486,7 +490,7 @@ function Maintenance() {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-1.5">
-                <Label htmlFor="m-reported">Reported date</Label>
+                <Label htmlFor="m-reported">Reported date *</Label>
                 <Input
                   id="m-reported"
                   type="date"
@@ -555,7 +559,9 @@ function Maintenance() {
             </Button>
             <Button
               onClick={save}
-              disabled={saving || !form.asset.trim() || !form.description.trim()}
+              disabled={
+                saving || !form.asset.trim() || !form.description.trim() || !form.reported_date
+              }
             >
               {saving ? "Saving…" : editId ? "Update" : "Add"}
             </Button>
