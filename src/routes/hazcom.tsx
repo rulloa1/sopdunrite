@@ -302,7 +302,6 @@ function HazCom() {
           ]
         : [];
     return [...base, ...actions];
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canManage, canDelete]);
 
   const missingSds = rows.filter((r) => !r.sds_on_file && !isHttpUrl(r.sds_url)).length;

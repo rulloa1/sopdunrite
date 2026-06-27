@@ -15,6 +15,7 @@ import {
   FlaskConical,
   Container,
   ClipboardCheck,
+  ShieldCheck,
   Users,
   LogOut,
   LogIn,
@@ -42,6 +43,7 @@ export const NAV = [
   { to: "/hazcom", label: "Hazard Communication", icon: FlaskConical },
   { to: "/trailer-inspections", label: "Trailer Inspections", icon: Container },
   { to: "/handbook-forms", label: "Handbook Forms", icon: ClipboardCheck },
+  { to: "/policies", label: "Safety Policies", icon: ShieldCheck },
 ] as const;
 
 function isActivePath(pathname: string, to: string) {
