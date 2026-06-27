@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Plus, Pencil, Trash2 } from "lucide-react";
 import { Layout } from "@/components/Layout";
@@ -113,13 +113,18 @@ function DriverQualifications() {
   const canManage = canManageLogs(role);
   const canDelete = canDeleteLogs(role);
 
+  // Sequence guard: only the most recent load() applies its result, so an
+  // earlier in-flight fetch can't resolve last and overwrite fresher rows.
+  const loadSeq = useRef(0);
   const load = useCallback(async () => {
+    const seq = ++loadSeq.current;
     setLoading(true);
     setError(null);
     const { data, error: lErr } = await supabase
       .from("driver_qualifications")
       .select("*")
       .order("driver_name");
+    if (seq !== loadSeq.current) return;
     if (lErr) setError(lErr.message);
     else setRows((data as DriverRow[]) ?? []);
     setLoading(false);
