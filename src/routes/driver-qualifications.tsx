@@ -124,7 +124,11 @@ function DriverQualifications() {
       .from("driver_qualifications")
       .select("*")
       .order("driver_name");
-    if (seq !== loadSeq.current) return;
+    if (seq !== loadSeq.current) {
+      // Superseded by a newer load; clear our own loading flag and bail.
+      setLoading(false);
+      return;
+    }
     if (lErr) setError(lErr.message);
     else setRows((data as DriverRow[]) ?? []);
     setLoading(false);

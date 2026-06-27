@@ -111,7 +111,11 @@ function Certifications() {
       .from("certifications")
       .select("*")
       .order("expires_date", { ascending: true, nullsFirst: false });
-    if (seq !== loadSeq.current) return;
+    if (seq !== loadSeq.current) {
+      // Superseded by a newer load; clear our own loading flag and bail.
+      setLoading(false);
+      return;
+    }
     if (lErr) setError(lErr.message);
     else setRows((data as CertRow[]) ?? []);
     setLoading(false);
