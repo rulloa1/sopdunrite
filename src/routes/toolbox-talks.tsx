@@ -141,6 +141,10 @@ function ToolboxTalks() {
   };
 
   const save = async () => {
+    if (!form.talk_date) {
+      setError("A date is required.");
+      return;
+    }
     const countTrim = form.attendee_count.trim();
     if (countTrim && (!Number.isInteger(Number(countTrim)) || Number(countTrim) < 0)) {
       setError("Attendees must be a whole number (0 or more).");
@@ -150,7 +154,7 @@ function ToolboxTalks() {
     setError(null);
     const payload = {
       topic: form.topic.trim(),
-      talk_date: form.talk_date || today(),
+      talk_date: form.talk_date,
       presenter: form.presenter.trim() || null,
       location: form.location.trim() || null,
       attendees: form.attendees.trim() || null,
@@ -326,7 +330,7 @@ function ToolboxTalks() {
             </div>
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-1.5">
-                <Label htmlFor="t-date">Date</Label>
+                <Label htmlFor="t-date">Date *</Label>
                 <Input
                   id="t-date"
                   type="date"
@@ -403,7 +407,7 @@ function ToolboxTalks() {
             >
               Cancel
             </Button>
-            <Button onClick={save} disabled={saving || !form.topic.trim()}>
+            <Button onClick={save} disabled={saving || !form.topic.trim() || !form.talk_date}>
               {saving ? "Saving…" : editId ? "Update" : "Add"}
             </Button>
           </DialogFooter>
