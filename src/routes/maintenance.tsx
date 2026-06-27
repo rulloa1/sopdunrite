@@ -566,7 +566,8 @@ function Maintenance() {
       <AlertDialog
         open={!!deleteId}
         onOpenChange={(o) => {
-          if (!o) {
+          // Don't dismiss (and lose the error) while a delete is still running.
+          if (!o && !deleting) {
             setDeleteId(null);
             setDeleteError(null);
           }
