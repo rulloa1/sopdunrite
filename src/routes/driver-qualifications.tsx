@@ -124,11 +124,10 @@ function DriverQualifications() {
       .from("driver_qualifications")
       .select("*")
       .order("driver_name");
-    if (seq !== loadSeq.current) {
-      // Superseded by a newer load; clear our own loading flag and bail.
-      setLoading(false);
-      return;
-    }
+    // Superseded by a newer load: bail without touching state — the newest
+    // load always runs to completion and owns the loading flag, so this can't
+    // leave the spinner stuck, and it avoids clearing it prematurely.
+    if (seq !== loadSeq.current) return;
     if (lErr) setError(lErr.message);
     else setRows((data as DriverRow[]) ?? []);
     setLoading(false);
