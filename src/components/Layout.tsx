@@ -16,6 +16,7 @@ import {
   Container,
   ClipboardCheck,
   ShieldCheck,
+  Wrench,
   Users,
   LogOut,
   LogIn,
@@ -44,6 +45,7 @@ export const NAV = [
   { to: "/trailer-inspections", label: "Trailer Inspections", icon: Container },
   { to: "/handbook-forms", label: "Handbook Forms", icon: ClipboardCheck },
   { to: "/policies", label: "Safety Policies", icon: ShieldCheck },
+  { to: "/maintenance", label: "Maintenance & Repairs", icon: Wrench },
 ] as const;
 
 function isActivePath(pathname: string, to: string) {

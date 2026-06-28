@@ -24,6 +24,7 @@ import { Route as HazcomRouteImport } from './routes/hazcom'
 import { Route as TrailerInspectionsRouteImport } from './routes/trailer-inspections'
 import { Route as HandbookFormsRouteImport } from './routes/handbook-forms'
 import { Route as PoliciesRouteImport } from './routes/policies'
+import { Route as MaintenanceRouteImport } from './routes/maintenance'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -103,6 +104,11 @@ const PoliciesRoute = PoliciesRouteImport.update({
   path: '/policies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MaintenanceRoute = MaintenanceRouteImport.update({
+  id: '/maintenance',
+  path: '/maintenance',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BidsRoute = BidsRouteImport.update({
   id: '/bids',
   path: '/bids',
@@ -127,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/hazcom': typeof HazcomRoute
   '/handbook-forms': typeof HandbookFormsRoute
   '/policies': typeof PoliciesRoute
+  '/maintenance': typeof MaintenanceRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -147,6 +154,7 @@ export interface FileRoutesByTo {
   '/hazcom': typeof HazcomRoute
   '/handbook-forms': typeof HandbookFormsRoute
   '/policies': typeof PoliciesRoute
+  '/maintenance': typeof MaintenanceRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -168,6 +176,7 @@ export interface FileRoutesById {
   '/hazcom': typeof HazcomRoute
   '/handbook-forms': typeof HandbookFormsRoute
   '/policies': typeof PoliciesRoute
+  '/maintenance': typeof MaintenanceRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -190,6 +199,7 @@ export interface FileRouteTypes {
     | '/hazcom'
     | '/handbook-forms'
     | '/policies'
+    | '/maintenance'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -210,6 +220,7 @@ export interface FileRouteTypes {
     | '/hazcom'
     | '/handbook-forms'
     | '/policies'
+    | '/maintenance'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -230,6 +241,7 @@ export interface FileRouteTypes {
     | '/hazcom'
     | '/handbook-forms'
     | '/policies'
+    | '/maintenance'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -251,6 +263,7 @@ export interface RootRouteChildren {
   HazcomRoute: typeof HazcomRoute
   HandbookFormsRoute: typeof HandbookFormsRoute
   PoliciesRoute: typeof PoliciesRoute
+  MaintenanceRoute: typeof MaintenanceRoute
   InspectionsRoute: typeof InspectionsRoute
   TrailerInspectionsRoute: typeof TrailerInspectionsRoute
   ProcurementRoute: typeof ProcurementRoute
@@ -371,6 +384,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliciesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/maintenance': {
+      id: '/maintenance'
+      path: '/maintenance'
+      fullPath: '/maintenance'
+      preLoaderRoute: typeof MaintenanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/bids': {
       id: '/bids'
       path: '/bids'
@@ -403,6 +423,7 @@ const rootRouteChildren: RootRouteChildren = {
   HazcomRoute: HazcomRoute,
   HandbookFormsRoute: HandbookFormsRoute,
   PoliciesRoute: PoliciesRoute,
+  MaintenanceRoute: MaintenanceRoute,
   InspectionsRoute: InspectionsRoute,
   TrailerInspectionsRoute: TrailerInspectionsRoute,
   ProcurementRoute: ProcurementRoute,

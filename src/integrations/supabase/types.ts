@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      maintenance_records: {
+        Row: {
+          asset: string
+          asset_type: string
+          completed_date: string | null
+          cost: number | null
+          created_at: string
+          created_by: string | null
+          description: string
+          id: string
+          notes: string | null
+          odometer_hours: string | null
+          reported_date: string
+          service_type: string
+          status: string
+          updated_at: string
+          vendor: string | null
+        }
+        Insert: {
+          asset: string
+          asset_type?: string
+          completed_date?: string | null
+          cost?: number | null
+          created_at?: string
+          created_by?: string | null
+          description: string
+          id?: string
+          notes?: string | null
+          odometer_hours?: string | null
+          reported_date?: string
+          service_type?: string
+          status?: string
+          updated_at?: string
+          vendor?: string | null
+        }
+        Update: {
+          asset?: string
+          asset_type?: string
+          completed_date?: string | null
+          cost?: number | null
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          id?: string
+          notes?: string | null
+          odometer_hours?: string | null
+          reported_date?: string
+          service_type?: string
+          status?: string
+          updated_at?: string
+          vendor?: string | null
+        }
+        Relationships: []
+      }
       handbook_acknowledgments: {
         Row: {
           acknowledged_date: string
