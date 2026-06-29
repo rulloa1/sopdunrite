@@ -154,6 +154,261 @@ export type Database = {
         }
         Relationships: []
       }
+      handbook_acknowledgments: {
+        Row: {
+          acknowledged_date: string | null
+          created_at: string
+          created_by: string | null
+          employee_name: string
+          form_type: string
+          id: string
+          notes: string | null
+          signed_on_file: boolean
+          supervisor: string | null
+          updated_at: string
+        }
+        Insert: {
+          acknowledged_date?: string | null
+          created_at?: string
+          created_by?: string | null
+          employee_name: string
+          form_type: string
+          id?: string
+          notes?: string | null
+          signed_on_file?: boolean
+          supervisor?: string | null
+          updated_at?: string
+        }
+        Update: {
+          acknowledged_date?: string | null
+          created_at?: string
+          created_by?: string | null
+          employee_name?: string
+          form_type?: string
+          id?: string
+          notes?: string | null
+          signed_on_file?: boolean
+          supervisor?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      hazardous_chemicals: {
+        Row: {
+          chemical_name: string
+          container_labeling: string | null
+          created_at: string
+          created_by: string | null
+          hazards: string | null
+          id: string
+          location: string | null
+          manufacturer: string | null
+          notes: string | null
+          quantity: string | null
+          sds_on_file: boolean
+          sds_url: string | null
+          updated_at: string
+        }
+        Insert: {
+          chemical_name: string
+          container_labeling?: string | null
+          created_at?: string
+          created_by?: string | null
+          hazards?: string | null
+          id?: string
+          location?: string | null
+          manufacturer?: string | null
+          notes?: string | null
+          quantity?: string | null
+          sds_on_file?: boolean
+          sds_url?: string | null
+          updated_at?: string
+        }
+        Update: {
+          chemical_name?: string
+          container_labeling?: string | null
+          created_at?: string
+          created_by?: string | null
+          hazards?: string | null
+          id?: string
+          location?: string | null
+          manufacturer?: string | null
+          notes?: string | null
+          quantity?: string | null
+          sds_on_file?: boolean
+          sds_url?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      incident_reports: {
+        Row: {
+          action_taken: string | null
+          created_at: string
+          created_by: string | null
+          damage_description: string | null
+          description: string
+          equipment_ownership: string | null
+          id: string
+          incident_date: string | null
+          incident_time: string | null
+          injuries: boolean
+          injury_description: string | null
+          location: string | null
+          people_involved: string | null
+          property_damage: boolean
+          report_type: string
+          status: string | null
+          updated_at: string
+          vehicle: string | null
+          witnesses: string | null
+        }
+        Insert: {
+          action_taken?: string | null
+          created_at?: string
+          created_by?: string | null
+          damage_description?: string | null
+          description: string
+          equipment_ownership?: string | null
+          id?: string
+          incident_date?: string | null
+          incident_time?: string | null
+          injuries?: boolean
+          injury_description?: string | null
+          location?: string | null
+          people_involved?: string | null
+          property_damage?: boolean
+          report_type: string
+          status?: string | null
+          updated_at?: string
+          vehicle?: string | null
+          witnesses?: string | null
+        }
+        Update: {
+          action_taken?: string | null
+          created_at?: string
+          created_by?: string | null
+          damage_description?: string | null
+          description?: string
+          equipment_ownership?: string | null
+          id?: string
+          incident_date?: string | null
+          incident_time?: string | null
+          injuries?: boolean
+          injury_description?: string | null
+          location?: string | null
+          people_involved?: string | null
+          property_damage?: boolean
+          report_type?: string
+          status?: string | null
+          updated_at?: string
+          vehicle?: string | null
+          witnesses?: string | null
+        }
+        Relationships: []
+      }
+      job_safety_analyses: {
+        Row: {
+          controls: string | null
+          created_at: string
+          created_by: string | null
+          hazards: string | null
+          id: string
+          job_steps: string | null
+          job_title: string
+          jsa_date: string | null
+          location: string | null
+          notes: string | null
+          prepared_by: string | null
+          required_ppe: string | null
+          updated_at: string
+        }
+        Insert: {
+          controls?: string | null
+          created_at?: string
+          created_by?: string | null
+          hazards?: string | null
+          id?: string
+          job_steps?: string | null
+          job_title: string
+          jsa_date?: string | null
+          location?: string | null
+          notes?: string | null
+          prepared_by?: string | null
+          required_ppe?: string | null
+          updated_at?: string
+        }
+        Update: {
+          controls?: string | null
+          created_at?: string
+          created_by?: string | null
+          hazards?: string | null
+          id?: string
+          job_steps?: string | null
+          job_title?: string
+          jsa_date?: string | null
+          location?: string | null
+          notes?: string | null
+          prepared_by?: string | null
+          required_ppe?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      maintenance_records: {
+        Row: {
+          asset: string
+          asset_type: string | null
+          completed_date: string | null
+          cost: number | null
+          created_at: string
+          created_by: string | null
+          description: string
+          id: string
+          notes: string | null
+          odometer_hours: string | null
+          reported_date: string | null
+          service_type: string | null
+          status: string | null
+          updated_at: string
+          vendor: string | null
+        }
+        Insert: {
+          asset: string
+          asset_type?: string | null
+          completed_date?: string | null
+          cost?: number | null
+          created_at?: string
+          created_by?: string | null
+          description: string
+          id?: string
+          notes?: string | null
+          odometer_hours?: string | null
+          reported_date?: string | null
+          service_type?: string | null
+          status?: string | null
+          updated_at?: string
+          vendor?: string | null
+        }
+        Update: {
+          asset?: string
+          asset_type?: string | null
+          completed_date?: string | null
+          cost?: number | null
+          created_at?: string
+          created_by?: string | null
+          description?: string
+          id?: string
+          notes?: string | null
+          odometer_hours?: string | null
+          reported_date?: string | null
+          service_type?: string | null
+          status?: string | null
+          updated_at?: string
+          vendor?: string | null
+        }
+        Relationships: []
+      }
       po_logs: {
         Row: {
           amount: number | null
@@ -615,6 +870,60 @@ export type Database = {
           },
         ]
       }
+      subcontractor_prequalifications: {
+        Row: {
+          coi_expires: string | null
+          company_name: string
+          contact_email: string | null
+          contact_name: string | null
+          contact_phone: string | null
+          created_at: string
+          created_by: string | null
+          emr: number | null
+          id: string
+          notes: string | null
+          osha_citations: string | null
+          review_date: string | null
+          status: string | null
+          trade: string | null
+          updated_at: string
+        }
+        Insert: {
+          coi_expires?: string | null
+          company_name: string
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          created_by?: string | null
+          emr?: number | null
+          id?: string
+          notes?: string | null
+          osha_citations?: string | null
+          review_date?: string | null
+          status?: string | null
+          trade?: string | null
+          updated_at?: string
+        }
+        Update: {
+          coi_expires?: string | null
+          company_name?: string
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          created_by?: string | null
+          emr?: number | null
+          id?: string
+          notes?: string | null
+          osha_citations?: string | null
+          review_date?: string | null
+          status?: string | null
+          trade?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       submittal_logs: {
         Row: {
           closed: boolean
@@ -668,6 +977,126 @@ export type Database = {
           },
         ]
       }
+      toolbox_talks: {
+        Row: {
+          attendee_count: number | null
+          attendees: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          key_points: string | null
+          location: string | null
+          notes: string | null
+          presenter: string | null
+          talk_date: string | null
+          topic: string
+          updated_at: string
+        }
+        Insert: {
+          attendee_count?: number | null
+          attendees?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          key_points?: string | null
+          location?: string | null
+          notes?: string | null
+          presenter?: string | null
+          talk_date?: string | null
+          topic: string
+          updated_at?: string
+        }
+        Update: {
+          attendee_count?: number | null
+          attendees?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          key_points?: string | null
+          location?: string | null
+          notes?: string | null
+          presenter?: string | null
+          talk_date?: string | null
+          topic?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      trailer_inspections: {
+        Row: {
+          brakes_ok: boolean
+          coupler_ok: boolean
+          created_at: string
+          created_by: string | null
+          deck_floor_ok: boolean
+          defects: string | null
+          frame_welds_ok: boolean
+          id: string
+          inspection_date: string | null
+          inspector_name: string | null
+          landing_gear_ok: boolean
+          lights_ok: boolean
+          plate_registration_ok: boolean
+          ramps_gates_ok: boolean
+          safety_chains_ok: boolean
+          status: string | null
+          suspension_ok: boolean
+          tie_downs_ok: boolean
+          tires_wheels_ok: boolean
+          trailer: string
+          trailer_type: string | null
+          updated_at: string
+        }
+        Insert: {
+          brakes_ok?: boolean
+          coupler_ok?: boolean
+          created_at?: string
+          created_by?: string | null
+          deck_floor_ok?: boolean
+          defects?: string | null
+          frame_welds_ok?: boolean
+          id?: string
+          inspection_date?: string | null
+          inspector_name?: string | null
+          landing_gear_ok?: boolean
+          lights_ok?: boolean
+          plate_registration_ok?: boolean
+          ramps_gates_ok?: boolean
+          safety_chains_ok?: boolean
+          status?: string | null
+          suspension_ok?: boolean
+          tie_downs_ok?: boolean
+          tires_wheels_ok?: boolean
+          trailer: string
+          trailer_type?: string | null
+          updated_at?: string
+        }
+        Update: {
+          brakes_ok?: boolean
+          coupler_ok?: boolean
+          created_at?: string
+          created_by?: string | null
+          deck_floor_ok?: boolean
+          defects?: string | null
+          frame_welds_ok?: boolean
+          id?: string
+          inspection_date?: string | null
+          inspector_name?: string | null
+          landing_gear_ok?: boolean
+          lights_ok?: boolean
+          plate_registration_ok?: boolean
+          ramps_gates_ok?: boolean
+          safety_chains_ok?: boolean
+          status?: string | null
+          suspension_ok?: boolean
+          tie_downs_ok?: boolean
+          tires_wheels_ok?: boolean
+          trailer?: string
+          trailer_type?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -686,6 +1115,72 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
+        }
+        Relationships: []
+      }
+      vehicle_inspections: {
+        Row: {
+          blinkers_ok: boolean
+          brake_lights_ok: boolean
+          clearance_lights_ok: boolean
+          controls_ok: boolean
+          created_at: string
+          created_by: string | null
+          defects: string | null
+          fluids_ok: boolean
+          guards_ok: boolean
+          headlights_ok: boolean
+          id: string
+          inspection_date: string | null
+          inspector_name: string | null
+          odometer: number | null
+          running_lights_ok: boolean
+          status: string | null
+          tires_ok: boolean
+          updated_at: string
+          vehicle: string
+        }
+        Insert: {
+          blinkers_ok?: boolean
+          brake_lights_ok?: boolean
+          clearance_lights_ok?: boolean
+          controls_ok?: boolean
+          created_at?: string
+          created_by?: string | null
+          defects?: string | null
+          fluids_ok?: boolean
+          guards_ok?: boolean
+          headlights_ok?: boolean
+          id?: string
+          inspection_date?: string | null
+          inspector_name?: string | null
+          odometer?: number | null
+          running_lights_ok?: boolean
+          status?: string | null
+          tires_ok?: boolean
+          updated_at?: string
+          vehicle: string
+        }
+        Update: {
+          blinkers_ok?: boolean
+          brake_lights_ok?: boolean
+          clearance_lights_ok?: boolean
+          controls_ok?: boolean
+          created_at?: string
+          created_by?: string | null
+          defects?: string | null
+          fluids_ok?: boolean
+          guards_ok?: boolean
+          headlights_ok?: boolean
+          id?: string
+          inspection_date?: string | null
+          inspector_name?: string | null
+          odometer?: number | null
+          running_lights_ok?: boolean
+          status?: string | null
+          tires_ok?: boolean
+          updated_at?: string
+          vehicle?: string
         }
         Relationships: []
       }
