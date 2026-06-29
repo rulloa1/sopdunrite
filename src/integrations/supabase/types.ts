@@ -14,6 +14,60 @@ export type Database = {
   }
   public: {
     Tables: {
+      subcontractor_prequalifications: {
+        Row: {
+          coi_expires: string | null
+          company_name: string
+          contact_email: string | null
+          contact_name: string | null
+          contact_phone: string | null
+          created_at: string
+          created_by: string | null
+          emr: number | null
+          id: string
+          notes: string | null
+          osha_citations: string | null
+          review_date: string | null
+          status: string
+          trade: string | null
+          updated_at: string
+        }
+        Insert: {
+          coi_expires?: string | null
+          company_name: string
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          created_by?: string | null
+          emr?: number | null
+          id?: string
+          notes?: string | null
+          osha_citations?: string | null
+          review_date?: string | null
+          status?: string
+          trade?: string | null
+          updated_at?: string
+        }
+        Update: {
+          coi_expires?: string | null
+          company_name?: string
+          contact_email?: string | null
+          contact_name?: string | null
+          contact_phone?: string | null
+          created_at?: string
+          created_by?: string | null
+          emr?: number | null
+          id?: string
+          notes?: string | null
+          osha_citations?: string | null
+          review_date?: string | null
+          status?: string
+          trade?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       maintenance_records: {
         Row: {
           asset: string

@@ -28,6 +28,7 @@ import { Route as MaintenanceRouteImport } from './routes/maintenance'
 import { Route as CertificationsRouteImport } from './routes/certifications'
 import { Route as DriverQualificationsRouteImport } from './routes/driver-qualifications'
 import { Route as ToolboxTalksRouteImport } from './routes/toolbox-talks'
+import { Route as SubcontractorPrequalRouteImport } from './routes/subcontractor-prequal'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -127,6 +128,11 @@ const ToolboxTalksRoute = ToolboxTalksRouteImport.update({
   path: '/toolbox-talks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SubcontractorPrequalRoute = SubcontractorPrequalRouteImport.update({
+  id: '/subcontractor-prequal',
+  path: '/subcontractor-prequal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BidsRoute = BidsRouteImport.update({
   id: '/bids',
   path: '/bids',
@@ -155,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/certifications': typeof CertificationsRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
   '/toolbox-talks': typeof ToolboxTalksRoute
+  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -179,6 +186,7 @@ export interface FileRoutesByTo {
   '/certifications': typeof CertificationsRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
   '/toolbox-talks': typeof ToolboxTalksRoute
+  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -204,6 +212,7 @@ export interface FileRoutesById {
   '/certifications': typeof CertificationsRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
   '/toolbox-talks': typeof ToolboxTalksRoute
+  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -230,6 +239,7 @@ export interface FileRouteTypes {
     | '/certifications'
     | '/driver-qualifications'
     | '/toolbox-talks'
+    | '/subcontractor-prequal'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -254,6 +264,7 @@ export interface FileRouteTypes {
     | '/certifications'
     | '/driver-qualifications'
     | '/toolbox-talks'
+    | '/subcontractor-prequal'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -278,6 +289,7 @@ export interface FileRouteTypes {
     | '/certifications'
     | '/driver-qualifications'
     | '/toolbox-talks'
+    | '/subcontractor-prequal'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -303,6 +315,7 @@ export interface RootRouteChildren {
   CertificationsRoute: typeof CertificationsRoute
   DriverQualificationsRoute: typeof DriverQualificationsRoute
   ToolboxTalksRoute: typeof ToolboxTalksRoute
+  SubcontractorPrequalRoute: typeof SubcontractorPrequalRoute
   InspectionsRoute: typeof InspectionsRoute
   TrailerInspectionsRoute: typeof TrailerInspectionsRoute
   ProcurementRoute: typeof ProcurementRoute
@@ -444,6 +457,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverQualificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/subcontractor-prequal': {
+      id: '/subcontractor-prequal'
+      path: '/subcontractor-prequal'
+      fullPath: '/subcontractor-prequal'
+      preLoaderRoute: typeof SubcontractorPrequalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/toolbox-talks': {
       id: '/toolbox-talks'
       path: '/toolbox-talks'
@@ -487,6 +507,7 @@ const rootRouteChildren: RootRouteChildren = {
   CertificationsRoute: CertificationsRoute,
   DriverQualificationsRoute: DriverQualificationsRoute,
   ToolboxTalksRoute: ToolboxTalksRoute,
+  SubcontractorPrequalRoute: SubcontractorPrequalRoute,
   InspectionsRoute: InspectionsRoute,
   TrailerInspectionsRoute: TrailerInspectionsRoute,
   ProcurementRoute: ProcurementRoute,
