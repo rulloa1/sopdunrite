@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      job_safety_analyses: {
+        Row: {
+          controls: string | null
+          created_at: string
+          created_by: string | null
+          hazards: string | null
+          id: string
+          job_steps: string | null
+          job_title: string
+          jsa_date: string
+          location: string | null
+          notes: string | null
+          prepared_by: string | null
+          required_ppe: string | null
+          updated_at: string
+        }
+        Insert: {
+          controls?: string | null
+          created_at?: string
+          created_by?: string | null
+          hazards?: string | null
+          id?: string
+          job_steps?: string | null
+          job_title: string
+          jsa_date?: string
+          location?: string | null
+          notes?: string | null
+          prepared_by?: string | null
+          required_ppe?: string | null
+          updated_at?: string
+        }
+        Update: {
+          controls?: string | null
+          created_at?: string
+          created_by?: string | null
+          hazards?: string | null
+          id?: string
+          job_steps?: string | null
+          job_title?: string
+          jsa_date?: string
+          location?: string | null
+          notes?: string | null
+          prepared_by?: string | null
+          required_ppe?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       maintenance_records: {
         Row: {
           asset: string
