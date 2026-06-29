@@ -29,6 +29,7 @@ import { Route as CertificationsRouteImport } from './routes/certifications'
 import { Route as DriverQualificationsRouteImport } from './routes/driver-qualifications'
 import { Route as ToolboxTalksRouteImport } from './routes/toolbox-talks'
 import { Route as JobSafetyAnalysesRouteImport } from './routes/job-safety-analyses'
+import { Route as SubcontractorPrequalRouteImport } from './routes/subcontractor-prequal'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -133,6 +134,11 @@ const JobSafetyAnalysesRoute = JobSafetyAnalysesRouteImport.update({
   path: '/job-safety-analyses',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SubcontractorPrequalRoute = SubcontractorPrequalRouteImport.update({
+  id: '/subcontractor-prequal',
+  path: '/subcontractor-prequal',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BidsRoute = BidsRouteImport.update({
   id: '/bids',
   path: '/bids',
@@ -162,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/driver-qualifications': typeof DriverQualificationsRoute
   '/toolbox-talks': typeof ToolboxTalksRoute
   '/job-safety-analyses': typeof JobSafetyAnalysesRoute
+  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -187,6 +194,7 @@ export interface FileRoutesByTo {
   '/driver-qualifications': typeof DriverQualificationsRoute
   '/toolbox-talks': typeof ToolboxTalksRoute
   '/job-safety-analyses': typeof JobSafetyAnalysesRoute
+  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -213,6 +221,7 @@ export interface FileRoutesById {
   '/driver-qualifications': typeof DriverQualificationsRoute
   '/toolbox-talks': typeof ToolboxTalksRoute
   '/job-safety-analyses': typeof JobSafetyAnalysesRoute
+  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -240,6 +249,7 @@ export interface FileRouteTypes {
     | '/driver-qualifications'
     | '/toolbox-talks'
     | '/job-safety-analyses'
+    | '/subcontractor-prequal'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -265,6 +275,7 @@ export interface FileRouteTypes {
     | '/driver-qualifications'
     | '/toolbox-talks'
     | '/job-safety-analyses'
+    | '/subcontractor-prequal'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -290,6 +301,7 @@ export interface FileRouteTypes {
     | '/driver-qualifications'
     | '/toolbox-talks'
     | '/job-safety-analyses'
+    | '/subcontractor-prequal'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -316,6 +328,7 @@ export interface RootRouteChildren {
   DriverQualificationsRoute: typeof DriverQualificationsRoute
   ToolboxTalksRoute: typeof ToolboxTalksRoute
   JobSafetyAnalysesRoute: typeof JobSafetyAnalysesRoute
+  SubcontractorPrequalRoute: typeof SubcontractorPrequalRoute
   InspectionsRoute: typeof InspectionsRoute
   TrailerInspectionsRoute: typeof TrailerInspectionsRoute
   ProcurementRoute: typeof ProcurementRoute
@@ -464,6 +477,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JobSafetyAnalysesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/subcontractor-prequal': {
+      id: '/subcontractor-prequal'
+      path: '/subcontractor-prequal'
+      fullPath: '/subcontractor-prequal'
+      preLoaderRoute: typeof SubcontractorPrequalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/toolbox-talks': {
       id: '/toolbox-talks'
       path: '/toolbox-talks'
@@ -508,6 +528,7 @@ const rootRouteChildren: RootRouteChildren = {
   DriverQualificationsRoute: DriverQualificationsRoute,
   ToolboxTalksRoute: ToolboxTalksRoute,
   JobSafetyAnalysesRoute: JobSafetyAnalysesRoute,
+  SubcontractorPrequalRoute: SubcontractorPrequalRoute,
   InspectionsRoute: InspectionsRoute,
   TrailerInspectionsRoute: TrailerInspectionsRoute,
   ProcurementRoute: ProcurementRoute,
