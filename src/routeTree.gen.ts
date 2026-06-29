@@ -30,6 +30,7 @@ import { Route as DriverQualificationsRouteImport } from './routes/driver-qualif
 import { Route as ToolboxTalksRouteImport } from './routes/toolbox-talks'
 import { Route as JobSafetyAnalysesRouteImport } from './routes/job-safety-analyses'
 import { Route as SubcontractorPrequalRouteImport } from './routes/subcontractor-prequal'
+import { Route as Osha300RouteImport } from './routes/osha300'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
@@ -139,6 +140,11 @@ const SubcontractorPrequalRoute = SubcontractorPrequalRouteImport.update({
   path: '/subcontractor-prequal',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Osha300Route = Osha300RouteImport.update({
+  id: '/osha300',
+  path: '/osha300',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BidsRoute = BidsRouteImport.update({
   id: '/bids',
   path: '/bids',
@@ -169,6 +175,7 @@ export interface FileRoutesByFullPath {
   '/toolbox-talks': typeof ToolboxTalksRoute
   '/job-safety-analyses': typeof JobSafetyAnalysesRoute
   '/subcontractor-prequal': typeof SubcontractorPrequalRoute
+  '/osha300': typeof Osha300Route
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -195,6 +202,7 @@ export interface FileRoutesByTo {
   '/toolbox-talks': typeof ToolboxTalksRoute
   '/job-safety-analyses': typeof JobSafetyAnalysesRoute
   '/subcontractor-prequal': typeof SubcontractorPrequalRoute
+  '/osha300': typeof Osha300Route
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -222,6 +230,7 @@ export interface FileRoutesById {
   '/toolbox-talks': typeof ToolboxTalksRoute
   '/job-safety-analyses': typeof JobSafetyAnalysesRoute
   '/subcontractor-prequal': typeof SubcontractorPrequalRoute
+  '/osha300': typeof Osha300Route
   '/inspections': typeof InspectionsRoute
   '/trailer-inspections': typeof TrailerInspectionsRoute
   '/procurement': typeof ProcurementRoute
@@ -250,6 +259,7 @@ export interface FileRouteTypes {
     | '/toolbox-talks'
     | '/job-safety-analyses'
     | '/subcontractor-prequal'
+    | '/osha300'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -276,6 +286,7 @@ export interface FileRouteTypes {
     | '/toolbox-talks'
     | '/job-safety-analyses'
     | '/subcontractor-prequal'
+    | '/osha300'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -302,6 +313,7 @@ export interface FileRouteTypes {
     | '/toolbox-talks'
     | '/job-safety-analyses'
     | '/subcontractor-prequal'
+    | '/osha300'
     | '/inspections'
     | '/trailer-inspections'
     | '/procurement'
@@ -329,6 +341,7 @@ export interface RootRouteChildren {
   ToolboxTalksRoute: typeof ToolboxTalksRoute
   JobSafetyAnalysesRoute: typeof JobSafetyAnalysesRoute
   SubcontractorPrequalRoute: typeof SubcontractorPrequalRoute
+  Osha300Route: typeof Osha300Route
   InspectionsRoute: typeof InspectionsRoute
   TrailerInspectionsRoute: typeof TrailerInspectionsRoute
   ProcurementRoute: typeof ProcurementRoute
@@ -484,6 +497,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SubcontractorPrequalRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/osha300': {
+      id: '/osha300'
+      path: '/osha300'
+      fullPath: '/osha300'
+      preLoaderRoute: typeof Osha300RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/toolbox-talks': {
       id: '/toolbox-talks'
       path: '/toolbox-talks'
@@ -529,6 +549,7 @@ const rootRouteChildren: RootRouteChildren = {
   ToolboxTalksRoute: ToolboxTalksRoute,
   JobSafetyAnalysesRoute: JobSafetyAnalysesRoute,
   SubcontractorPrequalRoute: SubcontractorPrequalRoute,
+  Osha300Route: Osha300Route,
   InspectionsRoute: InspectionsRoute,
   TrailerInspectionsRoute: TrailerInspectionsRoute,
   ProcurementRoute: ProcurementRoute,

@@ -22,6 +22,7 @@ import {
   Megaphone,
   ListChecks,
   Handshake,
+  ClipboardList,
   Users,
   LogOut,
   LogIn,
@@ -56,6 +57,7 @@ export const NAV = [
   { to: "/toolbox-talks", label: "Toolbox Talks", icon: Megaphone },
   { to: "/job-safety-analyses", label: "Job Safety Analysis", icon: ListChecks },
   { to: "/subcontractor-prequal", label: "Subcontractor Prequal", icon: Handshake },
+  { to: "/osha300", label: "OSHA 300 Log", icon: ClipboardList },
 ] as const;
 
 function isActivePath(pathname: string, to: string) {
