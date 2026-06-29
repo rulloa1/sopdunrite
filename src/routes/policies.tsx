@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ShieldCheck, FlaskRound, Truck } from "lucide-react";
+import { ShieldCheck, FlaskRound, Truck, HardHat } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { RequireAuth } from "@/components/RequireAuth";
 import { PageHeader } from "@/components/PageHeader";
@@ -171,6 +171,49 @@ const POLICIES: Policy[] = [
     ],
     acknowledgment:
       "Drivers acknowledge the fleet rules on the Driver Agreement & MVR Authorization form (see Handbook Forms).",
+  },
+  {
+    id: "fall-protection",
+    label: "Fall Protection",
+    title: "Fall Protection Program",
+    icon: HardHat,
+    intro: `Falls are a leading cause of serious injury in construction. ${COMPANY} maintains this Fall Protection Program to protect employees from fall hazards, consistent with OSHA's construction fall-protection requirements (29 CFR 1926 Subpart M). It applies to all work where employees are exposed to a fall, and a competent person oversees its implementation on each project.`,
+    sections: [
+      {
+        title: "1. Policy & Trigger Heights",
+        body: `Fall protection is provided and used whenever an employee is exposed to a fall to a lower level. As a general rule, protection is required at 6 feet or more in construction work; protection is also required, regardless of height, when working above dangerous equipment, near unprotected leading edges, holes, excavations, or other recognized fall hazards.`,
+      },
+      {
+        title: "2. Competent Person",
+        body: `A designated competent person [insert name/title] — someone capable of identifying fall hazards and authorized to take prompt corrective action — selects the appropriate fall-protection methods for each task, inspects systems and equipment, and oversees their use on site.`,
+      },
+      {
+        title: "3. Hazard Assessment & Methods",
+        body: `Before work begins, fall hazards are assessed and controlled using, in order of preference: guardrail systems, safety net systems, or personal fall arrest systems (PFAS). Covers, hole protection, warning lines, and controlled-access zones are used where applicable. The selected method is documented in the task plan.`,
+      },
+      {
+        title: "4. Personal Fall Arrest Systems",
+        body: `Where PFAS are used, employees wear a full-body harness connected by a lanyard or self-retracting lifeline to a suitable anchorage capable of supporting the required load. Components are compatible and used per the manufacturer's instructions. Systems are rigged so that an employee cannot free-fall more than the allowed distance or contact a lower level.`,
+      },
+      {
+        title: "5. Inspection & Maintenance",
+        body: `Employees inspect their harnesses, lanyards, connectors, and anchorages before each use; the competent person performs periodic inspections. Any equipment that is damaged, deformed, or has been subjected to a fall is removed from service immediately and destroyed or returned to the manufacturer.`,
+      },
+      {
+        title: "6. Training",
+        body: `Employees exposed to fall hazards are trained by a competent person to recognize fall hazards and to correctly use the fall-protection systems for their work, before they are assigned to such work. Retraining is provided when work conditions change, when equipment changes, or when an employee's understanding appears inadequate.`,
+      },
+      {
+        title: "7. Rescue & Emergency Procedures",
+        body: `A prompt rescue plan is in place for any employee who falls and is suspended in a harness, to address suspension trauma. Employees are trained to summon help and, where provided, to use self-rescue or assisted-rescue equipment. Emergency contacts and procedures are reviewed before work at height begins.`,
+      },
+      {
+        title: "8. Accountability & Review",
+        body: `Use of required fall protection is mandatory; failure to use it may result in disciplinary action up to and including termination. Fall incidents and near misses are investigated through the Incident & Accident process, and this program is reviewed periodically and updated as conditions, equipment, or regulations change.`,
+      },
+    ],
+    acknowledgment:
+      "Fall-protection training is recorded on the Training & Certifications log; the broader safety acknowledgment is on the Handbook Forms page.",
   },
 ];
 
