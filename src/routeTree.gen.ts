@@ -9,8 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrailerInspectionsRouteImport } from './routes/trailer-inspections'
+import { Route as ToolboxTalksRouteImport } from './routes/toolbox-talks'
 import { Route as TeamRouteImport } from './routes/team'
 import { Route as SubmittalsRouteImport } from './routes/submittals'
+import { Route as SubcontractorPrequalRouteImport } from './routes/subcontractor-prequal'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 import { Route as RfisRouteImport } from './routes/rfis'
@@ -18,23 +21,30 @@ import { Route as PurchasingRouteImport } from './routes/purchasing'
 import { Route as PurchaseOrdersRouteImport } from './routes/purchase-orders'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as ProcurementRouteImport } from './routes/procurement'
+import { Route as PoliciesRouteImport } from './routes/policies'
+import { Route as Osha300RouteImport } from './routes/osha300'
+import { Route as MaintenanceRouteImport } from './routes/maintenance'
+import { Route as JobSafetyAnalysesRouteImport } from './routes/job-safety-analyses'
 import { Route as InspectionsRouteImport } from './routes/inspections'
 import { Route as IncidentsRouteImport } from './routes/incidents'
 import { Route as HazcomRouteImport } from './routes/hazcom'
-import { Route as TrailerInspectionsRouteImport } from './routes/trailer-inspections'
 import { Route as HandbookFormsRouteImport } from './routes/handbook-forms'
-import { Route as PoliciesRouteImport } from './routes/policies'
-import { Route as MaintenanceRouteImport } from './routes/maintenance'
-import { Route as CertificationsRouteImport } from './routes/certifications'
 import { Route as DriverQualificationsRouteImport } from './routes/driver-qualifications'
-import { Route as ToolboxTalksRouteImport } from './routes/toolbox-talks'
-import { Route as JobSafetyAnalysesRouteImport } from './routes/job-safety-analyses'
-import { Route as SubcontractorPrequalRouteImport } from './routes/subcontractor-prequal'
-import { Route as Osha300RouteImport } from './routes/osha300'
+import { Route as CertificationsRouteImport } from './routes/certifications'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 
+const TrailerInspectionsRoute = TrailerInspectionsRouteImport.update({
+  id: '/trailer-inspections',
+  path: '/trailer-inspections',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ToolboxTalksRoute = ToolboxTalksRouteImport.update({
+  id: '/toolbox-talks',
+  path: '/toolbox-talks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TeamRoute = TeamRouteImport.update({
   id: '/team',
   path: '/team',
@@ -43,6 +53,11 @@ const TeamRoute = TeamRouteImport.update({
 const SubmittalsRoute = SubmittalsRouteImport.update({
   id: '/submittals',
   path: '/submittals',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubcontractorPrequalRoute = SubcontractorPrequalRouteImport.update({
+  id: '/subcontractor-prequal',
+  path: '/subcontractor-prequal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -80,6 +95,26 @@ const ProcurementRoute = ProcurementRouteImport.update({
   path: '/procurement',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PoliciesRoute = PoliciesRouteImport.update({
+  id: '/policies',
+  path: '/policies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Osha300Route = Osha300RouteImport.update({
+  id: '/osha300',
+  path: '/osha300',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MaintenanceRoute = MaintenanceRouteImport.update({
+  id: '/maintenance',
+  path: '/maintenance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JobSafetyAnalysesRoute = JobSafetyAnalysesRouteImport.update({
+  id: '/job-safety-analyses',
+  path: '/job-safety-analyses',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InspectionsRoute = InspectionsRouteImport.update({
   id: '/inspections',
   path: '/inspections',
@@ -95,29 +130,9 @@ const HazcomRoute = HazcomRouteImport.update({
   path: '/hazcom',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TrailerInspectionsRoute = TrailerInspectionsRouteImport.update({
-  id: '/trailer-inspections',
-  path: '/trailer-inspections',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const HandbookFormsRoute = HandbookFormsRouteImport.update({
   id: '/handbook-forms',
   path: '/handbook-forms',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PoliciesRoute = PoliciesRouteImport.update({
-  id: '/policies',
-  path: '/policies',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MaintenanceRoute = MaintenanceRouteImport.update({
-  id: '/maintenance',
-  path: '/maintenance',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CertificationsRoute = CertificationsRouteImport.update({
-  id: '/certifications',
-  path: '/certifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DriverQualificationsRoute = DriverQualificationsRouteImport.update({
@@ -125,24 +140,9 @@ const DriverQualificationsRoute = DriverQualificationsRouteImport.update({
   path: '/driver-qualifications',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ToolboxTalksRoute = ToolboxTalksRouteImport.update({
-  id: '/toolbox-talks',
-  path: '/toolbox-talks',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const JobSafetyAnalysesRoute = JobSafetyAnalysesRouteImport.update({
-  id: '/job-safety-analyses',
-  path: '/job-safety-analyses',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SubcontractorPrequalRoute = SubcontractorPrequalRouteImport.update({
-  id: '/subcontractor-prequal',
-  path: '/subcontractor-prequal',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const Osha300Route = Osha300RouteImport.update({
-  id: '/osha300',
-  path: '/osha300',
+const CertificationsRoute = CertificationsRouteImport.update({
+  id: '/certifications',
+  path: '/certifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BidsRoute = BidsRouteImport.update({
@@ -165,19 +165,16 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
-  '/incidents': typeof IncidentsRoute
-  '/hazcom': typeof HazcomRoute
-  '/handbook-forms': typeof HandbookFormsRoute
-  '/policies': typeof PoliciesRoute
-  '/maintenance': typeof MaintenanceRoute
   '/certifications': typeof CertificationsRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
-  '/toolbox-talks': typeof ToolboxTalksRoute
-  '/job-safety-analyses': typeof JobSafetyAnalysesRoute
-  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
-  '/osha300': typeof Osha300Route
+  '/handbook-forms': typeof HandbookFormsRoute
+  '/hazcom': typeof HazcomRoute
+  '/incidents': typeof IncidentsRoute
   '/inspections': typeof InspectionsRoute
-  '/trailer-inspections': typeof TrailerInspectionsRoute
+  '/job-safety-analyses': typeof JobSafetyAnalysesRoute
+  '/maintenance': typeof MaintenanceRoute
+  '/osha300': typeof Osha300Route
+  '/policies': typeof PoliciesRoute
   '/procurement': typeof ProcurementRoute
   '/projects': typeof ProjectsRoute
   '/purchase-orders': typeof PurchaseOrdersRoute
@@ -185,26 +182,26 @@ export interface FileRoutesByFullPath {
   '/rfis': typeof RfisRoute
   '/schedule': typeof ScheduleRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
   '/submittals': typeof SubmittalsRoute
   '/team': typeof TeamRoute
+  '/toolbox-talks': typeof ToolboxTalksRoute
+  '/trailer-inspections': typeof TrailerInspectionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
-  '/incidents': typeof IncidentsRoute
-  '/hazcom': typeof HazcomRoute
-  '/handbook-forms': typeof HandbookFormsRoute
-  '/policies': typeof PoliciesRoute
-  '/maintenance': typeof MaintenanceRoute
   '/certifications': typeof CertificationsRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
-  '/toolbox-talks': typeof ToolboxTalksRoute
-  '/job-safety-analyses': typeof JobSafetyAnalysesRoute
-  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
-  '/osha300': typeof Osha300Route
+  '/handbook-forms': typeof HandbookFormsRoute
+  '/hazcom': typeof HazcomRoute
+  '/incidents': typeof IncidentsRoute
   '/inspections': typeof InspectionsRoute
-  '/trailer-inspections': typeof TrailerInspectionsRoute
+  '/job-safety-analyses': typeof JobSafetyAnalysesRoute
+  '/maintenance': typeof MaintenanceRoute
+  '/osha300': typeof Osha300Route
+  '/policies': typeof PoliciesRoute
   '/procurement': typeof ProcurementRoute
   '/projects': typeof ProjectsRoute
   '/purchase-orders': typeof PurchaseOrdersRoute
@@ -212,27 +209,27 @@ export interface FileRoutesByTo {
   '/rfis': typeof RfisRoute
   '/schedule': typeof ScheduleRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
   '/submittals': typeof SubmittalsRoute
   '/team': typeof TeamRoute
+  '/toolbox-talks': typeof ToolboxTalksRoute
+  '/trailer-inspections': typeof TrailerInspectionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
-  '/incidents': typeof IncidentsRoute
-  '/hazcom': typeof HazcomRoute
-  '/handbook-forms': typeof HandbookFormsRoute
-  '/policies': typeof PoliciesRoute
-  '/maintenance': typeof MaintenanceRoute
   '/certifications': typeof CertificationsRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
-  '/toolbox-talks': typeof ToolboxTalksRoute
-  '/job-safety-analyses': typeof JobSafetyAnalysesRoute
-  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
-  '/osha300': typeof Osha300Route
+  '/handbook-forms': typeof HandbookFormsRoute
+  '/hazcom': typeof HazcomRoute
+  '/incidents': typeof IncidentsRoute
   '/inspections': typeof InspectionsRoute
-  '/trailer-inspections': typeof TrailerInspectionsRoute
+  '/job-safety-analyses': typeof JobSafetyAnalysesRoute
+  '/maintenance': typeof MaintenanceRoute
+  '/osha300': typeof Osha300Route
+  '/policies': typeof PoliciesRoute
   '/procurement': typeof ProcurementRoute
   '/projects': typeof ProjectsRoute
   '/purchase-orders': typeof PurchaseOrdersRoute
@@ -240,8 +237,11 @@ export interface FileRoutesById {
   '/rfis': typeof RfisRoute
   '/schedule': typeof ScheduleRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/subcontractor-prequal': typeof SubcontractorPrequalRoute
   '/submittals': typeof SubmittalsRoute
   '/team': typeof TeamRoute
+  '/toolbox-talks': typeof ToolboxTalksRoute
+  '/trailer-inspections': typeof TrailerInspectionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -249,19 +249,16 @@ export interface FileRouteTypes {
     | '/'
     | '/auth'
     | '/bids'
-    | '/incidents'
-    | '/hazcom'
-    | '/handbook-forms'
-    | '/policies'
-    | '/maintenance'
     | '/certifications'
     | '/driver-qualifications'
-    | '/toolbox-talks'
-    | '/job-safety-analyses'
-    | '/subcontractor-prequal'
-    | '/osha300'
+    | '/handbook-forms'
+    | '/hazcom'
+    | '/incidents'
     | '/inspections'
-    | '/trailer-inspections'
+    | '/job-safety-analyses'
+    | '/maintenance'
+    | '/osha300'
+    | '/policies'
     | '/procurement'
     | '/projects'
     | '/purchase-orders'
@@ -269,26 +266,26 @@ export interface FileRouteTypes {
     | '/rfis'
     | '/schedule'
     | '/sitemap.xml'
+    | '/subcontractor-prequal'
     | '/submittals'
     | '/team'
+    | '/toolbox-talks'
+    | '/trailer-inspections'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
     | '/bids'
-    | '/incidents'
-    | '/hazcom'
-    | '/handbook-forms'
-    | '/policies'
-    | '/maintenance'
     | '/certifications'
     | '/driver-qualifications'
-    | '/toolbox-talks'
-    | '/job-safety-analyses'
-    | '/subcontractor-prequal'
-    | '/osha300'
+    | '/handbook-forms'
+    | '/hazcom'
+    | '/incidents'
     | '/inspections'
-    | '/trailer-inspections'
+    | '/job-safety-analyses'
+    | '/maintenance'
+    | '/osha300'
+    | '/policies'
     | '/procurement'
     | '/projects'
     | '/purchase-orders'
@@ -296,26 +293,26 @@ export interface FileRouteTypes {
     | '/rfis'
     | '/schedule'
     | '/sitemap.xml'
+    | '/subcontractor-prequal'
     | '/submittals'
     | '/team'
+    | '/toolbox-talks'
+    | '/trailer-inspections'
   id:
     | '__root__'
     | '/'
     | '/auth'
     | '/bids'
-    | '/incidents'
-    | '/hazcom'
-    | '/handbook-forms'
-    | '/policies'
-    | '/maintenance'
     | '/certifications'
     | '/driver-qualifications'
-    | '/toolbox-talks'
-    | '/job-safety-analyses'
-    | '/subcontractor-prequal'
-    | '/osha300'
+    | '/handbook-forms'
+    | '/hazcom'
+    | '/incidents'
     | '/inspections'
-    | '/trailer-inspections'
+    | '/job-safety-analyses'
+    | '/maintenance'
+    | '/osha300'
+    | '/policies'
     | '/procurement'
     | '/projects'
     | '/purchase-orders'
@@ -323,27 +320,27 @@ export interface FileRouteTypes {
     | '/rfis'
     | '/schedule'
     | '/sitemap.xml'
+    | '/subcontractor-prequal'
     | '/submittals'
     | '/team'
+    | '/toolbox-talks'
+    | '/trailer-inspections'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRoute
   BidsRoute: typeof BidsRoute
-  IncidentsRoute: typeof IncidentsRoute
-  HazcomRoute: typeof HazcomRoute
-  HandbookFormsRoute: typeof HandbookFormsRoute
-  PoliciesRoute: typeof PoliciesRoute
-  MaintenanceRoute: typeof MaintenanceRoute
   CertificationsRoute: typeof CertificationsRoute
   DriverQualificationsRoute: typeof DriverQualificationsRoute
-  ToolboxTalksRoute: typeof ToolboxTalksRoute
-  JobSafetyAnalysesRoute: typeof JobSafetyAnalysesRoute
-  SubcontractorPrequalRoute: typeof SubcontractorPrequalRoute
-  Osha300Route: typeof Osha300Route
+  HandbookFormsRoute: typeof HandbookFormsRoute
+  HazcomRoute: typeof HazcomRoute
+  IncidentsRoute: typeof IncidentsRoute
   InspectionsRoute: typeof InspectionsRoute
-  TrailerInspectionsRoute: typeof TrailerInspectionsRoute
+  JobSafetyAnalysesRoute: typeof JobSafetyAnalysesRoute
+  MaintenanceRoute: typeof MaintenanceRoute
+  Osha300Route: typeof Osha300Route
+  PoliciesRoute: typeof PoliciesRoute
   ProcurementRoute: typeof ProcurementRoute
   ProjectsRoute: typeof ProjectsRoute
   PurchaseOrdersRoute: typeof PurchaseOrdersRoute
@@ -351,12 +348,29 @@ export interface RootRouteChildren {
   RfisRoute: typeof RfisRoute
   ScheduleRoute: typeof ScheduleRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SubcontractorPrequalRoute: typeof SubcontractorPrequalRoute
   SubmittalsRoute: typeof SubmittalsRoute
   TeamRoute: typeof TeamRoute
+  ToolboxTalksRoute: typeof ToolboxTalksRoute
+  TrailerInspectionsRoute: typeof TrailerInspectionsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trailer-inspections': {
+      id: '/trailer-inspections'
+      path: '/trailer-inspections'
+      fullPath: '/trailer-inspections'
+      preLoaderRoute: typeof TrailerInspectionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/toolbox-talks': {
+      id: '/toolbox-talks'
+      path: '/toolbox-talks'
+      fullPath: '/toolbox-talks'
+      preLoaderRoute: typeof ToolboxTalksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/team': {
       id: '/team'
       path: '/team'
@@ -369,6 +383,13 @@ declare module '@tanstack/react-router' {
       path: '/submittals'
       fullPath: '/submittals'
       preLoaderRoute: typeof SubmittalsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subcontractor-prequal': {
+      id: '/subcontractor-prequal'
+      path: '/subcontractor-prequal'
+      fullPath: '/subcontractor-prequal'
+      preLoaderRoute: typeof SubcontractorPrequalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -420,6 +441,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProcurementRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/policies': {
+      id: '/policies'
+      path: '/policies'
+      fullPath: '/policies'
+      preLoaderRoute: typeof PoliciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/osha300': {
+      id: '/osha300'
+      path: '/osha300'
+      fullPath: '/osha300'
+      preLoaderRoute: typeof Osha300RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/maintenance': {
+      id: '/maintenance'
+      path: '/maintenance'
+      fullPath: '/maintenance'
+      preLoaderRoute: typeof MaintenanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/job-safety-analyses': {
+      id: '/job-safety-analyses'
+      path: '/job-safety-analyses'
+      fullPath: '/job-safety-analyses'
+      preLoaderRoute: typeof JobSafetyAnalysesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/inspections': {
       id: '/inspections'
       path: '/inspections'
@@ -441,39 +490,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HazcomRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/trailer-inspections': {
-      id: '/trailer-inspections'
-      path: '/trailer-inspections'
-      fullPath: '/trailer-inspections'
-      preLoaderRoute: typeof TrailerInspectionsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/handbook-forms': {
       id: '/handbook-forms'
       path: '/handbook-forms'
       fullPath: '/handbook-forms'
       preLoaderRoute: typeof HandbookFormsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/policies': {
-      id: '/policies'
-      path: '/policies'
-      fullPath: '/policies'
-      preLoaderRoute: typeof PoliciesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/maintenance': {
-      id: '/maintenance'
-      path: '/maintenance'
-      fullPath: '/maintenance'
-      preLoaderRoute: typeof MaintenanceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/certifications': {
-      id: '/certifications'
-      path: '/certifications'
-      fullPath: '/certifications'
-      preLoaderRoute: typeof CertificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/driver-qualifications': {
@@ -483,32 +504,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverQualificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/job-safety-analyses': {
-      id: '/job-safety-analyses'
-      path: '/job-safety-analyses'
-      fullPath: '/job-safety-analyses'
-      preLoaderRoute: typeof JobSafetyAnalysesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/subcontractor-prequal': {
-      id: '/subcontractor-prequal'
-      path: '/subcontractor-prequal'
-      fullPath: '/subcontractor-prequal'
-      preLoaderRoute: typeof SubcontractorPrequalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/osha300': {
-      id: '/osha300'
-      path: '/osha300'
-      fullPath: '/osha300'
-      preLoaderRoute: typeof Osha300RouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/toolbox-talks': {
-      id: '/toolbox-talks'
-      path: '/toolbox-talks'
-      fullPath: '/toolbox-talks'
-      preLoaderRoute: typeof ToolboxTalksRouteImport
+    '/certifications': {
+      id: '/certifications'
+      path: '/certifications'
+      fullPath: '/certifications'
+      preLoaderRoute: typeof CertificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bids': {
@@ -539,19 +539,16 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRoute,
   BidsRoute: BidsRoute,
-  IncidentsRoute: IncidentsRoute,
-  HazcomRoute: HazcomRoute,
-  HandbookFormsRoute: HandbookFormsRoute,
-  PoliciesRoute: PoliciesRoute,
-  MaintenanceRoute: MaintenanceRoute,
   CertificationsRoute: CertificationsRoute,
   DriverQualificationsRoute: DriverQualificationsRoute,
-  ToolboxTalksRoute: ToolboxTalksRoute,
-  JobSafetyAnalysesRoute: JobSafetyAnalysesRoute,
-  SubcontractorPrequalRoute: SubcontractorPrequalRoute,
-  Osha300Route: Osha300Route,
+  HandbookFormsRoute: HandbookFormsRoute,
+  HazcomRoute: HazcomRoute,
+  IncidentsRoute: IncidentsRoute,
   InspectionsRoute: InspectionsRoute,
-  TrailerInspectionsRoute: TrailerInspectionsRoute,
+  JobSafetyAnalysesRoute: JobSafetyAnalysesRoute,
+  MaintenanceRoute: MaintenanceRoute,
+  Osha300Route: Osha300Route,
+  PoliciesRoute: PoliciesRoute,
   ProcurementRoute: ProcurementRoute,
   ProjectsRoute: ProjectsRoute,
   PurchaseOrdersRoute: PurchaseOrdersRoute,
@@ -559,8 +556,11 @@ const rootRouteChildren: RootRouteChildren = {
   RfisRoute: RfisRoute,
   ScheduleRoute: ScheduleRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SubcontractorPrequalRoute: SubcontractorPrequalRoute,
   SubmittalsRoute: SubmittalsRoute,
   TeamRoute: TeamRoute,
+  ToolboxTalksRoute: ToolboxTalksRoute,
+  TrailerInspectionsRoute: TrailerInspectionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
