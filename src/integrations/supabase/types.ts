@@ -14,6 +14,63 @@ export type Database = {
   }
   public: {
     Tables: {
+      osha300_log: {
+        Row: {
+          case_number: string | null
+          classification: string
+          created_at: string
+          created_by: string | null
+          days_away: number
+          days_restricted: number
+          employee_name: string
+          id: string
+          incident_date: string
+          injury_description: string | null
+          injury_type: string
+          job_title: string | null
+          location: string | null
+          notes: string | null
+          privacy_case: boolean
+          updated_at: string
+        }
+        Insert: {
+          case_number?: string | null
+          classification?: string
+          created_at?: string
+          created_by?: string | null
+          days_away?: number
+          days_restricted?: number
+          employee_name: string
+          id?: string
+          incident_date?: string
+          injury_description?: string | null
+          injury_type?: string
+          job_title?: string | null
+          location?: string | null
+          notes?: string | null
+          privacy_case?: boolean
+          updated_at?: string
+        }
+        Update: {
+          case_number?: string | null
+          classification?: string
+          created_at?: string
+          created_by?: string | null
+          days_away?: number
+          days_restricted?: number
+          employee_name?: string
+          id?: string
+          incident_date?: string
+          injury_description?: string | null
+          injury_type?: string
+          job_title?: string | null
+          location?: string | null
+          notes?: string | null
+          privacy_case?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
       job_safety_analyses: {
         Row: {
           controls: string | null
