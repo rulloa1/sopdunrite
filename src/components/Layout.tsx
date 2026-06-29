@@ -20,6 +20,7 @@ import {
   Award,
   IdCard,
   Megaphone,
+  ListChecks,
   Users,
   LogOut,
   LogIn,
@@ -52,6 +53,7 @@ export const NAV = [
   { to: "/certifications", label: "Training & Certs", icon: Award },
   { to: "/driver-qualifications", label: "Driver Qualifications", icon: IdCard },
   { to: "/toolbox-talks", label: "Toolbox Talks", icon: Megaphone },
+  { to: "/job-safety-analyses", label: "Job Safety Analysis", icon: ListChecks },
 ] as const;
 
 function isActivePath(pathname: string, to: string) {
