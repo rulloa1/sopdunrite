@@ -156,7 +156,7 @@ export type Database = {
       }
       handbook_acknowledgments: {
         Row: {
-          acknowledged_date: string | null
+          acknowledged_date: string
           created_at: string
           created_by: string | null
           employee_name: string
@@ -168,7 +168,7 @@ export type Database = {
           updated_at: string
         }
         Insert: {
-          acknowledged_date?: string | null
+          acknowledged_date?: string
           created_at?: string
           created_by?: string | null
           employee_name: string
@@ -180,7 +180,7 @@ export type Database = {
           updated_at?: string
         }
         Update: {
-          acknowledged_date?: string | null
+          acknowledged_date?: string
           created_at?: string
           created_by?: string | null
           employee_name?: string
@@ -248,9 +248,9 @@ export type Database = {
           created_by: string | null
           damage_description: string | null
           description: string
-          equipment_ownership: string | null
+          equipment_ownership: string
           id: string
-          incident_date: string | null
+          incident_date: string
           incident_time: string | null
           injuries: boolean
           injury_description: string | null
@@ -258,7 +258,8 @@ export type Database = {
           people_involved: string | null
           property_damage: boolean
           report_type: string
-          status: string | null
+          reported_by: string | null
+          status: string
           updated_at: string
           vehicle: string | null
           witnesses: string | null
@@ -269,9 +270,9 @@ export type Database = {
           created_by?: string | null
           damage_description?: string | null
           description: string
-          equipment_ownership?: string | null
+          equipment_ownership?: string
           id?: string
-          incident_date?: string | null
+          incident_date?: string
           incident_time?: string | null
           injuries?: boolean
           injury_description?: string | null
@@ -279,7 +280,8 @@ export type Database = {
           people_involved?: string | null
           property_damage?: boolean
           report_type: string
-          status?: string | null
+          reported_by?: string | null
+          status?: string
           updated_at?: string
           vehicle?: string | null
           witnesses?: string | null
@@ -290,9 +292,9 @@ export type Database = {
           created_by?: string | null
           damage_description?: string | null
           description?: string
-          equipment_ownership?: string | null
+          equipment_ownership?: string
           id?: string
-          incident_date?: string | null
+          incident_date?: string
           incident_time?: string | null
           injuries?: boolean
           injury_description?: string | null
@@ -300,7 +302,8 @@ export type Database = {
           people_involved?: string | null
           property_damage?: boolean
           report_type?: string
-          status?: string | null
+          reported_by?: string | null
+          status?: string
           updated_at?: string
           vehicle?: string | null
           witnesses?: string | null
@@ -316,7 +319,7 @@ export type Database = {
           id: string
           job_steps: string | null
           job_title: string
-          jsa_date: string | null
+          jsa_date: string
           location: string | null
           notes: string | null
           prepared_by: string | null
@@ -331,7 +334,7 @@ export type Database = {
           id?: string
           job_steps?: string | null
           job_title: string
-          jsa_date?: string | null
+          jsa_date?: string
           location?: string | null
           notes?: string | null
           prepared_by?: string | null
@@ -346,7 +349,7 @@ export type Database = {
           id?: string
           job_steps?: string | null
           job_title?: string
-          jsa_date?: string | null
+          jsa_date?: string
           location?: string | null
           notes?: string | null
           prepared_by?: string | null
@@ -358,7 +361,7 @@ export type Database = {
       maintenance_records: {
         Row: {
           asset: string
-          asset_type: string | null
+          asset_type: string
           completed_date: string | null
           cost: number | null
           created_at: string
@@ -367,15 +370,15 @@ export type Database = {
           id: string
           notes: string | null
           odometer_hours: string | null
-          reported_date: string | null
-          service_type: string | null
-          status: string | null
+          reported_date: string
+          service_type: string
+          status: string
           updated_at: string
           vendor: string | null
         }
         Insert: {
           asset: string
-          asset_type?: string | null
+          asset_type?: string
           completed_date?: string | null
           cost?: number | null
           created_at?: string
@@ -384,15 +387,15 @@ export type Database = {
           id?: string
           notes?: string | null
           odometer_hours?: string | null
-          reported_date?: string | null
-          service_type?: string | null
-          status?: string | null
+          reported_date?: string
+          service_type?: string
+          status?: string
           updated_at?: string
           vendor?: string | null
         }
         Update: {
           asset?: string
-          asset_type?: string | null
+          asset_type?: string
           completed_date?: string | null
           cost?: number | null
           created_at?: string
@@ -401,11 +404,68 @@ export type Database = {
           id?: string
           notes?: string | null
           odometer_hours?: string | null
-          reported_date?: string | null
-          service_type?: string | null
-          status?: string | null
+          reported_date?: string
+          service_type?: string
+          status?: string
           updated_at?: string
           vendor?: string | null
+        }
+        Relationships: []
+      }
+      osha300_log: {
+        Row: {
+          case_number: string | null
+          classification: string
+          created_at: string
+          created_by: string | null
+          days_away: number
+          days_restricted: number
+          employee_name: string
+          id: string
+          incident_date: string
+          injury_description: string | null
+          injury_type: string
+          job_title: string | null
+          location: string | null
+          notes: string | null
+          privacy_case: boolean
+          updated_at: string
+        }
+        Insert: {
+          case_number?: string | null
+          classification?: string
+          created_at?: string
+          created_by?: string | null
+          days_away?: number
+          days_restricted?: number
+          employee_name: string
+          id?: string
+          incident_date?: string
+          injury_description?: string | null
+          injury_type?: string
+          job_title?: string | null
+          location?: string | null
+          notes?: string | null
+          privacy_case?: boolean
+          updated_at?: string
+        }
+        Update: {
+          case_number?: string | null
+          classification?: string
+          created_at?: string
+          created_by?: string | null
+          days_away?: number
+          days_restricted?: number
+          employee_name?: string
+          id?: string
+          incident_date?: string
+          injury_description?: string | null
+          injury_type?: string
+          job_title?: string | null
+          location?: string | null
+          notes?: string | null
+          privacy_case?: boolean
+          updated_at?: string
         }
         Relationships: []
       }
@@ -653,8 +713,10 @@ export type Database = {
           assigned_to: string | null
           bid_due_date: string | null
           client: string | null
+          contract_completion: string | null
           created_at: string
           created_by: string | null
+          current_completion: string | null
           id: string
           location: string | null
           name: string
@@ -668,8 +730,10 @@ export type Database = {
           assigned_to?: string | null
           bid_due_date?: string | null
           client?: string | null
+          contract_completion?: string | null
           created_at?: string
           created_by?: string | null
+          current_completion?: string | null
           id?: string
           location?: string | null
           name: string
@@ -683,8 +747,10 @@ export type Database = {
           assigned_to?: string | null
           bid_due_date?: string | null
           client?: string | null
+          contract_completion?: string | null
           created_at?: string
           created_by?: string | null
+          current_completion?: string | null
           id?: string
           location?: string | null
           name?: string
@@ -884,7 +950,7 @@ export type Database = {
           notes: string | null
           osha_citations: string | null
           review_date: string | null
-          status: string | null
+          status: string
           trade: string | null
           updated_at: string
         }
@@ -901,7 +967,7 @@ export type Database = {
           notes?: string | null
           osha_citations?: string | null
           review_date?: string | null
-          status?: string | null
+          status?: string
           trade?: string | null
           updated_at?: string
         }
@@ -918,7 +984,7 @@ export type Database = {
           notes?: string | null
           osha_citations?: string | null
           review_date?: string | null
-          status?: string | null
+          status?: string
           trade?: string | null
           updated_at?: string
         }
@@ -988,7 +1054,7 @@ export type Database = {
           location: string | null
           notes: string | null
           presenter: string | null
-          talk_date: string | null
+          talk_date: string
           topic: string
           updated_at: string
         }
@@ -1002,7 +1068,7 @@ export type Database = {
           location?: string | null
           notes?: string | null
           presenter?: string | null
-          talk_date?: string | null
+          talk_date?: string
           topic: string
           updated_at?: string
         }
@@ -1016,7 +1082,7 @@ export type Database = {
           location?: string | null
           notes?: string | null
           presenter?: string | null
-          talk_date?: string | null
+          talk_date?: string
           topic?: string
           updated_at?: string
         }
@@ -1032,19 +1098,20 @@ export type Database = {
           defects: string | null
           frame_welds_ok: boolean
           id: string
-          inspection_date: string | null
+          inspected_by: string | null
+          inspection_date: string
           inspector_name: string | null
           landing_gear_ok: boolean
           lights_ok: boolean
           plate_registration_ok: boolean
           ramps_gates_ok: boolean
           safety_chains_ok: boolean
-          status: string | null
+          status: string
           suspension_ok: boolean
           tie_downs_ok: boolean
           tires_wheels_ok: boolean
           trailer: string
-          trailer_type: string | null
+          trailer_type: string
           updated_at: string
         }
         Insert: {
@@ -1056,19 +1123,20 @@ export type Database = {
           defects?: string | null
           frame_welds_ok?: boolean
           id?: string
-          inspection_date?: string | null
+          inspected_by?: string | null
+          inspection_date?: string
           inspector_name?: string | null
           landing_gear_ok?: boolean
           lights_ok?: boolean
           plate_registration_ok?: boolean
           ramps_gates_ok?: boolean
           safety_chains_ok?: boolean
-          status?: string | null
+          status?: string
           suspension_ok?: boolean
           tie_downs_ok?: boolean
           tires_wheels_ok?: boolean
           trailer: string
-          trailer_type?: string | null
+          trailer_type?: string
           updated_at?: string
         }
         Update: {
@@ -1080,19 +1148,20 @@ export type Database = {
           defects?: string | null
           frame_welds_ok?: boolean
           id?: string
-          inspection_date?: string | null
+          inspected_by?: string | null
+          inspection_date?: string
           inspector_name?: string | null
           landing_gear_ok?: boolean
           lights_ok?: boolean
           plate_registration_ok?: boolean
           ramps_gates_ok?: boolean
           safety_chains_ok?: boolean
-          status?: string | null
+          status?: string
           suspension_ok?: boolean
           tie_downs_ok?: boolean
           tires_wheels_ok?: boolean
           trailer?: string
-          trailer_type?: string | null
+          trailer_type?: string
           updated_at?: string
         }
         Relationships: []
@@ -1131,11 +1200,12 @@ export type Database = {
           guards_ok: boolean
           headlights_ok: boolean
           id: string
-          inspection_date: string | null
+          inspected_by: string | null
+          inspection_date: string
           inspector_name: string | null
           odometer: number | null
           running_lights_ok: boolean
-          status: string | null
+          status: string
           tires_ok: boolean
           updated_at: string
           vehicle: string
@@ -1152,11 +1222,12 @@ export type Database = {
           guards_ok?: boolean
           headlights_ok?: boolean
           id?: string
-          inspection_date?: string | null
+          inspected_by?: string | null
+          inspection_date?: string
           inspector_name?: string | null
           odometer?: number | null
           running_lights_ok?: boolean
-          status?: string | null
+          status?: string
           tires_ok?: boolean
           updated_at?: string
           vehicle: string
@@ -1173,11 +1244,12 @@ export type Database = {
           guards_ok?: boolean
           headlights_ok?: boolean
           id?: string
-          inspection_date?: string | null
+          inspected_by?: string | null
+          inspection_date?: string
           inspector_name?: string | null
           odometer?: number | null
           running_lights_ok?: boolean
-          status?: string | null
+          status?: string
           tires_ok?: boolean
           updated_at?: string
           vehicle?: string
