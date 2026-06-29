@@ -14,6 +14,261 @@ export type Database = {
   }
   public: {
     Tables: {
+      bid_logs: {
+        Row: {
+          bid_amount: number | null
+          bid_date: string | null
+          bid_number: string | null
+          contractor: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          notes: string | null
+          project_id: string
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          bid_amount?: number | null
+          bid_date?: string | null
+          bid_number?: string | null
+          contractor?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          notes?: string | null
+          project_id: string
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          bid_amount?: number | null
+          bid_date?: string | null
+          bid_number?: string | null
+          contractor?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          notes?: string | null
+          project_id?: string
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "bid_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      certifications: {
+        Row: {
+          certificate_number: string | null
+          certification: string
+          created_at: string
+          created_by: string | null
+          employee_name: string
+          expires_date: string | null
+          id: string
+          issued_date: string | null
+          issuing_organization: string | null
+          notes: string | null
+          updated_at: string
+        }
+        Insert: {
+          certificate_number?: string | null
+          certification: string
+          created_at?: string
+          created_by?: string | null
+          employee_name: string
+          expires_date?: string | null
+          id?: string
+          issued_date?: string | null
+          issuing_organization?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Update: {
+          certificate_number?: string | null
+          certification?: string
+          created_at?: string
+          created_by?: string | null
+          employee_name?: string
+          expires_date?: string | null
+          id?: string
+          issued_date?: string | null
+          issuing_organization?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      driver_qualifications: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          driver_name: string
+          endorsements: string | null
+          id: string
+          last_mvr_review: string | null
+          license_class: string | null
+          license_expires: string | null
+          license_number: string | null
+          medical_card_expires: string | null
+          notes: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          driver_name: string
+          endorsements?: string | null
+          id?: string
+          last_mvr_review?: string | null
+          license_class?: string | null
+          license_expires?: string | null
+          license_number?: string | null
+          medical_card_expires?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          driver_name?: string
+          endorsements?: string | null
+          id?: string
+          last_mvr_review?: string | null
+          license_class?: string | null
+          license_expires?: string | null
+          license_number?: string | null
+          medical_card_expires?: string | null
+          notes?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      po_logs: {
+        Row: {
+          amount: number | null
+          created_at: string
+          created_by: string | null
+          delivery_date: string | null
+          description: string | null
+          id: string
+          notes: string | null
+          po_date: string | null
+          po_number: string | null
+          project_id: string
+          status: string | null
+          updated_at: string
+          vendor: string | null
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string
+          created_by?: string | null
+          delivery_date?: string | null
+          description?: string | null
+          id?: string
+          notes?: string | null
+          po_date?: string | null
+          po_number?: string | null
+          project_id: string
+          status?: string | null
+          updated_at?: string
+          vendor?: string | null
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string
+          created_by?: string | null
+          delivery_date?: string | null
+          description?: string | null
+          id?: string
+          notes?: string | null
+          po_date?: string | null
+          po_number?: string | null
+          project_id?: string
+          status?: string | null
+          updated_at?: string
+          vendor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "po_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      procurement_items: {
+        Row: {
+          committed: boolean
+          created_at: string
+          created_by: string | null
+          expected_delivery: string | null
+          id: string
+          item: string
+          notes: string | null
+          po_number: string | null
+          project_id: string
+          purchased: boolean
+          sort_order: number | null
+          status: string | null
+          updated_at: string
+          vendor: string | null
+        }
+        Insert: {
+          committed?: boolean
+          created_at?: string
+          created_by?: string | null
+          expected_delivery?: string | null
+          id?: string
+          item: string
+          notes?: string | null
+          po_number?: string | null
+          project_id: string
+          purchased?: boolean
+          sort_order?: number | null
+          status?: string | null
+          updated_at?: string
+          vendor?: string | null
+        }
+        Update: {
+          committed?: boolean
+          created_at?: string
+          created_by?: string | null
+          expected_delivery?: string | null
+          id?: string
+          item?: string
+          notes?: string | null
+          po_number?: string | null
+          project_id?: string
+          purchased?: boolean
+          sort_order?: number | null
+          status?: string | null
+          updated_at?: string
+          vendor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "procurement_items_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           created_at: string
@@ -88,6 +343,56 @@ export type Database = {
           },
         ]
       }
+      project_milestones: {
+        Row: {
+          actual: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          name: string
+          notes: string | null
+          project_id: string
+          scheduled: string | null
+          sort_order: number | null
+          status: string | null
+          updated_at: string
+        }
+        Insert: {
+          actual?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name: string
+          notes?: string | null
+          project_id: string
+          scheduled?: string | null
+          sort_order?: number | null
+          status?: string | null
+          updated_at?: string
+        }
+        Update: {
+          actual?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          name?: string
+          notes?: string | null
+          project_id?: string
+          scheduled?: string | null
+          sort_order?: number | null
+          status?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_milestones_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       projects: {
         Row: {
           assigned_to: string | null
@@ -135,6 +440,233 @@ export type Database = {
           value?: number
         }
         Relationships: []
+      }
+      purchasing_logs: {
+        Row: {
+          contract_amount: number | null
+          contract_issued: string | null
+          contractor: string | null
+          cost_code: string | null
+          created_at: string
+          created_by: string | null
+          description: string | null
+          id: string
+          material_amount: number | null
+          noci: number | null
+          notes: string | null
+          original_budget: number | null
+          po_number: string | null
+          project_id: string
+          updated_at: string
+          vendor: string | null
+        }
+        Insert: {
+          contract_amount?: number | null
+          contract_issued?: string | null
+          contractor?: string | null
+          cost_code?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          material_amount?: number | null
+          noci?: number | null
+          notes?: string | null
+          original_budget?: number | null
+          po_number?: string | null
+          project_id: string
+          updated_at?: string
+          vendor?: string | null
+        }
+        Update: {
+          contract_amount?: number | null
+          contract_issued?: string | null
+          contractor?: string | null
+          cost_code?: string | null
+          created_at?: string
+          created_by?: string | null
+          description?: string | null
+          id?: string
+          material_amount?: number | null
+          noci?: number | null
+          notes?: string | null
+          original_budget?: number | null
+          po_number?: string | null
+          project_id?: string
+          updated_at?: string
+          vendor?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "purchasing_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      rfi_logs: {
+        Row: {
+          closed: boolean
+          cost_impact: number | null
+          created_at: string
+          created_by: string | null
+          date_received: string | null
+          date_required: string | null
+          description: string | null
+          id: string
+          issue_date: string | null
+          notes: string | null
+          project_id: string
+          rfi_number: string | null
+          updated_at: string
+        }
+        Insert: {
+          closed?: boolean
+          cost_impact?: number | null
+          created_at?: string
+          created_by?: string | null
+          date_received?: string | null
+          date_required?: string | null
+          description?: string | null
+          id?: string
+          issue_date?: string | null
+          notes?: string | null
+          project_id: string
+          rfi_number?: string | null
+          updated_at?: string
+        }
+        Update: {
+          closed?: boolean
+          cost_impact?: number | null
+          created_at?: string
+          created_by?: string | null
+          date_received?: string | null
+          date_required?: string | null
+          description?: string | null
+          id?: string
+          issue_date?: string | null
+          notes?: string | null
+          project_id?: string
+          rfi_number?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "rfi_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      schedule_delays: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          days_delayed: number | null
+          delay_description: string | null
+          id: string
+          impact: string | null
+          notes: string | null
+          original_date: string | null
+          project_id: string
+          reason: string | null
+          revised_date: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          days_delayed?: number | null
+          delay_description?: string | null
+          id?: string
+          impact?: string | null
+          notes?: string | null
+          original_date?: string | null
+          project_id: string
+          reason?: string | null
+          revised_date?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          days_delayed?: number | null
+          delay_description?: string | null
+          id?: string
+          impact?: string | null
+          notes?: string | null
+          original_date?: string | null
+          project_id?: string
+          reason?: string | null
+          revised_date?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "schedule_delays_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      submittal_logs: {
+        Row: {
+          closed: boolean
+          created_at: string
+          created_by: string | null
+          date_received: string | null
+          date_required: string | null
+          description: string | null
+          id: string
+          issue_date: string | null
+          notes: string | null
+          project_id: string
+          submittal_number: string | null
+          updated_at: string
+        }
+        Insert: {
+          closed?: boolean
+          created_at?: string
+          created_by?: string | null
+          date_received?: string | null
+          date_required?: string | null
+          description?: string | null
+          id?: string
+          issue_date?: string | null
+          notes?: string | null
+          project_id: string
+          submittal_number?: string | null
+          updated_at?: string
+        }
+        Update: {
+          closed?: boolean
+          created_at?: string
+          created_by?: string | null
+          date_received?: string | null
+          date_required?: string | null
+          description?: string | null
+          id?: string
+          issue_date?: string | null
+          notes?: string | null
+          project_id?: string
+          submittal_number?: string | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "submittal_logs_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       user_roles: {
         Row: {
