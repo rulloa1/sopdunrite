@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { ShieldCheck, FlaskRound, Truck, HardHat } from "lucide-react";
+import { ShieldCheck, FlaskRound, Truck, HardHat, Siren } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { RequireAuth } from "@/components/RequireAuth";
 import { PageHeader } from "@/components/PageHeader";
@@ -214,6 +214,57 @@ const POLICIES: Policy[] = [
     ],
     acknowledgment:
       "Fall-protection training is recorded on the Training & Certifications log; the broader safety acknowledgment is on the Handbook Forms page.",
+  },
+  {
+    id: "emergency-action",
+    label: "Emergency Action",
+    title: "Emergency Action Plan",
+    icon: Siren,
+    intro: `${COMPANY} maintains this Emergency Action Plan (EAP) so that every employee knows what to do in a fire, medical emergency, severe weather, or other event requiring evacuation or shelter. It is consistent with OSHA's emergency action plan requirements (29 CFR 1910.38, applied to construction under 1926.35) and is reviewed with employees and adapted to the specific conditions of each jobsite.`,
+    sections: [
+      {
+        title: "1. Purpose & Scope",
+        body: `This plan applies to all employees at every company facility and jobsite. Because jobsite conditions change, the competent person/supervisor on each project reviews the site-specific details — nearest exits, assembly point, and the route to the nearest hospital — with the crew before work begins and whenever conditions change.`,
+      },
+      {
+        title: "2. Reporting an Emergency & Alarm",
+        body: `Any employee who discovers a fire, injury, hazardous release, or other emergency must alert others nearby and call 911, then notify their supervisor. On jobsites without a fixed alarm, the means of alerting workers is [insert: air horn, radio call, verbal relay]. Give the dispatcher the site address, the nature of the emergency, and a callback number, and do not hang up until told to.`,
+      },
+      {
+        title: "3. Evacuation Procedures & Routes",
+        body: `When evacuation is ordered, stop work, shut down equipment if it is safe to do so, and leave by the nearest safe exit or established route. Do not use elevators/hoists during a fire. Walk — do not run — assist anyone who needs help, and move clear of the structure and emergency-vehicle access. Posted site maps show the primary and secondary routes for the current work area.`,
+      },
+      {
+        title: "4. Assembly Point & Accounting for Employees",
+        body: `After evacuating, all employees report to the designated assembly point [insert location for each site] so a head count can confirm everyone is out. Supervisors account for their crews and immediately report anyone missing to emergency responders and the site manager. No one re-enters the site until responders declare it safe.`,
+      },
+      {
+        title: "5. Employees with Critical Operations",
+        body: `Only specifically trained and assigned employees may remain to perform or shut down critical operations (such as isolating energy, securing equipment, or capping a line) before they evacuate. These duties are assigned in advance, and those employees evacuate as soon as the critical task is complete or conditions become unsafe.`,
+      },
+      {
+        title: "6. Medical & Rescue Duties",
+        body: `Employees are not expected to perform rescues beyond their training. Trained first-aid/CPR responders [insert names or "see Training & Certifications log"] render aid within their training until EMS arrives. First-aid kits and, where provided, AEDs and eyewash/emergency equipment are located at [insert locations]. For confined-space or at-height work, the separate rescue plan for that task applies.`,
+      },
+      {
+        title: "7. Fire Prevention & Extinguishers",
+        body: `Exits, electrical panels, and firefighting equipment are kept clear and accessible. Flammable and combustible materials are stored properly and hot-work areas are kept free of ignition hazards. Only employees who are trained and who judge it safe should attempt to use a portable fire extinguisher on a small, incipient fire; if there is any doubt, evacuate and let the fire department respond.`,
+      },
+      {
+        title: "8. Severe Weather & Site-Specific Events",
+        body: `For severe weather (high wind, lightning, flooding) and other site-specific hazards, employees stop exposed work and move to the designated shelter or safe area [insert location] until an all-clear is given. The supervisor monitors conditions and orders shelter or evacuation. Utility strikes, gas odors, and hazardous spills are treated as emergencies and reported immediately.`,
+      },
+      {
+        title: "9. Emergency Contacts",
+        body: `Emergency services: 911. Site manager [insert name/phone]. Safety Coordinator [insert name/phone]. Nearest hospital/urgent care [insert name, address, phone]. Utility emergency lines [insert]. A current contact list and the route to the nearest hospital are posted at the jobsite and reviewed during orientation.`,
+      },
+      {
+        title: "10. Training & Review",
+        body: `Employees are trained on this plan at hire and whenever their responsibilities or the plan change, and site-specific details are covered in jobsite orientation and toolbox talks. The plan is reviewed periodically and after any actual emergency or drill, and updated as facilities, jobsites, or staffing change.`,
+      },
+    ],
+    acknowledgment:
+      "Emergency Action Plan training is recorded on the Training & Certifications log and in toolbox-talk records; site-specific details are reviewed in jobsite orientation.",
   },
 ];
 
