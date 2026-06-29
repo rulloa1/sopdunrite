@@ -155,6 +155,51 @@ export type Database = {
         }
         Relationships: []
       }
+      toolbox_talks: {
+        Row: {
+          attendee_count: number | null
+          attendees: string | null
+          created_at: string
+          created_by: string | null
+          id: string
+          key_points: string | null
+          location: string | null
+          notes: string | null
+          presenter: string | null
+          talk_date: string
+          topic: string
+          updated_at: string
+        }
+        Insert: {
+          attendee_count?: number | null
+          attendees?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          key_points?: string | null
+          location?: string | null
+          notes?: string | null
+          presenter?: string | null
+          talk_date?: string
+          topic: string
+          updated_at?: string
+        }
+        Update: {
+          attendee_count?: number | null
+          attendees?: string | null
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          key_points?: string | null
+          location?: string | null
+          notes?: string | null
+          presenter?: string | null
+          talk_date?: string
+          topic?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       handbook_acknowledgments: {
         Row: {
           acknowledged_date: string
