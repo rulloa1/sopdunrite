@@ -125,7 +125,7 @@ function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () 
 function UserBlock() {
   const { user, role, signOut } = useAuth();
   return (
-    <div className="border-t border-sidebar-border px-4 py-4">
+    <div className="shrink-0 border-t border-sidebar-border px-4 py-4">
       {user ? (
         <div className="space-y-2">
           <div className="px-2">
