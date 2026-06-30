@@ -125,7 +125,7 @@ export const PROJECT = {
 
 export const CONTRACTOR = {
   name: "Dunrite Construction Group",
-  address: "Austin, TX",
+  address: "San Antonio, FL",
 };
 
 export const COMPANY = {
