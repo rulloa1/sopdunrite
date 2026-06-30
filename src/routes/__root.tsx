@@ -79,36 +79,26 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Longleaf Amenity Center — Dunrite Construction Group" },
+      { title: "Dun Rite Construction — Internal Dashboard" },
       {
         name: "description",
         content:
-          "Project management dashboard and standard operating procedures for Longleaf Amenity Center.",
+          "Internal SOP workbook and project management dashboard for Dun Rite Construction Group.",
       },
       { name: "author", content: "Dunrite Construction Group LLC" },
-      { property: "og:title", content: "Longleaf Amenity Center — Dunrite Construction Group" },
+      { property: "og:title", content: "Dun Rite Construction — Internal Dashboard" },
       {
         property: "og:description",
         content:
-          "Project management dashboard and standard operating procedures for Longleaf Amenity Center.",
+          "Internal SOP workbook and project management dashboard for Dun Rite Construction Group.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: "Longleaf Amenity Center — Dunrite Construction Group" },
+      { name: "twitter:title", content: "Dun Rite Construction — Internal Dashboard" },
       {
         name: "twitter:description",
         content:
-          "Project management dashboard and standard operating procedures for Longleaf Amenity Center.",
-      },
-      {
-        property: "og:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b18344b3-bad6-40ce-bbe1-0fba47cba481/id-preview-600392b4--aa68c7b0-576a-47f1-b94a-2ce5efb7ce74.lovable.app-1781303659717.png",
-      },
-      {
-        name: "twitter:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b18344b3-bad6-40ce-bbe1-0fba47cba481/id-preview-600392b4--aa68c7b0-576a-47f1-b94a-2ce5efb7ce74.lovable.app-1781303659717.png",
+          "Internal SOP workbook and project management dashboard for Dun Rite Construction Group.",
       },
     ],
     links: [
