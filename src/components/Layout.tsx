@@ -161,7 +161,7 @@ export function Layout({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen w-full bg-background">
       {/* Desktop sidebar */}
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-sidebar text-sidebar-foreground lg:flex">
-        <div className="flex items-center px-6 py-6">
+        <div className="flex shrink-0 items-center px-6 py-6">
           <LogoChip />
         </div>
         <NavLinks pathname={pathname} />
