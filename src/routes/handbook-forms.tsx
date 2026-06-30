@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canManageLogs, canDeleteLogs } from "@/lib/auth";
 import type { Database } from "@/integrations/supabase/types";
 import { formatDate } from "@/data/projectData";
+import { todayISO } from "@/lib/expiry";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -107,19 +108,12 @@ const labelOf = (key: string) => FORM_LABELS[key] ?? key;
 
 type AckRow = Database["public"]["Tables"]["handbook_acknowledgments"]["Row"];
 
-/** Local (not UTC) yyyy-mm-dd so a late-evening entry keeps today's date. */
-function today() {
-  const d = new Date();
-  const tz = d.getTimezoneOffset() * 60000;
-  return new Date(d.getTime() - tz).toISOString().slice(0, 10);
-}
-
 function buildEmptyForm() {
   return {
     id: "",
     employee_name: "",
     form_type: "handbook_receipt",
-    acknowledged_date: today(),
+    acknowledged_date: todayISO(),
     supervisor: "",
     signed_on_file: false,
     notes: "",
@@ -187,7 +181,7 @@ function HandbookForms() {
     const payload = {
       employee_name: form.employee_name.trim(),
       form_type: form.form_type,
-      acknowledged_date: form.acknowledged_date || today(),
+      acknowledged_date: form.acknowledged_date || todayISO(),
       supervisor: form.supervisor.trim() || null,
       signed_on_file: form.signed_on_file,
       notes: form.notes.trim() || null,

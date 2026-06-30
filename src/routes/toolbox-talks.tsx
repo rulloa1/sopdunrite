@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canManageLogs, canDeleteLogs } from "@/lib/auth";
 import type { Database } from "@/integrations/supabase/types";
 import { formatDate } from "@/data/projectData";
+import { todayISO } from "@/lib/expiry";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -53,18 +54,11 @@ export const Route = createFileRoute("/toolbox-talks")({
 
 type TalkRow = Database["public"]["Tables"]["toolbox_talks"]["Row"];
 
-/** yyyy-mm-dd local today, so an entry made late in the day keeps today. */
-function today() {
-  const d = new Date();
-  const tz = d.getTimezoneOffset() * 60000;
-  return new Date(d.getTime() - tz).toISOString().slice(0, 10);
-}
-
 function buildEmptyForm() {
   return {
     id: "",
     topic: "",
-    talk_date: today(),
+    talk_date: todayISO(),
     presenter: "",
     location: "",
     attendees: "",

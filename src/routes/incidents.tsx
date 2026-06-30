@@ -9,6 +9,7 @@ import { DataTable, type Column } from "@/components/DataTable";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, isAdmin } from "@/lib/auth";
 import { formatDate } from "@/data/projectData";
+import { todayISO } from "@/lib/expiry";
 import type { Database } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -91,17 +92,12 @@ const ACTION_STEPS = [
 const labelOf = (opts: { value: string; label: string }[], v: string) =>
   opts.find((o) => o.value === v)?.label ?? v;
 
-const today = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-};
-
 function buildEmptyForm() {
   return {
     id: "",
     report_type: "incident",
     equipment_ownership: "owned",
-    incident_date: today(),
+    incident_date: todayISO(),
     incident_time: "",
     location: "",
     vehicle: "",
@@ -216,7 +212,7 @@ function Incidents() {
     const payload = {
       report_type: form.report_type,
       equipment_ownership: form.equipment_ownership,
-      incident_date: form.incident_date || today(),
+      incident_date: form.incident_date || todayISO(),
       incident_time: form.incident_time.trim() || null,
       location: form.location.trim() || null,
       vehicle: form.vehicle.trim() || null,
