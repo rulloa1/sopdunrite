@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { RequireAuth } from "@/components/RequireAuth";
 import { DashboardView } from "@/components/DashboardView";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/dashboard")({
   head: () => ({
     meta: [
       { title: "Dashboard | Dunrite Construction Group" },

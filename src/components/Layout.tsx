@@ -36,7 +36,7 @@ import { useAuth, isAdmin, ROLE_LABELS } from "@/lib/auth";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export const NAV = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard },
+  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { to: "/projects", label: "Projects", icon: FolderKanban },
   { to: "/purchasing", label: "Purchasing Log", icon: ShoppingCart },
   { to: "/bids", label: "Bid Log", icon: Gavel },
