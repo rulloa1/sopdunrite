@@ -81,10 +81,11 @@ function AuthPage() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4 py-12">
       <div className="w-full max-w-md rounded-2xl border bg-card p-8 shadow-sm">
         <div className="mb-6 flex flex-col items-center text-center">
-          <img src={logo.url} alt="Dunrite Construction Group LLC" className="h-14 w-auto" />
-          <h1 className="mt-4 font-display text-2xl font-bold">Dunrite Construction Group</h1>
-          <p className="text-xs text-muted-foreground">DunRite Construction Group — Project Dashboard</p>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <img src={logo.url} alt="Dunrite Construction Group LLC" className="h-20 w-auto" />
+          <p className="mt-4 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+            Project Dashboard
+          </p>
+          <p className="mt-2 text-sm text-muted-foreground">
             {mode === "signin" ? "Sign in to the project dashboard" : "Create your account"}
           </p>
         </div>
