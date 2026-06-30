@@ -300,7 +300,10 @@ export function DashboardView() {
       <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <h2 className="font-display text-xl font-bold sm:text-2xl">
-            <span className="text-primary">1. </span>Executive Summary
+            <span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-md bg-muted text-xs font-semibold text-muted-foreground">
+              1
+            </span>
+            Executive Summary
           </h2>
           <p className="mt-1 text-sm text-muted-foreground">
             {loading

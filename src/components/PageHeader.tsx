@@ -35,7 +35,11 @@ export function PageHeader({
     <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
         <h2 className="font-display text-xl font-bold text-foreground sm:text-2xl">
-          {number != null && <span className="text-primary">{number}. </span>}
+          {number != null && (
+            <span className="mr-2 inline-flex h-6 w-6 items-center justify-center rounded-md bg-muted text-xs font-semibold text-muted-foreground">
+              {number}
+            </span>
+          )}
           {title}
         </h2>
         {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}

@@ -91,9 +91,9 @@ function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () 
             key={to}
             to={to}
             onClick={onNavigate}
-            className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+            className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium tracking-wide transition-colors ${
               active
-                ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm"
+                ? "border-l-2 border-primary bg-muted text-primary"
                 : "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             }`}
           >
@@ -106,9 +106,9 @@ function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () 
         <Link
           to="/team"
           onClick={onNavigate}
-          className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors ${
+          className={`flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium tracking-wide transition-colors ${
             pathname.startsWith("/team")
-              ? "bg-sidebar-primary text-sidebar-primary-foreground shadow-sm"
+              ? "border-l-2 border-primary bg-muted text-primary"
               : "text-sidebar-foreground/80 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
           }`}
         >
