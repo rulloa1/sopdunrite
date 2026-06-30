@@ -116,8 +116,8 @@ export const TODAY = new Date(2026, 5, 13); // Jun 13, 2026
 // ---------------------------------------------------------------------------
 export const PROJECT = {
   name: "DunRite Construction Group",
-  lot: "Austin, TX 78701",
-  location: "Austin, TX 78701",
+  lot: "12412 Curley St, San Antonio, FL 33576",
+  location: "12412 Curley St, San Antonio, FL 33576",
   scheduleMonths: 18,
   startDate: "2025-03-03",
   targetCompletion: "2026-10-02",
