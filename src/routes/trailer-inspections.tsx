@@ -9,6 +9,7 @@ import { DataTable, type Column } from "@/components/DataTable";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, isAdmin } from "@/lib/auth";
 import { formatDate } from "@/data/projectData";
+import { todayISO } from "@/lib/expiry";
 import type { Database } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -90,11 +91,6 @@ const STATUS_OPTIONS = [
 const labelOf = (opts: { value: string; label: string }[], v: string) =>
   opts.find((o) => o.value === v)?.label ?? v;
 
-const today = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-};
-
 function buildEmptyForm() {
   const checks = Object.fromEntries(CHECKLIST.map((c) => [c.key, true])) as Record<
     CheckKey,
@@ -104,7 +100,7 @@ function buildEmptyForm() {
     id: "",
     trailer_type: "gooseneck",
     trailer: "",
-    inspection_date: today(),
+    inspection_date: todayISO(),
     inspector_name: "",
     status: "pass",
     defects: "",
@@ -197,7 +193,7 @@ function TrailerInspections() {
     const payload = {
       trailer_type: form.trailer_type,
       trailer: form.trailer.trim(),
-      inspection_date: form.inspection_date || today(),
+      inspection_date: form.inspection_date || todayISO(),
       inspector_name: form.inspector_name.trim() || null,
       status: form.status,
       defects: form.defects.trim() || null,

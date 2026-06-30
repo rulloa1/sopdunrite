@@ -9,6 +9,7 @@ import { DataTable, type Column } from "@/components/DataTable";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, isAdmin } from "@/lib/auth";
 import { formatDate } from "@/data/projectData";
+import { todayISO } from "@/lib/expiry";
 import type { Database } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -80,11 +81,6 @@ const STATUS_OPTIONS = [
 
 // Operator's LOCAL calendar date (toISOString() would give the UTC day, which
 // rolls over early evening for time zones west of UTC and misorders the log).
-const today = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-};
-
 function buildEmptyForm() {
   const checks = Object.fromEntries(CHECKLIST.map((c) => [c.key, true])) as Record<
     CheckKey,
@@ -93,7 +89,7 @@ function buildEmptyForm() {
   return {
     id: "",
     vehicle: "",
-    inspection_date: today(),
+    inspection_date: todayISO(),
     inspector_name: "",
     odometer: "",
     status: "pass",
@@ -187,7 +183,7 @@ function Inspections() {
     const checks = Object.fromEntries(CHECKLIST.map((c) => [c.key, form[c.key]]));
     const payload = {
       vehicle: form.vehicle.trim(),
-      inspection_date: form.inspection_date || today(),
+      inspection_date: form.inspection_date || todayISO(),
       inspector_name: form.inspector_name.trim() || null,
       odometer: form.odometer ? Number(form.odometer) : null,
       status: form.status,

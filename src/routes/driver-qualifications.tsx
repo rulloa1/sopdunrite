@@ -109,6 +109,7 @@ function DriverQualifications() {
   const [saving, setSaving] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
 
   const canManage = canManageLogs(role);
   const canDelete = canDeleteLogs(role);
@@ -189,11 +190,13 @@ function DriverQualifications() {
   };
 
   const confirmDelete = async () => {
-    if (!deleteId) return;
+    if (!deleteId || deleting) return;
+    setDeleting(true);
     const { error: dErr } = await supabase
       .from("driver_qualifications")
       .delete()
       .eq("id", deleteId);
+    setDeleting(false);
     if (dErr) {
       setDeleteError(dErr.message);
       return;
@@ -454,7 +457,8 @@ function DriverQualifications() {
       <AlertDialog
         open={!!deleteId}
         onOpenChange={(o) => {
-          if (!o) {
+          // Don't dismiss (and lose the error) while a delete is still running.
+          if (!o && !deleting) {
             setDeleteId(null);
             setDeleteError(null);
           }
@@ -471,12 +475,13 @@ function DriverQualifications() {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
+              disabled={deleting}
               onClick={(e) => {
                 e.preventDefault();
                 confirmDelete();
               }}
             >
-              Delete
+              {deleting ? "Deleting…" : "Delete"}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

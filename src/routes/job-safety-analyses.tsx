@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canManageLogs, canDeleteLogs } from "@/lib/auth";
 import type { Database } from "@/integrations/supabase/types";
 import { formatDate } from "@/data/projectData";
+import { todayISO } from "@/lib/expiry";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -53,18 +54,11 @@ export const Route = createFileRoute("/job-safety-analyses")({
 
 type JsaRow = Database["public"]["Tables"]["job_safety_analyses"]["Row"];
 
-/** yyyy-mm-dd local today, so an entry made late in the day keeps today. */
-function today() {
-  const d = new Date();
-  const tz = d.getTimezoneOffset() * 60000;
-  return new Date(d.getTime() - tz).toISOString().slice(0, 10);
-}
-
 function buildEmptyForm() {
   return {
     id: "",
     job_title: "",
-    jsa_date: today(),
+    jsa_date: todayISO(),
     location: "",
     prepared_by: "",
     required_ppe: "",
@@ -265,7 +259,7 @@ function JobSafetyAnalyses() {
         <div>
           <h3 className="font-display text-lg font-semibold">JSA Log</h3>
           <p className="text-sm text-muted-foreground">
-            {rows.length} analysis{rows.length === 1 ? "" : "es"} recorded
+            {rows.length} {rows.length === 1 ? "analysis" : "analyses"} recorded
           </p>
         </div>
         {canManage && (

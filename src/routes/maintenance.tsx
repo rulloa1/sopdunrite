@@ -10,6 +10,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canManageLogs, canDeleteLogs } from "@/lib/auth";
 import type { Database } from "@/integrations/supabase/types";
 import { formatDate } from "@/data/projectData";
+import { todayISO } from "@/lib/expiry";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -100,13 +101,6 @@ function StatusPill({ status }: { status: string }) {
   );
 }
 
-/** yyyy-mm-dd local today, so an entry made late in the day keeps today. */
-function today() {
-  const d = new Date();
-  const tz = d.getTimezoneOffset() * 60000;
-  return new Date(d.getTime() - tz).toISOString().slice(0, 10);
-}
-
 function formatCost(n: number | null) {
   if (n === null) return "—";
   return n.toLocaleString(undefined, { style: "currency", currency: "USD" });
@@ -119,7 +113,7 @@ function buildEmptyForm() {
     asset_type: "vehicle",
     service_type: "repair",
     description: "",
-    reported_date: today(),
+    reported_date: todayISO(),
     completed_date: "",
     status: "open",
     vendor: "",
