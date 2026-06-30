@@ -28,7 +28,7 @@ import {
   LogIn,
   Menu,
 } from "lucide-react";
-import logo from "@/assets/dunrite-logo.jpg.asset.json";
+import logo from "@/assets/dunrite-logo-light.png.asset.json";
 import { WorkbookBanner } from "@/components/WorkbookBanner";
 import { Breadcrumb } from "@/components/PageHeader";
 import { PROJECT, CONTRACTOR } from "@/data/projectData";
