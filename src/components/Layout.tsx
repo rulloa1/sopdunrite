@@ -195,9 +195,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <h1 className="truncate font-display text-base font-semibold text-foreground">
               {PROJECT.name}
             </h1>
-            <p className="truncate text-xs text-muted-foreground">
-              {PROJECT.lot} · {PROJECT.location}
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{PROJECT.location}</p>
           </div>
         </header>
 
