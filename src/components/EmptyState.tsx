@@ -16,7 +16,7 @@ export function EmptyState({
   action?: ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/40 px-6 py-14 text-center">
+    <div className="flex flex-col items-center justify-center rounded-xl border border-border bg-card/40 px-8 py-16 text-center">
       <div className="mb-4 grid h-12 w-12 place-items-center rounded-full bg-primary/15 text-primary">
         <Icon className="h-6 w-6" />
       </div>
