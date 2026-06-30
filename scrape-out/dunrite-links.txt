@@ -1,0 +1,44 @@
+# DunRite Construction Group — links (from page source)
+
+## Primary navigation (live domain: www.dunriteconstructiongroup.com)
+Home                          ->  https://www.dunriteconstructiongroup.com/
+About                         ->  https://www.dunriteconstructiongroup.com/about/
+Services                      ->  https://www.dunriteconstructiongroup.com/services/
+  Full Shell Packages         ->  https://www.dunriteconstructiongroup.com/services/full-shell-packages/
+  Custom Home Shells          ->  https://www.dunriteconstructiongroup.com/services/custom-home-shells/
+  Developer Concrete Contractor -> https://www.dunriteconstructiongroup.com/services/developer-concrete-contractor/
+  Concrete Services           ->  https://www.dunriteconstructiongroup.com/services/concrete-services/
+Areas Served                  ->  https://www.dunriteconstructiongroup.com/areas-served/
+  Citrus County               ->  https://www.dunriteconstructiongroup.com/areas-served/citrus-county/
+  Hernando County             ->  https://www.dunriteconstructiongroup.com/areas-served/hernando-county/
+  Hillsborough County         ->  https://www.dunriteconstructiongroup.com/areas-served/hillsborough-county/
+  Lake County                 ->  https://www.dunriteconstructiongroup.com/areas-served/lake-county/
+  Manatee County              ->  https://www.dunriteconstructiongroup.com/areas-served/manatee-county/
+  Marion County               ->  https://www.dunriteconstructiongroup.com/areas-served/marion-county/
+  Pasco County                ->  https://www.dunriteconstructiongroup.com/areas-served/pasco-county/
+  Pinellas County             ->  https://www.dunriteconstructiongroup.com/areas-served/pinellas-county/
+  Polk County                 ->  https://www.dunriteconstructiongroup.com/areas-served/polk-county/
+  Sumter County               ->  https://www.dunriteconstructiongroup.com/areas-served/sumter-county/
+Projects                      ->  https://www.dunriteconstructiongroup.com/projects/
+Get A Quote (header button)   ->  https://www.dunriteconstructiongroup.com/contact-us/
+
+## Body & footer CTAs — POINT AT STAGING DOMAIN (dunrite.dreamhosters.com) ⚠
+Get Your Free Quote (hero/about/testimonials) -> https://dunrite.dreamhosters.com/contact-us/
+View All Services             ->  https://dunrite.dreamhosters.com/services/
+  Full Shell Packages (Learn More)   -> https://dunrite.dreamhosters.com/services/full-shell-packages/
+  Custom Home Shells (Learn More)    -> https://dunrite.dreamhosters.com/services/custom-home-shells/
+  Developer Projects (Learn More)    -> https://dunrite.dreamhosters.com/services/developer-concrete-contractor/
+All Projects                  ->  https://dunrite.dreamhosters.com/projects/
+Footer: About                 ->  https://dunrite.dreamhosters.com/about/
+Footer: Services              ->  https://dunrite.dreamhosters.com/services/
+Footer: Areas Served          ->  https://dunrite.dreamhosters.com/areas-served/
+Footer: Past Projects         ->  https://dunrite.dreamhosters.com/projects/
+Footer: Contact Us            ->  https://dunrite.dreamhosters.com/contact-us/
+
+## Contact / social / external
+Phone                         ->  tel:352-588-4050
+Email                         ->  mailto:bids@dunriteconstruct.com
+Office (Google Maps)          ->  https://www.google.com/maps/place/12412+Curley+St,+San+Antonio,+FL+33576/
+Instagram (@concrete_cowboys_fl) -> https://www.instagram.com/concrete_cowboys_fl/
+DRC Homes (sister company)    ->  https://drchomesfl.com/
+Video (YouTube embed)         ->  https://www.youtube.com/embed/VhBl3dHT5SY
