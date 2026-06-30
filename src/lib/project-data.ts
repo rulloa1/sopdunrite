@@ -19,7 +19,7 @@ export const EXECUTIVES: Executive[] = [
 ];
 
 export const PROJECT = {
-  name: "Longleaf Amenity Center",
+  name: "DunRite Construction Group",
   lot: "Austin, TX 78701",
   location: "Austin, TX 78701",
   scheduleMonths: 18,

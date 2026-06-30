@@ -1,9 +1,9 @@
-// Project Gantt schedule reconstructed from the Longleaf Amenity Center
+// Project Gantt schedule reconstructed from the DunRite Construction Group
 // Gantt chart (Dunrite Construction Group). Week indices are 0-based and map
 // onto WEEKS below; durationDays is the planned duration from the schedule.
 
 export const GANTT_META = {
-  project: "Longleaf Amenity Center",
+  project: "DunRite Construction Group",
   company: "Dunrite Construction Group",
   contact: "Michael E. Chandler · 352-588-4050",
   startDate: "Aug 15, 2026",

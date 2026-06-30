@@ -11,8 +11,8 @@ import logo from "@/assets/dunrite-logo.jpg.asset.json";
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign In | Longleaf Amenity Center" },
-      { name: "description", content: "Secure executive sign-in for the Longleaf Amenity Center project dashboard." },
+      { title: "Sign In | DunRite Construction Group" },
+      { name: "description", content: "Secure executive sign-in for the DunRite Construction Group project dashboard." },
       { name: "robots", content: "noindex" },
     ],
   }),
@@ -83,7 +83,7 @@ function AuthPage() {
         <div className="mb-6 flex flex-col items-center text-center">
           <img src={logo.url} alt="Dunrite Construction Group LLC" className="h-14 w-auto" />
           <h1 className="mt-4 font-display text-2xl font-bold">Dunrite Construction Group</h1>
-          <p className="text-xs text-muted-foreground">Longleaf Amenity Center — Project Dashboard</p>
+          <p className="text-xs text-muted-foreground">DunRite Construction Group — Project Dashboard</p>
           <p className="mt-1 text-sm text-muted-foreground">
             {mode === "signin" ? "Sign in to the project dashboard" : "Create your account"}
           </p>
