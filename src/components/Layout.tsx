@@ -72,10 +72,12 @@ function sectionLabel(pathname: string) {
 
 function LogoChip({ className = "" }: { className?: string }) {
   return (
-    <div
-      className={`inline-flex items-center justify-center overflow-hidden rounded-lg shadow-sm ${className}`}
-    >
-      <img src={logo.url} alt="Dunrite Construction Group LLC logo" className="h-12 w-auto" />
+    <div className={`inline-flex items-center justify-center ${className}`}>
+      <img
+        src={logo.url}
+        alt="Dunrite Construction Group LLC logo"
+        className="h-14 w-auto"
+      />
     </div>
   );
 }
