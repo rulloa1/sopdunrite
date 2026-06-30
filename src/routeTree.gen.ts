@@ -30,6 +30,7 @@ import { Route as IncidentsRouteImport } from './routes/incidents'
 import { Route as HazcomRouteImport } from './routes/hazcom'
 import { Route as HandbookFormsRouteImport } from './routes/handbook-forms'
 import { Route as DriverQualificationsRouteImport } from './routes/driver-qualifications'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CertificationsRouteImport } from './routes/certifications'
 import { Route as BidsRouteImport } from './routes/bids'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -140,6 +141,11 @@ const DriverQualificationsRoute = DriverQualificationsRouteImport.update({
   path: '/driver-qualifications',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CertificationsRoute = CertificationsRouteImport.update({
   id: '/certifications',
   path: '/certifications',
@@ -166,6 +172,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
   '/certifications': typeof CertificationsRoute
+  '/dashboard': typeof DashboardRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
   '/handbook-forms': typeof HandbookFormsRoute
   '/hazcom': typeof HazcomRoute
@@ -193,6 +200,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
   '/certifications': typeof CertificationsRoute
+  '/dashboard': typeof DashboardRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
   '/handbook-forms': typeof HandbookFormsRoute
   '/hazcom': typeof HazcomRoute
@@ -221,6 +229,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/bids': typeof BidsRoute
   '/certifications': typeof CertificationsRoute
+  '/dashboard': typeof DashboardRoute
   '/driver-qualifications': typeof DriverQualificationsRoute
   '/handbook-forms': typeof HandbookFormsRoute
   '/hazcom': typeof HazcomRoute
@@ -250,6 +259,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bids'
     | '/certifications'
+    | '/dashboard'
     | '/driver-qualifications'
     | '/handbook-forms'
     | '/hazcom'
@@ -277,6 +287,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bids'
     | '/certifications'
+    | '/dashboard'
     | '/driver-qualifications'
     | '/handbook-forms'
     | '/hazcom'
@@ -304,6 +315,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/bids'
     | '/certifications'
+    | '/dashboard'
     | '/driver-qualifications'
     | '/handbook-forms'
     | '/hazcom'
@@ -332,6 +344,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BidsRoute: typeof BidsRoute
   CertificationsRoute: typeof CertificationsRoute
+  DashboardRoute: typeof DashboardRoute
   DriverQualificationsRoute: typeof DriverQualificationsRoute
   HandbookFormsRoute: typeof HandbookFormsRoute
   HazcomRoute: typeof HazcomRoute
@@ -504,6 +517,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DriverQualificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/certifications': {
       id: '/certifications'
       path: '/certifications'
@@ -540,6 +560,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BidsRoute: BidsRoute,
   CertificationsRoute: CertificationsRoute,
+  DashboardRoute: DashboardRoute,
   DriverQualificationsRoute: DriverQualificationsRoute,
   HandbookFormsRoute: HandbookFormsRoute,
   HazcomRoute: HazcomRoute,
