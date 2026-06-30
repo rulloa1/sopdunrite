@@ -28,7 +28,7 @@ import {
   LogIn,
   Menu,
 } from "lucide-react";
-import logo from "@/assets/dunrite-logo.jpg.asset.json";
+import logo from "@/assets/dunrite-logo-light.png.asset.json";
 import { WorkbookBanner } from "@/components/WorkbookBanner";
 import { Breadcrumb } from "@/components/PageHeader";
 import { PROJECT, CONTRACTOR } from "@/data/projectData";
@@ -72,10 +72,12 @@ function sectionLabel(pathname: string) {
 
 function LogoChip({ className = "" }: { className?: string }) {
   return (
-    <div
-      className={`inline-flex items-center justify-center overflow-hidden rounded-lg shadow-sm ${className}`}
-    >
-      <img src={logo.url} alt="Dunrite Construction Group LLC logo" className="h-12 w-auto" />
+    <div className={`inline-flex items-center justify-center ${className}`}>
+      <img
+        src={logo.url}
+        alt="Dunrite Construction Group LLC logo"
+        className="h-14 w-auto"
+      />
     </div>
   );
 }
@@ -193,9 +195,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <h1 className="truncate font-display text-base font-semibold text-foreground">
               {PROJECT.name}
             </h1>
-            <p className="truncate text-xs text-muted-foreground">
-              {PROJECT.lot} · {PROJECT.location}
-            </p>
+            <p className="truncate text-xs text-muted-foreground">{PROJECT.location}</p>
           </div>
         </header>
 

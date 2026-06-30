@@ -1,6 +1,6 @@
 // =============================================================================
 // SINGLE SOURCE OF TRUTH
-// Longleaf Amenity Center — Dunrite Construction Group Project Management Workbook
+// DunRite Construction Group — Dunrite Construction Group Project Management Workbook
 //
 // Every total, subtotal, count and KPI shown anywhere in the app is COMPUTED
 // from the row data below via the selector functions at the bottom of this file.
@@ -115,9 +115,9 @@ export const TODAY = new Date(2026, 5, 13); // Jun 13, 2026
 // Project & contractor
 // ---------------------------------------------------------------------------
 export const PROJECT = {
-  name: "Longleaf Amenity Center",
-  lot: "Austin, TX 78701",
-  location: "Austin, TX 78701",
+  name: "DunRite Construction Group",
+  lot: "12412 Curley St, San Antonio, FL 33576",
+  location: "12412 Curley St, San Antonio, FL 33576",
   scheduleMonths: 18,
   startDate: "2025-03-03",
   targetCompletion: "2026-10-02",
@@ -125,7 +125,7 @@ export const PROJECT = {
 
 export const CONTRACTOR = {
   name: "Dunrite Construction Group",
-  address: "Austin, TX",
+  address: "San Antonio, FL",
 };
 
 export const COMPANY = {

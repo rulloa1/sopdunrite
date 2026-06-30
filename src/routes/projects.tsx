@@ -41,10 +41,10 @@ import {
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects | Longleaf Amenity Center" },
+      { title: "Projects | DunRite Construction Group" },
       {
         name: "description",
-        content: "Track bid, contract, and active projects across Longleaf Amenity Center.",
+        content: "Track bid, contract, and active projects across DunRite Construction Group.",
       },
       { name: "robots", content: "noindex" },
     ],

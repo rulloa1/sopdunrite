@@ -1,4 +1,4 @@
-import logo from "@/assets/dunrite-logo.jpg.asset.json";
+import logo from "@/assets/dunrite-logo-light.png.asset.json";
 import { PROJECT, COMPANY } from "@/data/projectData";
 
 /**
