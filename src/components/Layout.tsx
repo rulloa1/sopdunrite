@@ -85,7 +85,7 @@ function LogoChip({ className = "" }: { className?: string }) {
 function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () => void }) {
   const { role } = useAuth();
   return (
-    <nav className="flex-1 space-y-1 px-3 py-2">
+    <nav className="min-h-0 flex-1 space-y-1 overflow-y-auto px-3 py-2">
       {NAV.map(({ to, label, icon: Icon }) => {
         const active = isActivePath(pathname, to);
         return (
@@ -125,7 +125,7 @@ function NavLinks({ pathname, onNavigate }: { pathname: string; onNavigate?: () 
 function UserBlock() {
   const { user, role, signOut } = useAuth();
   return (
-    <div className="border-t border-sidebar-border px-4 py-4">
+    <div className="shrink-0 border-t border-sidebar-border px-4 py-4">
       {user ? (
         <div className="space-y-2">
           <div className="px-2">
@@ -161,7 +161,7 @@ export function Layout({ children }: { children: ReactNode }) {
     <div className="flex min-h-screen w-full bg-background">
       {/* Desktop sidebar */}
       <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col bg-sidebar text-sidebar-foreground lg:flex">
-        <div className="flex items-center px-6 py-6">
+        <div className="flex shrink-0 items-center px-6 py-6">
           <LogoChip />
         </div>
         <NavLinks pathname={pathname} />
