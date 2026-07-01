@@ -150,7 +150,10 @@ export const VENDORS: Vendor[] = [
   { name: "Abaco Sitework Ltd.", trades: ["Sitework", "Excavation", "Landscaping/Hardscape"] },
   { name: "Bahama Concrete Co.", trades: ["Concrete", "Piles/Caissons", "Masonry", "Cistern"] },
   { name: "Island Steel Fabricators", trades: ["Structural Steel", "Metal Stud Framing"] },
-  { name: "Coastal Framing LLC", trades: ["Rough Framing", "Heavy Timber", "Decks", "Exterior/Interior Stairs"] },
+  {
+    name: "Coastal Framing LLC",
+    trades: ["Rough Framing", "Heavy Timber", "Decks", "Exterior/Interior Stairs"],
+  },
   { name: "Tropic Roofing Systems", trades: ["Roofing", "Copper Flashing", "Gutters"] },
   { name: "Sandpiper Insulation Co.", trades: ["Icynene Insulation"] },
   { name: "Reef Mechanical", trades: ["HVAC"] },
@@ -479,7 +482,9 @@ export const PURCHASE_ORDERS: PurchaseOrder[] = [...CONTRACT_SEEDS]
     amount: c.contractAmount,
   }));
 
-const PO_BY_CODE: Record<string, PurchaseOrder> = Object.fromEntries(PURCHASE_ORDERS.map((p) => [p.code, p]));
+const PO_BY_CODE: Record<string, PurchaseOrder> = Object.fromEntries(
+  PURCHASE_ORDERS.map((p) => [p.code, p]),
+);
 
 export function poForCode(code: string): string {
   return PO_BY_CODE[code]?.po ?? "—";
@@ -520,9 +525,15 @@ export const BIDS: Bid[] = CONTRACT_SEEDS.map((c, i) => {
       budget: c.originalBudget,
       awardedVendor: c.subcontractor,
       awardedAmount: awarded,
-      footnote: "Low bid $338,900 (Treasure Cay Concrete) rejected — incomplete insurance certificates.",
+      footnote:
+        "Low bid $338,900 (Treasure Cay Concrete) rejected — incomplete insurance certificates.",
       bids: [
-        { bidder: "Treasure Cay Concrete", amount: 338_900, status: "rejected", note: "incomplete insurance certs" },
+        {
+          bidder: "Treasure Cay Concrete",
+          amount: 338_900,
+          status: "rejected",
+          note: "incomplete insurance certs",
+        },
         { bidder: c.subcontractor, amount: awarded, status: "awarded" },
         { bidder: "Great Abaco Concrete", amount: 372_400, status: "qualified" },
         { bidder: "Hope Town Masonry", amount: 389_750, status: "qualified" },
@@ -536,7 +547,8 @@ export const BIDS: Bid[] = CONTRACT_SEEDS.map((c, i) => {
       budget: c.originalBudget,
       awardedVendor: c.subcontractor,
       awardedAmount: awarded,
-      footnote: "Low bid $689,500 (Hurricane Glass & Glazing) rejected — non-compliant hurricane rating.",
+      footnote:
+        "Low bid $689,500 (Hurricane Glass & Glazing) rejected — non-compliant hurricane rating.",
       bids: [
         {
           bidder: "Hurricane Glass & Glazing",
@@ -777,12 +789,28 @@ export const MILESTONES: Milestone[] = [
   { name: "Install Cabinets", scheduled: "2026-03-06", actual: "2026-03-19", status: "complete" },
   { name: "Complete Countertops", scheduled: "2026-04-10", actual: null, status: "in-progress" },
   { name: "MEP Trim Complete", scheduled: "2026-05-22", actual: null, status: "in-progress" },
-  { name: "Exterior Finishes (Scaffold Down)", scheduled: "2026-07-17", actual: null, status: "upcoming" },
-  { name: "House Complete & Ready for Furniture", scheduled: "2026-10-02", actual: null, status: "upcoming" },
+  {
+    name: "Exterior Finishes (Scaffold Down)",
+    scheduled: "2026-07-17",
+    actual: null,
+    status: "upcoming",
+  },
+  {
+    name: "House Complete & Ready for Furniture",
+    scheduled: "2026-10-02",
+    actual: null,
+    status: "upcoming",
+  },
 ];
 
 export const DELAYS: DelayEvent[] = [
-  { num: "1", description: "Concrete cure delay, extended rain", start: "2025-05-19", end: "2025-05-21", days: 2 },
+  {
+    num: "1",
+    description: "Concrete cure delay, extended rain",
+    start: "2025-05-19",
+    end: "2025-05-21",
+    days: 2,
+  },
   {
     num: "2",
     description: "Late structural steel delivery (port delay)",
@@ -790,9 +818,27 @@ export const DELAYS: DelayEvent[] = [
     end: "2025-06-16",
     days: 7,
   },
-  { num: "3", description: "Hurricane preparation & shutdown", start: "2025-08-28", end: "2025-09-02", days: 5 },
-  { num: "4", description: "Owner-requested kitchen layout revision", start: "2025-11-03", end: "2025-11-06", days: 3 },
-  { num: "5", description: "Customs hold on imported stone veneer", start: "2025-12-01", end: "2025-12-09", days: 8 },
+  {
+    num: "3",
+    description: "Hurricane preparation & shutdown",
+    start: "2025-08-28",
+    end: "2025-09-02",
+    days: 5,
+  },
+  {
+    num: "4",
+    description: "Owner-requested kitchen layout revision",
+    start: "2025-11-03",
+    end: "2025-11-06",
+    days: 3,
+  },
+  {
+    num: "5",
+    description: "Customs hold on imported stone veneer",
+    start: "2025-12-01",
+    end: "2025-12-09",
+    days: 8,
+  },
 ].sort((a, b) => a.start.localeCompare(b.start));
 
 export const DELAY_NOTE =
@@ -934,7 +980,8 @@ export function isOverdue(item: { required: string; status: LogStatus }): boolea
 // ---------------------------------------------------------------------------
 export const getOriginalControlEstimate = () => BUDGET_INPUTS.originalControlEstimate;
 export const getApprovedNOCIs = () => BUDGET_INPUTS.approvedNOCIs;
-export const getCurrentBudget = () => BUDGET_INPUTS.originalControlEstimate + BUDGET_INPUTS.approvedNOCIs;
+export const getCurrentBudget = () =>
+  BUDGET_INPUTS.originalControlEstimate + BUDGET_INPUTS.approvedNOCIs;
 
 export const getTotalBudget = () => CONTRACTS.reduce((a, c) => a + c.originalBudget, 0);
 export const getTotalContracted = () => CONTRACTS.reduce((a, c) => a + c.contractAmount, 0);
@@ -943,8 +990,10 @@ export const getNetVariance = () => getTotalBudget() - getTotalContracted();
 export const getCommittedToDate = () => getTotalContracted();
 export const getCommittedPct = () => Math.round((getCommittedToDate() / getCurrentBudget()) * 100);
 
-export const getContingencyVariance = () => BUDGET_INPUTS.contingencyAllowance - BUDGET_INPUTS.contingencyDrawn;
-export const getContingencyVariancePct = () => (getContingencyVariance() / getCurrentBudget()) * 100;
+export const getContingencyVariance = () =>
+  BUDGET_INPUTS.contingencyAllowance - BUDGET_INPUTS.contingencyDrawn;
+export const getContingencyVariancePct = () =>
+  (getContingencyVariance() / getCurrentBudget()) * 100;
 
 export const getTotalPOIssued = () => PURCHASE_ORDERS.reduce((a, p) => a + p.amount, 0);
 
@@ -952,7 +1001,9 @@ export const getOpenRfiCount = () => RFIS.filter((r) => r.status === "open").len
 export const getOpenSubmittalCount = () => SUBMITTALS.filter((s) => s.status === "open").length;
 export const getTotalDelayDays = () => DELAYS.reduce((a, d) => a + d.days, 0);
 
-export const getCompletedMilestones = () => MILESTONES.filter((m) => m.status === "complete").length;
-export const getMilestoneProgress = () => Math.round((getCompletedMilestones() / MILESTONES.length) * 100);
+export const getCompletedMilestones = () =>
+  MILESTONES.filter((m) => m.status === "complete").length;
+export const getMilestoneProgress = () =>
+  Math.round((getCompletedMilestones() / MILESTONES.length) * 100);
 
 export const contractForCode = (code: string) => CONTRACTS.find((c) => c.code === code);

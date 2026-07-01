@@ -13,8 +13,16 @@ export interface Executive {
 export const EXECUTIVES: Executive[] = [
   { name: "Executive One", title: "President", email: "exec1@dunriteconstruction.com" },
   { name: "Executive Two", title: "Vice President", email: "exec2@dunriteconstruction.com" },
-  { name: "Executive Three", title: "Chief Financial Officer", email: "exec3@dunriteconstruction.com" },
-  { name: "Executive Four", title: "Director of Operations", email: "exec4@dunriteconstruction.com" },
+  {
+    name: "Executive Three",
+    title: "Chief Financial Officer",
+    email: "exec3@dunriteconstruction.com",
+  },
+  {
+    name: "Executive Four",
+    title: "Director of Operations",
+    email: "exec4@dunriteconstruction.com",
+  },
   { name: "Executive Five", title: "Project Executive", email: "exec5@dunriteconstruction.com" },
 ];
 
@@ -46,14 +54,34 @@ export interface Milestone {
 
 export const MILESTONES: Milestone[] = [
   { name: "Pour Slab", scheduled: "Apr 18, 2025", actual: "Apr 21, 2025", status: "complete" },
-  { name: "Flashing & Dry In", scheduled: "Jul 30, 2025", actual: "Aug 4, 2025", status: "complete" },
+  {
+    name: "Flashing & Dry In",
+    scheduled: "Jul 30, 2025",
+    actual: "Aug 4, 2025",
+    status: "complete",
+  },
   { name: "MEPS Complete", scheduled: "Oct 12, 2025", actual: "Oct 15, 2025", status: "complete" },
-  { name: "Drywall Complete", scheduled: "Jan 9, 2026", actual: "In Progress", status: "in-progress" },
+  {
+    name: "Drywall Complete",
+    scheduled: "Jan 9, 2026",
+    actual: "In Progress",
+    status: "in-progress",
+  },
   { name: "Install Cabinets", scheduled: "Mar 6, 2026", actual: "—", status: "upcoming" },
   { name: "Complete Countertops", scheduled: "Apr 10, 2026", actual: "—", status: "upcoming" },
   { name: "MEP Trim Complete", scheduled: "May 22, 2026", actual: "—", status: "upcoming" },
-  { name: "Exterior Finishes (Scaffold Down)", scheduled: "Jul 17, 2026", actual: "—", status: "upcoming" },
-  { name: "House Complete & Ready for Furniture", scheduled: "Oct 2, 2026", actual: "—", status: "upcoming" },
+  {
+    name: "Exterior Finishes (Scaffold Down)",
+    scheduled: "Jul 17, 2026",
+    actual: "—",
+    status: "upcoming",
+  },
+  {
+    name: "House Complete & Ready for Furniture",
+    scheduled: "Oct 2, 2026",
+    actual: "—",
+    status: "upcoming",
+  },
 ];
 
 export interface CostCode {
@@ -111,9 +139,18 @@ export const COST_CODES: CostCode[] = [
 ];
 
 const SUBS = [
-  "Abaco Sitework Ltd.", "Bahama Concrete Co.", "Island Steel Fabricators", "Coastal Framing LLC",
-  "Tropic Roofing Systems", "Reef Mechanical", "BlueWave Electric", "Marsh Harbour Millwork",
-  "Cay Tile & Stone", "Northshore Plumbing", "Guana Painting Co.", "Atlantic Pools & Spa",
+  "Abaco Sitework Ltd.",
+  "Bahama Concrete Co.",
+  "Island Steel Fabricators",
+  "Coastal Framing LLC",
+  "Tropic Roofing Systems",
+  "Reef Mechanical",
+  "BlueWave Electric",
+  "Marsh Harbour Millwork",
+  "Cay Tile & Stone",
+  "Northshore Plumbing",
+  "Guana Painting Co.",
+  "Atlantic Pools & Spa",
 ];
 const fmt = (n: number) => n;
 
@@ -266,11 +303,36 @@ export interface DelayRow {
 }
 
 export const DELAYS: DelayRow[] = [
-  { num: "1", description: "Hurricane preparation & shutdown", impactedDates: "Aug 28 – Sep 2, 2025", days: 5 },
-  { num: "2", description: "Late structural steel delivery (port delay)", impactedDates: "Jun 9 – Jun 16, 2025", days: 7 },
-  { num: "3", description: "Owner-requested kitchen layout revision", impactedDates: "Nov 3 – Nov 6, 2025", days: 3 },
-  { num: "4", description: "Concrete cure delay, extended rain", impactedDates: "May 19 – May 21, 2025", days: 2 },
-  { num: "5", description: "Customs hold on imported stone veneer", impactedDates: "Dec 1 – Dec 9, 2025", days: 8 },
+  {
+    num: "1",
+    description: "Hurricane preparation & shutdown",
+    impactedDates: "Aug 28 – Sep 2, 2025",
+    days: 5,
+  },
+  {
+    num: "2",
+    description: "Late structural steel delivery (port delay)",
+    impactedDates: "Jun 9 – Jun 16, 2025",
+    days: 7,
+  },
+  {
+    num: "3",
+    description: "Owner-requested kitchen layout revision",
+    impactedDates: "Nov 3 – Nov 6, 2025",
+    days: 3,
+  },
+  {
+    num: "4",
+    description: "Concrete cure delay, extended rain",
+    impactedDates: "May 19 – May 21, 2025",
+    days: 2,
+  },
+  {
+    num: "5",
+    description: "Customs hold on imported stone veneer",
+    impactedDates: "Dec 1 – Dec 9, 2025",
+    days: 8,
+  },
 ];
 
 export type ProcStatus = "complete" | "in-progress" | "not-started";
@@ -285,16 +347,92 @@ export interface ProcRow {
 }
 
 export const PROCUREMENT: ProcRow[] = [
-  { item: "Finish Matrix", committed: true, purchased: true, vendor: "Marsh Harbour Millwork", poNumber: "PO-004", expectedDelivery: "Delivered", status: "complete" },
-  { item: "Re-Bar", committed: true, purchased: true, vendor: "Bahama Concrete Co.", poNumber: "PO-002", expectedDelivery: "Delivered", status: "complete" },
-  { item: "MEP Contracts", committed: true, purchased: true, vendor: "Reef Mechanical", poNumber: "PO-006", expectedDelivery: "Delivered", status: "complete" },
-  { item: "Heavy Timber & Look Outs", committed: true, purchased: true, vendor: "Coastal Framing LLC", poNumber: "PO-005", expectedDelivery: "Apr 2026", status: "in-progress" },
-  { item: "Windows & Exterior Doors", committed: true, purchased: false, vendor: "Island Glazing", poNumber: "—", expectedDelivery: "May 2026", status: "in-progress" },
-  { item: "Cabinetry", committed: true, purchased: false, vendor: "Marsh Harbour Millwork", poNumber: "—", expectedDelivery: "Mar 2026", status: "in-progress" },
-  { item: "Countertops", committed: false, purchased: false, vendor: "Cay Tile & Stone", poNumber: "—", expectedDelivery: "Apr 2026", status: "not-started" },
-  { item: "Appliances", committed: false, purchased: false, vendor: "—", poNumber: "—", expectedDelivery: "Jun 2026", status: "not-started" },
-  { item: "Pool & Spa Equipment", committed: false, purchased: false, vendor: "Atlantic Pools & Spa", poNumber: "—", expectedDelivery: "Jul 2026", status: "not-started" },
+  {
+    item: "Finish Matrix",
+    committed: true,
+    purchased: true,
+    vendor: "Marsh Harbour Millwork",
+    poNumber: "PO-004",
+    expectedDelivery: "Delivered",
+    status: "complete",
+  },
+  {
+    item: "Re-Bar",
+    committed: true,
+    purchased: true,
+    vendor: "Bahama Concrete Co.",
+    poNumber: "PO-002",
+    expectedDelivery: "Delivered",
+    status: "complete",
+  },
+  {
+    item: "MEP Contracts",
+    committed: true,
+    purchased: true,
+    vendor: "Reef Mechanical",
+    poNumber: "PO-006",
+    expectedDelivery: "Delivered",
+    status: "complete",
+  },
+  {
+    item: "Heavy Timber & Look Outs",
+    committed: true,
+    purchased: true,
+    vendor: "Coastal Framing LLC",
+    poNumber: "PO-005",
+    expectedDelivery: "Apr 2026",
+    status: "in-progress",
+  },
+  {
+    item: "Windows & Exterior Doors",
+    committed: true,
+    purchased: false,
+    vendor: "Island Glazing",
+    poNumber: "—",
+    expectedDelivery: "May 2026",
+    status: "in-progress",
+  },
+  {
+    item: "Cabinetry",
+    committed: true,
+    purchased: false,
+    vendor: "Marsh Harbour Millwork",
+    poNumber: "—",
+    expectedDelivery: "Mar 2026",
+    status: "in-progress",
+  },
+  {
+    item: "Countertops",
+    committed: false,
+    purchased: false,
+    vendor: "Cay Tile & Stone",
+    poNumber: "—",
+    expectedDelivery: "Apr 2026",
+    status: "not-started",
+  },
+  {
+    item: "Appliances",
+    committed: false,
+    purchased: false,
+    vendor: "—",
+    poNumber: "—",
+    expectedDelivery: "Jun 2026",
+    status: "not-started",
+  },
+  {
+    item: "Pool & Spa Equipment",
+    committed: false,
+    purchased: false,
+    vendor: "Atlantic Pools & Spa",
+    poNumber: "—",
+    expectedDelivery: "Jul 2026",
+    status: "not-started",
+  },
 ];
 
 export const currency = (n: number) =>
-  new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 }).format(n);
+  new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(n);

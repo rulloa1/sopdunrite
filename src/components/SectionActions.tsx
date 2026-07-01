@@ -43,12 +43,22 @@ export function SectionActions({ label }: { label: string }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel>{label}</DropdownMenuLabel>
-        <DropdownMenuItem onSelect={(e) => { e.preventDefault(); print(); }}>
+        <DropdownMenuItem
+          onSelect={(e) => {
+            e.preventDefault();
+            print();
+          }}
+        >
           <Printer className="mr-2 h-4 w-4 text-primary" />
           Download (Print to PDF)
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onSelect={(e) => { e.preventDefault(); email(); }}>
+        <DropdownMenuItem
+          onSelect={(e) => {
+            e.preventDefault();
+            email();
+          }}
+        >
           <Mail className="mr-2 h-4 w-4 text-muted-foreground" />
           Email this section…
         </DropdownMenuItem>

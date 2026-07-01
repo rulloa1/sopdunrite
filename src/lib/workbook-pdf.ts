@@ -99,7 +99,10 @@ export async function buildWorkbookDoc(data: WorkbookData) {
     ["Location", PROJECT.location],
     ["Start Date", PROJECT.startDate],
     ["Target Completion", PROJECT.currentCompletion],
-    ["Prepared", new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })],
+    [
+      "Prepared",
+      new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+    ],
   ];
   let cy = 280;
   meta.forEach(([k, v]) => {
@@ -160,7 +163,12 @@ export async function buildWorkbookDoc(data: WorkbookData) {
     return startY;
   };
 
-  const table = (startY: number, head: string[], body: (string | number)[][], colStyles?: Record<number, object>) => {
+  const table = (
+    startY: number,
+    head: string[],
+    body: (string | number)[][],
+    colStyles?: Record<number, object>,
+  ) => {
     autoTable(doc, {
       head: [head],
       body: body.map((r) => r.map((c) => String(c))),
@@ -168,7 +176,12 @@ export async function buildWorkbookDoc(data: WorkbookData) {
       margin: { left: margin, right: margin },
       theme: "grid",
       styles: { fontSize: 8.5, cellPadding: 4, lineColor: RULE, lineWidth: 0.5, textColor: DARK },
-      headStyles: { fillColor: BRAND, textColor: [255, 255, 255], fontStyle: "bold", fontSize: 8.5 },
+      headStyles: {
+        fillColor: BRAND,
+        textColor: [255, 255, 255],
+        fontStyle: "bold",
+        fontSize: 8.5,
+      },
       alternateRowStyles: { fillColor: ZEBRA },
       columnStyles: colStyles,
     });
@@ -206,7 +219,15 @@ export async function buildWorkbookDoc(data: WorkbookData) {
   y = section(2, "Purchasing Log", "Original budget vs. contracted amounts by cost code.");
   table(
     y,
-    ["Cost Code", "Description", "Original Budget", "Subcontractor", "Contract", "PO #", "Variance"],
+    [
+      "Cost Code",
+      "Description",
+      "Original Budget",
+      "Subcontractor",
+      "Contract",
+      "PO #",
+      "Variance",
+    ],
     PURCHASING.map((r) => [
       r.code,
       r.desc,
@@ -223,7 +244,17 @@ export async function buildWorkbookDoc(data: WorkbookData) {
   y = section(3, "Bid Log", "Competitive bids by cost code with awarded subcontractor.");
   table(
     y,
-    ["Code", "Description", "Bids", "Low Qualified", "Bid 2", "Bid 3", "Awarded To", "Budget", "Variance"],
+    [
+      "Code",
+      "Description",
+      "Bids",
+      "Low Qualified",
+      "Bid 2",
+      "Bid 3",
+      "Awarded To",
+      "Budget",
+      "Variance",
+    ],
     BIDS.map((r) => [
       r.code,
       r.desc,
@@ -235,7 +266,14 @@ export async function buildWorkbookDoc(data: WorkbookData) {
       currency(r.budget),
       currency(r.variance),
     ]),
-    { 2: { halign: "right" }, 3: { halign: "right" }, 4: { halign: "right" }, 5: { halign: "right" }, 7: { halign: "right" }, 8: { halign: "right" } },
+    {
+      2: { halign: "right" },
+      3: { halign: "right" },
+      4: { halign: "right" },
+      5: { halign: "right" },
+      7: { halign: "right" },
+      8: { halign: "right" },
+    },
   );
 
   // 4. PO Log
@@ -243,7 +281,14 @@ export async function buildWorkbookDoc(data: WorkbookData) {
   table(
     y,
     ["PO #", "Cost Code", "Subcontractor / Vendor", "Description", "Issue Date", "Amount"],
-    PURCHASE_ORDERS.map((r) => [r.po, r.code, r.vendor, r.description, r.issueDate, currency(r.amount)]),
+    PURCHASE_ORDERS.map((r) => [
+      r.po,
+      r.code,
+      r.vendor,
+      r.description,
+      r.issueDate,
+      currency(r.amount),
+    ]),
     { 5: { halign: "right" } },
   );
 
@@ -251,7 +296,15 @@ export async function buildWorkbookDoc(data: WorkbookData) {
   y = section(5, "RFI Log", "Requests for information with cost impact and status.");
   table(
     y,
-    ["RFI #", "Description", "Issue Date", "Date Required", "Date Received", "Cost Impact", "Status"],
+    [
+      "RFI #",
+      "Description",
+      "Issue Date",
+      "Date Required",
+      "Date Received",
+      "Cost Impact",
+      "Status",
+    ],
     RFIS.map((r) => [
       r.num,
       r.description,
@@ -268,8 +321,24 @@ export async function buildWorkbookDoc(data: WorkbookData) {
   y = section(6, "Submittal Log", "Shop drawings, samples & product data.");
   table(
     y,
-    ["Sub #", "Description", "Spec Section", "Issue Date", "Date Required", "Date Received", "Status"],
-    SUBMITTALS.map((s) => [s.num, s.description, "—", s.issueDate, s.required, s.received, statusLabel[s.status] ?? s.status]),
+    [
+      "Sub #",
+      "Description",
+      "Spec Section",
+      "Issue Date",
+      "Date Required",
+      "Date Received",
+      "Status",
+    ],
+    SUBMITTALS.map((s) => [
+      s.num,
+      s.description,
+      "—",
+      s.issueDate,
+      s.required,
+      s.received,
+      statusLabel[s.status] ?? s.status,
+    ]),
   );
 
   // 7. Schedule Delays
@@ -282,7 +351,11 @@ export async function buildWorkbookDoc(data: WorkbookData) {
   );
 
   // 8. Procurement Log
-  y = section(8, "Procurement Buyout Log", "Long-lead items, commitment status and expected delivery.");
+  y = section(
+    8,
+    "Procurement Buyout Log",
+    "Long-lead items, commitment status and expected delivery.",
+  );
   table(
     y,
     ["Item", "Committed", "Purchased", "Vendor", "PO #", "Expected Delivery", "Status"],

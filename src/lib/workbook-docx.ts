@@ -132,9 +132,7 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
                 width: { size: colWidths[i], type: WidthType.DXA },
                 borders: cellBorders,
                 shading:
-                  r % 2 === 1
-                    ? { fill: ZEBRA, type: ShadingType.CLEAR, color: "auto" }
-                    : undefined,
+                  r % 2 === 1 ? { fill: ZEBRA, type: ShadingType.CLEAR, color: "auto" } : undefined,
                 margins: { top: 50, bottom: 50, left: 100, right: 100 },
                 verticalAlign: VerticalAlign.CENTER,
                 children: [
@@ -178,7 +176,7 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
   const spacer = () => new Paragraph({ spacing: { after: 200 }, children: [] });
 
   // ---- Cover page ----
-  const cover: (InstanceType<typeof Paragraph>)[] = [];
+  const cover: InstanceType<typeof Paragraph>[] = [];
   if (logoBytes) {
     cover.push(
       new Paragraph({
@@ -188,7 +186,11 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
             type: "png",
             data: logoBytes,
             transformation: { width: 90, height: 90 },
-            altText: { title: "Dunrite Construction Group LLC", description: "Company logo", name: "Logo" },
+            altText: {
+              title: "Dunrite Construction Group LLC",
+              description: "Company logo",
+              name: "Logo",
+            },
           }),
         ],
       }),
@@ -199,7 +201,9 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
   cover.push(
     new Paragraph({
       spacing: { after: 60 },
-      children: [new TextRun({ text: COMPANY.name.toUpperCase(), bold: true, color: BRAND, size: 56 })],
+      children: [
+        new TextRun({ text: COMPANY.name.toUpperCase(), bold: true, color: BRAND, size: 56 }),
+      ],
     }),
     new Paragraph({
       spacing: { after: 240 },
@@ -214,7 +218,10 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
     ["Location", PROJECT.location],
     ["Start Date", PROJECT.startDate],
     ["Target Completion", PROJECT.currentCompletion],
-    ["Prepared", new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })],
+    [
+      "Prepared",
+      new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+    ],
   ];
   meta.forEach(([k, v]) =>
     cover.push(
@@ -272,10 +279,20 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
   );
 
   // 2. Purchasing Log
-  children.push(...sectionHeading(2, "Purchasing Log", "Original budget vs. contracted amounts by cost code."));
+  children.push(
+    ...sectionHeading(2, "Purchasing Log", "Original budget vs. contracted amounts by cost code."),
+  );
   children.push(
     buildTable(
-      ["Cost Code", "Description", "Original Budget", "Subcontractor", "Contract", "PO #", "Variance"],
+      [
+        "Cost Code",
+        "Description",
+        "Original Budget",
+        "Subcontractor",
+        "Contract",
+        "PO #",
+        "Variance",
+      ],
       PURCHASING.map((r) => [
         r.code,
         r.desc,
@@ -291,10 +308,22 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
   );
 
   // 3. Bid Log
-  children.push(...sectionHeading(3, "Bid Log", "Competitive bids by cost code with awarded subcontractor."));
+  children.push(
+    ...sectionHeading(3, "Bid Log", "Competitive bids by cost code with awarded subcontractor."),
+  );
   children.push(
     buildTable(
-      ["Code", "Description", "Bids", "Low Qualified", "Bid 2", "Bid 3", "Awarded To", "Budget", "Variance"],
+      [
+        "Code",
+        "Description",
+        "Bids",
+        "Low Qualified",
+        "Bid 2",
+        "Bid 3",
+        "Awarded To",
+        "Budget",
+        "Variance",
+      ],
       BIDS.map((r) => [
         r.code,
         r.desc,
@@ -312,21 +341,40 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
   );
 
   // 4. PO Log
-  children.push(...sectionHeading(4, "Purchase Order Log", "Issued purchase orders by vendor and cost code."));
+  children.push(
+    ...sectionHeading(4, "Purchase Order Log", "Issued purchase orders by vendor and cost code."),
+  );
   children.push(
     buildTable(
       ["PO #", "Cost Code", "Subcontractor / Vendor", "Description", "Issue Date", "Amount"],
-      PURCHASE_ORDERS.map((r) => [r.po, r.code, r.vendor, r.description, r.issueDate, currency(r.amount)]),
+      PURCHASE_ORDERS.map((r) => [
+        r.po,
+        r.code,
+        r.vendor,
+        r.description,
+        r.issueDate,
+        currency(r.amount),
+      ]),
       [0.9, 1.3, 2.2, 2.6, 1.3, 1.3],
       ["left", "left", "left", "left", "left", "right"],
     ),
   );
 
   // 5. RFI Log
-  children.push(...sectionHeading(5, "RFI Log", "Requests for information with cost impact and status."));
+  children.push(
+    ...sectionHeading(5, "RFI Log", "Requests for information with cost impact and status."),
+  );
   children.push(
     buildTable(
-      ["RFI #", "Description", "Issue Date", "Date Required", "Date Received", "Cost Impact", "Status"],
+      [
+        "RFI #",
+        "Description",
+        "Issue Date",
+        "Date Required",
+        "Date Received",
+        "Cost Impact",
+        "Status",
+      ],
       RFIS.map((r) => [
         r.num,
         r.description,
@@ -345,14 +393,36 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
   children.push(...sectionHeading(6, "Submittal Log", "Shop drawings, samples & product data."));
   children.push(
     buildTable(
-      ["Sub #", "Description", "Spec Section", "Issue Date", "Date Required", "Date Received", "Status"],
-      SUBMITTALS.map((s) => [s.num, s.description, "—", s.issueDate, s.required, s.received, statusLabel[s.status] ?? s.status]),
+      [
+        "Sub #",
+        "Description",
+        "Spec Section",
+        "Issue Date",
+        "Date Required",
+        "Date Received",
+        "Status",
+      ],
+      SUBMITTALS.map((s) => [
+        s.num,
+        s.description,
+        "—",
+        s.issueDate,
+        s.required,
+        s.received,
+        statusLabel[s.status] ?? s.status,
+      ]),
       [0.9, 3.2, 1.3, 1.3, 1.3, 1.3, 1.1],
     ),
   );
 
   // 7. Schedule Delays
-  children.push(...sectionHeading(7, "Schedule Delays", "Documented events impacting the construction schedule."));
+  children.push(
+    ...sectionHeading(
+      7,
+      "Schedule Delays",
+      "Documented events impacting the construction schedule.",
+    ),
+  );
   children.push(
     buildTable(
       ["#", "Description of Delay", "Impacted Dates", "Days"],
@@ -363,7 +433,13 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
   );
 
   // 8. Procurement Log
-  children.push(...sectionHeading(8, "Procurement Buyout Log", "Long-lead items, commitment status and expected delivery."));
+  children.push(
+    ...sectionHeading(
+      8,
+      "Procurement Buyout Log",
+      "Long-lead items, commitment status and expected delivery.",
+    ),
+  );
   children.push(
     buildTable(
       ["Item", "Committed", "Purchased", "Vendor", "PO #", "Expected Delivery", "Status"],
@@ -381,7 +457,9 @@ export async function buildWorkbookDocxBlob(data: WorkbookData): Promise<Blob> {
   );
 
   // 9. Project Procurement
-  children.push(...sectionHeading(9, "Project Procurement", "Long-Lead Items & Material Status Matrix"));
+  children.push(
+    ...sectionHeading(9, "Project Procurement", "Long-Lead Items & Material Status Matrix"),
+  );
   children.push(
     buildTable(
       ["Item", "Committed", "Vendor", "Expected Delivery", "Shop Drawing Status", "Notes"],

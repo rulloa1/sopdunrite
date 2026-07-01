@@ -20,12 +20,7 @@ import {
 } from "@/lib/dropbox.functions";
 import type { DropboxFile } from "@/lib/dropbox";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 const MAX_SIZE = 150 * 1024 * 1024; // 150 MB
 
@@ -63,12 +58,7 @@ async function fileToBase64(file: File): Promise<string> {
   });
 }
 
-export function DropboxDocumentsDialog({
-  projectId,
-  projectName,
-  open,
-  onOpenChange,
-}: Props) {
+export function DropboxDocumentsDialog({ projectId, projectName, open, onOpenChange }: Props) {
   const { role } = useAuth();
   const canUpload = canCreateProjects(role);
 
@@ -126,8 +116,8 @@ export function DropboxDocumentsDialog({
         errors.push(`"${file.name}" exceeds the 150 MB limit.`);
         setUploadItems((prev) =>
           prev.map((p, idx) =>
-            idx === i ? { ...p, done: true, error: "Exceeds 150 MB limit" } : p
-          )
+            idx === i ? { ...p, done: true, error: "Exceeds 150 MB limit" } : p,
+          ),
         );
         continue;
       }
@@ -141,14 +131,12 @@ export function DropboxDocumentsDialog({
             contentType: file.type || undefined,
           },
         });
-        setUploadItems((prev) =>
-          prev.map((p, idx) => (idx === i ? { ...p, done: true } : p))
-        );
+        setUploadItems((prev) => prev.map((p, idx) => (idx === i ? { ...p, done: true } : p)));
       } catch (e) {
         const msg = e instanceof Error ? e.message : "Upload failed";
         errors.push(msg);
         setUploadItems((prev) =>
-          prev.map((p, idx) => (idx === i ? { ...p, done: true, error: msg } : p))
+          prev.map((p, idx) => (idx === i ? { ...p, done: true, error: msg } : p)),
         );
       }
     }
@@ -277,9 +265,7 @@ export function DropboxDocumentsDialog({
                   <Loader2 className="h-3.5 w-3.5 animate-spin text-primary shrink-0" />
                 )}
                 <span className="truncate flex-1 text-muted-foreground">{item.name}</span>
-                {item.error && (
-                  <span className="text-destructive shrink-0">{item.error}</span>
-                )}
+                {item.error && <span className="text-destructive shrink-0">{item.error}</span>}
               </li>
             ))}
           </ul>
@@ -307,7 +293,10 @@ export function DropboxDocumentsDialog({
             {files.map((file) => {
               const busy = busyPath === file.path_lower;
               return (
-                <li key={file.id} className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2">
+                <li
+                  key={file.id}
+                  className="flex items-center gap-3 rounded-lg border bg-card px-3 py-2"
+                >
                   <FileText className="h-4 w-4 shrink-0 text-muted-foreground" />
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-sm font-medium">{file.name}</p>

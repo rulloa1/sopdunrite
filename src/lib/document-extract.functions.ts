@@ -14,8 +14,22 @@ const TEXT_TYPES = [
 ];
 
 const TEXT_EXTENSIONS = [
-  "txt", "md", "markdown", "csv", "tsv", "json", "xml", "yaml", "yml",
-  "html", "htm", "log", "js", "ts", "css", "sql",
+  "txt",
+  "md",
+  "markdown",
+  "csv",
+  "tsv",
+  "json",
+  "xml",
+  "yaml",
+  "yml",
+  "html",
+  "htm",
+  "log",
+  "js",
+  "ts",
+  "css",
+  "sql",
 ];
 
 const MAX_CHARS = 200_000;
@@ -34,11 +48,7 @@ function extOf(name: string): string {
   return name.includes(".") ? name.split(".").pop()!.toLowerCase() : "";
 }
 
-async function extractWithAI(
-  base64: string,
-  mime: string,
-  filename: string,
-): Promise<string> {
+async function extractWithAI(base64: string, mime: string, filename: string): Promise<string> {
   const apiKey = process.env.LOVABLE_API_KEY;
   if (!apiKey) throw new Error("AI extraction is not configured.");
 
@@ -109,8 +119,7 @@ export const extractDocumentText = createServerFn({ method: "POST" })
 
       const mime = doc.content_type ?? file.type ?? "";
       const ext = extOf(doc.name);
-      const isText =
-        TEXT_TYPES.some((t) => mime.startsWith(t)) || TEXT_EXTENSIONS.includes(ext);
+      const isText = TEXT_TYPES.some((t) => mime.startsWith(t)) || TEXT_EXTENSIONS.includes(ext);
       const isImage = mime.startsWith("image/");
       const isPdf = mime === "application/pdf" || ext === "pdf";
 
@@ -121,9 +130,10 @@ export const extractDocumentText = createServerFn({ method: "POST" })
         text = (await file.text()).slice(0, MAX_CHARS);
       } else if (isImage || isPdf) {
         const base64 = bufferToBase64(await file.arrayBuffer());
-        text = (
-          await extractWithAI(base64, isPdf ? "application/pdf" : mime, doc.name)
-        ).slice(0, MAX_CHARS);
+        text = (await extractWithAI(base64, isPdf ? "application/pdf" : mime, doc.name)).slice(
+          0,
+          MAX_CHARS,
+        );
       } else {
         status = "unsupported";
       }

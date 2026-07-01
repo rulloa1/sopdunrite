@@ -37,7 +37,9 @@ export function Td({
   className?: string;
 }) {
   return (
-    <td className={`border-r border-border/60 px-4 py-3 last:border-r-0 ${right ? "text-right" : ""} ${className}`}>
+    <td
+      className={`border-r border-border/60 px-4 py-3 last:border-r-0 ${right ? "text-right" : ""} ${className}`}
+    >
       {children}
     </td>
   );

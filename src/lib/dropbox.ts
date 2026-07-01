@@ -34,7 +34,7 @@ export function getDropboxToken(): string {
     return viteToken;
   }
   throw new Error(
-    "Dropbox is not configured. Set DROPBOX_ACCESS_TOKEN (server) or VITE_DROPBOX_ACCESS_TOKEN (client) in your environment."
+    "Dropbox is not configured. Set DROPBOX_ACCESS_TOKEN (server) or VITE_DROPBOX_ACCESS_TOKEN (client) in your environment.",
   );
 }
 
@@ -73,8 +73,8 @@ export async function listDropboxFiles(projectId: string): Promise<DropboxFile[]
     throw new Error(err?.error_summary ?? `Dropbox list failed (${res.status})`);
   }
 
-  const data = await res.json();
-  return ((data.entries ?? []) as any[]).filter((e) => e[".tag"] === "file") as DropboxFile[];
+  const data = (await res.json()) as { entries?: Record<string, unknown>[] };
+  return (data.entries ?? []).filter((e) => e[".tag"] === "file") as unknown as DropboxFile[];
 }
 
 /** Upload a file (browser File or Node Buffer/Blob) to Dropbox. */
@@ -82,7 +82,7 @@ export async function uploadToDropbox(
   projectId: string,
   fileName: string,
   body: File | Blob | ArrayBuffer,
-  token?: string
+  token?: string,
 ): Promise<DropboxFile> {
   const tok = token ?? getDropboxToken();
   const destPath = `${DROPBOX_BASE_FOLDER}/${projectId}/${fileName}`;
@@ -153,9 +153,7 @@ async function ensureDropboxFolder(path: string, token: string): Promise<void> {
   if (!res.ok && res.status !== 409) {
     const body = await res.json().catch(() => ({}));
     if (!body?.error_summary?.includes("path/conflict")) {
-      throw new Error(
-        body?.error_summary ?? `Could not create Dropbox folder (${res.status})`
-      );
+      throw new Error(body?.error_summary ?? `Could not create Dropbox folder (${res.status})`);
     }
   }
 }

@@ -1,12 +1,6 @@
 import { useState } from "react";
 import { currency } from "@/data/projectData";
-import {
-  GANTT_GROUPS,
-  GANTT_META,
-  MONTH_SPANS,
-  WEEKS,
-  type GanttTask,
-} from "@/data/ganttData";
+import { GANTT_GROUPS, GANTT_META, MONTH_SPANS, WEEKS, type GanttTask } from "@/data/ganttData";
 
 function durationLabel(task: GanttTask): string {
   return task.durationDays != null ? `${task.durationDays} days` : "—";
@@ -23,7 +17,8 @@ export function GanttChart() {
         <div>
           <h3 className="font-display text-lg font-semibold">Project Gantt Chart</h3>
           <p className="text-xs text-muted-foreground">
-            {GANTT_META.startDate} → Substantial Completion {GANTT_META.substantialCompletion} · {GANTT_META.contact}
+            {GANTT_META.startDate} → Substantial Completion {GANTT_META.substantialCompletion} ·{" "}
+            {GANTT_META.contact}
           </p>
         </div>
         <span className="rounded-full bg-warning/15 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-warning">
@@ -98,8 +93,13 @@ export function GanttChart() {
                     onMouseLeave={() => setActive((a) => (a === key ? null : a))}
                   >
                     <div className="sticky left-0 z-10 flex w-64 shrink-0 items-center gap-2 border-r bg-card px-4 py-2">
-                      <span className="font-mono text-[10px] text-muted-foreground">{task.code}</span>
-                      <span className="min-w-0 flex-1 truncate text-xs font-medium" title={task.name}>
+                      <span className="font-mono text-[10px] text-muted-foreground">
+                        {task.code}
+                      </span>
+                      <span
+                        className="min-w-0 flex-1 truncate text-xs font-medium"
+                        title={task.name}
+                      >
                         {task.name}
                       </span>
                       <span className="shrink-0 text-[10px] tabular-nums text-muted-foreground">
@@ -126,7 +126,6 @@ export function GanttChart() {
                         title={`${task.name} · ${durationLabel(task)}`}
                       />
                     </div>
-
                   </div>
                 );
               })}
@@ -145,7 +144,8 @@ export function GanttChart() {
           <span>Scheduled trade activity</span>
         </div>
         <span className="tabular-nums">
-          Total contract value: <span className="font-semibold text-foreground">{currency(GANTT_META.total)}</span>
+          Total contract value:{" "}
+          <span className="font-semibold text-foreground">{currency(GANTT_META.total)}</span>
         </span>
       </div>
     </div>

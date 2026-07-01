@@ -34,17 +34,20 @@ A full-stack project management workbook and standard operating procedures (SOP)
 **Prerequisites:** Node.js 18+
 
 1. Install dependencies:
+
    ```bash
    npm install
    ```
 
 2. Configure Supabase environment variables (create a `.env` file):
+
    ```env
    VITE_SUPABASE_URL=your_supabase_project_url
    VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
    ```
 
 3. Run the development server:
+
    ```bash
    npm run dev
    ```
@@ -85,12 +88,12 @@ src/
 
 ## User Roles
 
-| Role | Permissions |
-|------|------------|
-| Admin | Full access — manage users, create/edit/delete projects |
-| Executive | View all data, export workbooks |
-| Project Manager | Create and edit projects, manage logs |
-| Viewer | Read-only access |
+| Role            | Permissions                                             |
+| --------------- | ------------------------------------------------------- |
+| Admin           | Full access — manage users, create/edit/delete projects |
+| Executive       | View all data, export workbooks                         |
+| Project Manager | Create and edit projects, manage logs                   |
+| Viewer          | Read-only access                                        |
 
 ## License
 

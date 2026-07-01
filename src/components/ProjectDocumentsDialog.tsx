@@ -1,24 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  ChevronDown,
-  Download,
-  FileText,
-  Loader2,
-  ScanText,
-  Trash2,
-  Upload,
-} from "lucide-react";
+import { ChevronDown, Download, FileText, Loader2, ScanText, Trash2, Upload } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth, canCreateProjects, isAdmin } from "@/lib/auth";
 import { extractDocumentText } from "@/lib/document-extract.functions";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 interface ProjectDocument {
   id: string;
@@ -39,7 +26,6 @@ interface Props {
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
-
 
 function formatSize(bytes: number | null): string {
   if (bytes == null) return "";
@@ -63,7 +49,6 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
   const runExtract = useServerFn(extractDocumentText);
-
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -142,7 +127,7 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
       }
       await load();
       // Collect all errors and surface them together.
-      if (errors.length > 0) setError(errors.join(' | '));
+      if (errors.length > 0) setError(errors.join(" | "));
       // Kick off automatic text extraction for each new document.
       for (const id of newIds) {
         void extract(id);
@@ -152,7 +137,6 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
       if (fileRef.current) fileRef.current.value = "";
     }
   };
-
 
   const download = async (doc: ProjectDocument) => {
     setBusyId(doc.id);
@@ -171,10 +155,7 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
   const remove = async (doc: ProjectDocument) => {
     setBusyId(doc.id);
     setError(null);
-    const { error: delErr } = await supabase
-      .from("project_documents")
-      .delete()
-      .eq("id", doc.id);
+    const { error: delErr } = await supabase.from("project_documents").delete().eq("id", doc.id);
     if (delErr) {
       setBusyId(null);
       setError(delErr.message);
@@ -254,9 +235,11 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
                         {doc.file_size != null ? " · " : ""}
                         {new Date(doc.created_at).toLocaleDateString()}
                         {isExtracting && " · Extracting text…"}
-                        {!isExtracting && doc.extraction_status === "unsupported" &&
+                        {!isExtracting &&
+                          doc.extraction_status === "unsupported" &&
                           " · No text found"}
-                        {!isExtracting && doc.extraction_status === "error" &&
+                        {!isExtracting &&
+                          doc.extraction_status === "error" &&
                           " · Extraction failed"}
                       </p>
                     </div>
@@ -310,7 +293,6 @@ export function ProjectDocumentsDialog({ projectId, projectName, open, onOpenCha
                 </li>
               );
             })}
-
           </ul>
         )}
       </DialogContent>

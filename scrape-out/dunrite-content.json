@@ -10,7 +10,12 @@
     "ogImage": "https://www.dunriteconstructiongroup.com/wp-content/uploads/2025/09/Dunrite-Logo_color.png",
     "lastModified": "2025-11-26T16:23:03+00:00",
     "language": "en-US",
-    "generator": ["WordPress 7.0", "Elementor 4.1.4", "Site Kit by Google 1.181.0", "Yoast SEO 27.9"],
+    "generator": [
+      "WordPress 7.0",
+      "Elementor 4.1.4",
+      "Site Kit by Google 1.181.0",
+      "Yoast SEO 27.9"
+    ],
     "platform": "WordPress + Elementor (Hello Elementor theme)"
   },
   "business": {
@@ -58,53 +63,144 @@
     "Large-Scale Developer Projects – entire communities, clubhouses & more"
   ],
   "serviceCards": [
-    { "title": "Full Shell Packages", "audience": "Builders • Developers • GCs", "blurb": "Slabs, block walls, trusses, and framing for residential and commercial builds." },
-    { "title": "Custom Home Shells", "audience": "Homeowners • Architects • Custom Builders", "blurb": "Direct-to-consumer shells, from beach homes to one-off builds, fast timelines and premium quality." },
-    { "title": "Developer Projects", "audience": "Developers • Production builders • GC Teams", "blurb": "Large-scale concrete packages for neighborhoods, clubhouses, and community developments." }
+    {
+      "title": "Full Shell Packages",
+      "audience": "Builders • Developers • GCs",
+      "blurb": "Slabs, block walls, trusses, and framing for residential and commercial builds."
+    },
+    {
+      "title": "Custom Home Shells",
+      "audience": "Homeowners • Architects • Custom Builders",
+      "blurb": "Direct-to-consumer shells, from beach homes to one-off builds, fast timelines and premium quality."
+    },
+    {
+      "title": "Developer Projects",
+      "audience": "Developers • Production builders • GC Teams",
+      "blurb": "Large-scale concrete packages for neighborhoods, clubhouses, and community developments."
+    }
   ],
   "portfolio": [
-    { "title": "Epperson Ranch Lagoon (Wesley Chapel)", "detail": "15-acre stamped-concrete pool surrounds" },
+    {
+      "title": "Epperson Ranch Lagoon (Wesley Chapel)",
+      "detail": "15-acre stamped-concrete pool surrounds"
+    },
     { "title": "Large-Scale Neighborhoods", "detail": "200,000 sq. ft. sidewalks & drives" },
     { "title": "Residential Shells", "detail": "Three-story custom homes along the coast" },
     { "title": "Wiregrass Mall", "detail": "Decorative colored and sandblasted concrete" }
   ],
   "testimonials": [
-    { "author": "Sissi Antonini", "role": "Client", "rating": 5, "text": "Just an awesome experience from start to finish! Management and staff are top notch! Special thanks to David Colin & Gator for ALL your help!" },
-    { "author": "Forest Lawrence", "role": "Client", "rating": 5, "text": "Very professional and customer orientated" },
-    { "author": "Wendy Johnson", "role": "Client", "rating": 5, "text": "I live in Sugar Mill Woods. Your construction services are doing work on Pagoda Court East. I want to say this is the first time I have ever seen a crew so careful about cleaning up on the site! The concrete manager is a super nice guy. Again, thank you for making our community look nice!" }
+    {
+      "author": "Sissi Antonini",
+      "role": "Client",
+      "rating": 5,
+      "text": "Just an awesome experience from start to finish! Management and staff are top notch! Special thanks to David Colin & Gator for ALL your help!"
+    },
+    {
+      "author": "Forest Lawrence",
+      "role": "Client",
+      "rating": 5,
+      "text": "Very professional and customer orientated"
+    },
+    {
+      "author": "Wendy Johnson",
+      "role": "Client",
+      "rating": 5,
+      "text": "I live in Sugar Mill Woods. Your construction services are doing work on Pagoda Court East. I want to say this is the first time I have ever seen a crew so careful about cleaning up on the site! The concrete manager is a super nice guy. Again, thank you for making our community look nice!"
+    }
   ],
   "areasServed": [
-    "Citrus County", "Hernando County", "Hillsborough County", "Lake County",
-    "Manatee County", "Marion County", "Pasco County", "Pinellas County",
-    "Polk County", "Sumter County"
+    "Citrus County",
+    "Hernando County",
+    "Hillsborough County",
+    "Lake County",
+    "Manatee County",
+    "Marion County",
+    "Pasco County",
+    "Pinellas County",
+    "Polk County",
+    "Sumter County"
   ],
   "links": [
     { "text": "Home", "href": "https://www.dunriteconstructiongroup.com/" },
     { "text": "About", "href": "https://www.dunriteconstructiongroup.com/about/" },
     { "text": "Services", "href": "https://www.dunriteconstructiongroup.com/services/" },
-    { "text": "Full Shell Packages", "href": "https://www.dunriteconstructiongroup.com/services/full-shell-packages/" },
-    { "text": "Custom Home Shells", "href": "https://www.dunriteconstructiongroup.com/services/custom-home-shells/" },
-    { "text": "Developer Concrete Contractor", "href": "https://www.dunriteconstructiongroup.com/services/developer-concrete-contractor/" },
-    { "text": "Concrete Services", "href": "https://www.dunriteconstructiongroup.com/services/concrete-services/" },
+    {
+      "text": "Full Shell Packages",
+      "href": "https://www.dunriteconstructiongroup.com/services/full-shell-packages/"
+    },
+    {
+      "text": "Custom Home Shells",
+      "href": "https://www.dunriteconstructiongroup.com/services/custom-home-shells/"
+    },
+    {
+      "text": "Developer Concrete Contractor",
+      "href": "https://www.dunriteconstructiongroup.com/services/developer-concrete-contractor/"
+    },
+    {
+      "text": "Concrete Services",
+      "href": "https://www.dunriteconstructiongroup.com/services/concrete-services/"
+    },
     { "text": "Areas Served", "href": "https://www.dunriteconstructiongroup.com/areas-served/" },
-    { "text": "Citrus County", "href": "https://www.dunriteconstructiongroup.com/areas-served/citrus-county/" },
-    { "text": "Hernando County", "href": "https://www.dunriteconstructiongroup.com/areas-served/hernando-county/" },
-    { "text": "Hillsborough County", "href": "https://www.dunriteconstructiongroup.com/areas-served/hillsborough-county/" },
-    { "text": "Lake County", "href": "https://www.dunriteconstructiongroup.com/areas-served/lake-county/" },
-    { "text": "Manatee County", "href": "https://www.dunriteconstructiongroup.com/areas-served/manatee-county/" },
-    { "text": "Marion County", "href": "https://www.dunriteconstructiongroup.com/areas-served/marion-county/" },
-    { "text": "Pasco County", "href": "https://www.dunriteconstructiongroup.com/areas-served/pasco-county/" },
-    { "text": "Pinellas County", "href": "https://www.dunriteconstructiongroup.com/areas-served/pinellas-county/" },
-    { "text": "Polk County", "href": "https://www.dunriteconstructiongroup.com/areas-served/polk-county/" },
-    { "text": "Sumter County", "href": "https://www.dunriteconstructiongroup.com/areas-served/sumter-county/" },
+    {
+      "text": "Citrus County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/citrus-county/"
+    },
+    {
+      "text": "Hernando County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/hernando-county/"
+    },
+    {
+      "text": "Hillsborough County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/hillsborough-county/"
+    },
+    {
+      "text": "Lake County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/lake-county/"
+    },
+    {
+      "text": "Manatee County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/manatee-county/"
+    },
+    {
+      "text": "Marion County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/marion-county/"
+    },
+    {
+      "text": "Pasco County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/pasco-county/"
+    },
+    {
+      "text": "Pinellas County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/pinellas-county/"
+    },
+    {
+      "text": "Polk County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/polk-county/"
+    },
+    {
+      "text": "Sumter County",
+      "href": "https://www.dunriteconstructiongroup.com/areas-served/sumter-county/"
+    },
     { "text": "Projects", "href": "https://www.dunriteconstructiongroup.com/projects/" },
-    { "text": "Get A Quote (header)", "href": "https://www.dunriteconstructiongroup.com/contact-us/" },
-    { "text": "Get Your Free Quote / View All Services / All Projects (body CTAs)", "href": "https://dunrite.dreamhosters.com/ (staging domain — see notes)" },
+    {
+      "text": "Get A Quote (header)",
+      "href": "https://www.dunriteconstructiongroup.com/contact-us/"
+    },
+    {
+      "text": "Get Your Free Quote / View All Services / All Projects (body CTAs)",
+      "href": "https://dunrite.dreamhosters.com/ (staging domain — see notes)"
+    },
     { "text": "Phone", "href": "tel:352-588-4050" },
     { "text": "Email", "href": "mailto:bids@dunriteconstruct.com" },
     { "text": "DRC Homes (sister company)", "href": "https://drchomesfl.com/" },
-    { "text": "Instagram (@concrete_cowboys_fl)", "href": "https://www.instagram.com/concrete_cowboys_fl/" },
-    { "text": "Google Maps (office)", "href": "https://www.google.com/maps/place/12412+Curley+St,+San+Antonio,+FL+33576/" }
+    {
+      "text": "Instagram (@concrete_cowboys_fl)",
+      "href": "https://www.instagram.com/concrete_cowboys_fl/"
+    },
+    {
+      "text": "Google Maps (office)",
+      "href": "https://www.google.com/maps/place/12412+Curley+St,+San+Antonio,+FL+33576/"
+    }
   ],
   "images": [
     "https://www.dunriteconstructiongroup.com/wp-content/uploads/2025/09/Dunrite-Logo_invert-e1758651959544.png (logo)",

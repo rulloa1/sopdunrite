@@ -75,7 +75,9 @@ export function DataTable<T>({
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className={`w-full border-collapse text-sm ${minWidthClass} [&_tbody_tr:nth-child(even)]:bg-muted/30`}>
+            <table
+              className={`w-full border-collapse text-sm ${minWidthClass} [&_tbody_tr:nth-child(even)]:bg-muted/30`}
+            >
               <thead className="bg-primary text-left text-xs font-semibold uppercase tracking-wide text-primary-foreground">
                 <tr>
                   {columns.map((c) => {
@@ -85,7 +87,11 @@ export function DataTable<T>({
                       <th
                         key={c.key}
                         className={`border-r border-primary-foreground/15 px-4 py-3 font-semibold last:border-r-0 ${
-                          c.align === "right" ? "text-right" : c.align === "center" ? "text-center" : ""
+                          c.align === "right"
+                            ? "text-right"
+                            : c.align === "center"
+                              ? "text-center"
+                              : ""
                         } ${sortable ? "cursor-pointer select-none" : ""}`}
                         onClick={sortable ? () => toggle(c.key) : undefined}
                       >
@@ -121,7 +127,11 @@ export function DataTable<T>({
                       <td
                         key={c.key}
                         className={`border-r border-border/50 px-4 py-3 last:border-r-0 ${
-                          c.align === "right" ? "text-right" : c.align === "center" ? "text-center" : ""
+                          c.align === "right"
+                            ? "text-right"
+                            : c.align === "center"
+                              ? "text-center"
+                              : ""
                         } ${c.cellClassName ?? ""}`}
                       >
                         {c.cell(row)}

@@ -89,7 +89,8 @@ export function OverdueBadge() {
 
 /** Variance number coloured: negative = destructive, positive = success, zero = muted. */
 export function Variance({ value, children }: { value: number; children: ReactNode }) {
-  const tone = value < 0 ? "text-destructive" : value > 0 ? "text-success" : "text-muted-foreground";
+  const tone =
+    value < 0 ? "text-destructive" : value > 0 ? "text-success" : "text-muted-foreground";
   return <span className={`font-medium tabular-nums ${tone}`}>{children}</span>;
 }
 
